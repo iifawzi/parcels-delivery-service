@@ -1,4 +1,4 @@
-import { BaseApp, BaseLogger } from "@/interfaces";
+import { BaseApp, BaseDatabase, BaseLogger } from "@/interfaces";
 import * as path from 'path';
 import * as dotenv from 'dotenv';
 import express, { NextFunction, Request, Response } from "express";
@@ -6,13 +6,13 @@ import Locals from "./Locals";
 import Routes from "./Routes";
 import { BaseError, handleError } from "./ErrorHandler";
 import { inject, injectable } from "tsyringe";
-
 @injectable()
 export default class App implements BaseApp {
 
     private instance: express.Application;
-    constructor(@inject('logger') private logger: BaseLogger) {
+    constructor(@inject('logger') private logger: BaseLogger, @inject('database') private database: BaseDatabase) {
         this.logger = logger;
+        this.database = database;
         this.loadConfiguration();
         this.loadDatabase();
         this.instance = this.loadServer();
@@ -26,7 +26,7 @@ export default class App implements BaseApp {
 
     private loadDatabase(): void {
         this.logger.info("Database :: Loading");
-        // to be implemented;
+        this.database.getConnection();
     }
 
     private loadServer(): express.Application {
@@ -41,7 +41,7 @@ export default class App implements BaseApp {
         // Mounting the routes: 
         Routes.mountRoutes(this.instance);
         // Global error handling: 
-        this.instance.use((err: BaseError, req: Request, res: Response, next: NextFunction) => {
+        this.instance.use((err: BaseError, _: Request, res: Response, next: NextFunction) => {
             handleError(err, res, next);
         });
     }
