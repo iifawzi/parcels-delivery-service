@@ -1,5 +1,5 @@
 import { ConsoleLogger } from "../utils";
-import { container } from "tsyringe";
+import { Lifecycle, container } from "tsyringe";
 
 
-container.register("logger", { useClass: ConsoleLogger });
+container.register("logger", { useClass: ConsoleLogger }, { lifecycle: Lifecycle.Singleton });
