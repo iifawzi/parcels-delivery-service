@@ -17,19 +17,19 @@ export default class CustomerController {
     public async login(req: Request, res: Response, next: NextFunction) {
         try {
             this.logger.info(`CustomerService :: login :: ${JSON.stringify(req.body.username)}`);
-            const user = await this.customerService.findCustomer(req.body.username);
-            if (!user) {
+            const customer = await this.customerService.findCustomer(req.body.username);
+            if (!customer) {
                 this.logger.error(`CustomerService :: login :: 401 :: ${JSON.stringify(req.body.username)}`);
-                throw new BaseError(401, " You're not authenticated");
+                throw new BaseError(401, "You're not authenticated");
             }
-            const passwordIsSame = await comparePassword(req.body.password, user.password);
+            const passwordIsSame = await comparePassword(req.body.password, customer.password);
             if (!passwordIsSame) {
                 this.logger.error(`CustomerService :: login :: invalid password ::`);
-                throw new BaseError(401, 'You\'re not authorized');
+                throw new BaseError(401, 'You\'re not authenticated');
             }
-            delete user.password;
-            const token = createToken({ ...user, role: 'customer' });
-            return ResponseUtility.Success(200, { ...user, token }, res);
+            delete customer.password;
+            const token = createToken({ ...customer, role: 'customer' });
+            return ResponseUtility.Success(200, { ...customer, token }, res);
         } catch (err: any) {
             next(err);
         }

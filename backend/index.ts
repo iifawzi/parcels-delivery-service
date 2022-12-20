@@ -4,11 +4,16 @@ import http from "http"
 import { App } from "./providers";
 import Server from "./server";
 import { container } from "tsyringe";
+import { regesterProductionDependencies, regesterTestDependencies } from './di/';
 
 // Inject dependencies: 
-import "./di/production"
-const app = container.resolve(App);
+if (process.env.NODE_ENV == 'production') {
+    regesterProductionDependencies();
+} else {
+    regesterTestDependencies();
+}
 
+const app = container.resolve(App);
 // Server creation: 
 const serverInstance = Server.createInstance(app);
 const port = process.env.PORT || 4040;

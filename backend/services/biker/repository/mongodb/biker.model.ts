@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-interface BikerI {
+export interface BikerI {
 	username: string,
 	password: string,
 	fullname: string

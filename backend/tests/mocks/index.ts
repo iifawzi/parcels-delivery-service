@@ -1,0 +1,1 @@
+export { default as DatabaseMock } from "./Database.mock"

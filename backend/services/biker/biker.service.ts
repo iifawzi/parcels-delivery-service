@@ -11,7 +11,7 @@ export default class BikerService {
 
     public async findBiker(username: string): Promise<any> {
         this.logger.info(`BikerService :: findBiker :: ${username}`);
-        const user = await this.bikerRepository.findBiker(username);
-        return user._doc ?? null;
+        const biker = await this.bikerRepository.findBiker(username);
+        return biker;
     }
 }

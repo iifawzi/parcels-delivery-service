@@ -17,17 +17,39 @@
   "main": "index.ts",
   "devDependencies": {
     "@types/bcrypt": "^5.0.0",
+    "@types/jest": "^29.2.4",
     "@types/jsonwebtoken": "^8.5.9",
-    "@types/node": "^18.11.17"
+    "@types/node": "^18.11.17",
+    "@types/supertest": "^2.0.12",
+    "jest": "^29.3.1",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.0.3"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.ts"
+    "test:e2e": "NODE_ENV=test & jest --no-cache",
+    "start": "NODE_ENV=production  nodemon index.ts"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "_moduleAliases": {
     "@": "."
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "ts"
+    ],
+    "rootDir": ".",
+    "transform": {
+      "^.+\\.(t|j)s$": "ts-jest"
+    },
+    "moduleNameMapper": {
+      "^@/(.*)$": "<rootDir>/$1"
+    } ,
+    "testEnvironment": "node",
+    "testTimeout": 10000,
+    "modulePathIgnorePatterns": ["<rootDir>/di/"]
   }
 }

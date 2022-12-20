@@ -5,7 +5,8 @@ export default class MongoDBCustomerRepository implements CustomerRepositoryI {
     private CustomerModel = CustomerModel;
 
     public async findCustomer(username: string): Promise<any> {
-        return await this.CustomerModel.findOne({ username });
+        const customer = await this.CustomerModel.findOne({ username }).lean();
+        return customer;
     }
 
 }

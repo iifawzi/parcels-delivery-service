@@ -17,19 +17,19 @@ export default class BikerController {
     public async login(req: Request, res: Response, next: NextFunction) {
         try {
             this.logger.info(`BikerService :: login :: ${JSON.stringify(req.body.username)}`);
-            const user = await this.bikerService.findBiker(req.body.username);
-            if (!user) {
+            const biker = await this.bikerService.findBiker(req.body.username);
+            if (!biker) {
                 this.logger.error(`BikerService :: login :: 401 :: ${JSON.stringify(req.body.username)}`);
-                throw new BaseError(401, " You're not authenticated");
+                throw new BaseError(401, "You're not authenticated");
             }
-            const passwordIsSame = await comparePassword(req.body.password, user.password);
+            const passwordIsSame = await comparePassword(req.body.password, biker.password);
             if (!passwordIsSame) {
                 this.logger.error(`BikerService :: login :: invalid password ::`);
-                throw new BaseError(401, 'You\'re not authorized');
+                throw new BaseError(401, 'You\'re not authenticated');
             }
-            delete user.password;
-            const token = createToken({ ...user, role: 'biker' });
-            return ResponseUtility.Success(200, { ...user, token }, res);
+            delete biker.password;
+            const token = createToken({ ...biker, role: 'biker' });
+            return ResponseUtility.Success(200, { ...biker, token }, res);
         } catch (err: any) {
             next(err);
         }

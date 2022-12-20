@@ -11,7 +11,7 @@ export default class CustomerService {
 
     public async findCustomer(username: string): Promise<any> {
         this.logger.info(`CustomerService :: findCustomer :: ${username}`);
-        const user = await this.customerRepository.findCustomer(username);
-        return user._doc ?? null;
+        const customer = await this.customerRepository.findCustomer(username);
+        return customer;
     }
 }
