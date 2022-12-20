@@ -1,11 +1,11 @@
 import { BikerRepositoryI } from "../BikerRepository.contract";
-import Biker from "./biker.model";
+import BikerModel from "./biker.model";
 
 export default class MongoDBBikerRepository implements BikerRepositoryI {
-    private bikerModel = Biker;
+    private bikerModel = BikerModel;
 
     public async findBiker(username: string): Promise<any> {
-        return this.bikerModel.findOne({ username });
+        return await this.bikerModel.findOne({ username });
     }
 
 }

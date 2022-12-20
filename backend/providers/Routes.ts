@@ -1,11 +1,23 @@
-import { Application, NextFunction, Request, Response } from 'express';
+import { Application, NextFunction, Request, Response, Router } from 'express';
 import bodyParser from 'body-parser';
-import router from '../routes';
+import { BikerRouter } from '@/services/biker';
 
 class Routes {
-    public static mountRoutes(express: Application): Application {
-        const apiPrefix = express.locals.app.apiPrefix;
+    private static router = Router()
 
+    public static mountRoutes(express: Application): void {
+        const apiPrefix = express.locals.app.apiPrefix;
+        // Required headers and configs
+        Routes.configureRoutes(express);
+        // Test Route: 
+        Routes.router.get("/health", (req: Request, res: Response) => { res.json("The server is Healthy!") });
+        // Use services routers: 
+        Routes.useRouters();
+        // SET API PREFIX: 
+        express.use(apiPrefix, Routes.router);
+    }
+
+    private static configureRoutes(express: Application) {
         // Body Parser Settings: 
         express.use(bodyParser.json());
         // Required Headers: 
@@ -15,8 +27,12 @@ class Routes {
             res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
             next();
         });
+    }
 
-        return express.use(apiPrefix, router);
+    private static useRouters() {
+        // Biker: 
+        const bikerRouter = new BikerRouter();
+        Routes.router.use(bikerRouter.getPrefix, bikerRouter.getRoutes);
     }
 }
 

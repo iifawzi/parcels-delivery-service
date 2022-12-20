@@ -2,18 +2,19 @@ import { NextFunction } from "connect";
 import { Response } from "express";
 
 export class BaseError extends Error {
-    constructor(public statusCode: number, public message: string) {
+    constructor(public statusCode: number, public message: string, public errors?: any) {
         super();
         this.message = message;
         this.statusCode = statusCode;
+        this.errors = errors;
     }
 }
 
 export const handleError = (err: BaseError, res: Response, next: NextFunction) => {
-    const { message, statusCode = 500 } = err;
+    const { message, statusCode = 500, errors = {} } = err;
     res.status(statusCode).json({
         status: false,
         message,
-        data: {}
+        errors
     });
 };

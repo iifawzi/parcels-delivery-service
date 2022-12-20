@@ -15,6 +15,6 @@ export const BikerSchema = new mongoose.Schema<BikerI>({
 });
 
 
-const Biker = mongoose.model<BikerI>('Biker', BikerSchema);
+const BikerModel = mongoose.model<BikerI>('Biker', BikerSchema);
 
-export default Biker;
+export default BikerModel;

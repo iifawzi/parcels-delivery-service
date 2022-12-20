@@ -1,3 +1,3 @@
 export interface BikerRepositoryI {
-    findBiker(username: string): any
+    findBiker(username: string): Promise<any>
 }
