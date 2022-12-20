@@ -1,6 +1,5 @@
-import { MongoDBBikerRepository } from "@/services/biker/repository/mongodb";
-import { Database } from "@/providers/Database";
-import { ConsoleLogger } from "@/utils";
+import 'module-alias/register';
+import "reflect-metadata"
 import { Lifecycle, container } from "tsyringe";
 import { BikerService } from "@/services/biker";
 import { BikerRepositoryI } from "@/services/biker/repository/BikerRepository.contract";
@@ -9,17 +8,20 @@ import BikerController from "@/services/biker/Biker.controller";
 import CustomerController from "@/services/customer/Customer.controller";
 import { CustomerService } from "@/services/customer";
 import { MongoDBCustomerRepository } from "@/services/customer/repository/mongodb";
+import { DatabaseMock } from "@/tests/mocks";
+import { BikerRepositoryMock } from "@/services/biker/tests/mocks";
+import TestLogger from '@/tests/mocks/Logger.mock';
 
 export default function regesterDependencies() {
     // Common Dependencies
-    container.register<BaseLogger>("logger", { useClass: ConsoleLogger }, { lifecycle: Lifecycle.Singleton });
-    container.register<BaseDatabase>("database", { useClass: Database }, { lifecycle: Lifecycle.Singleton });
-
+    container.register<BaseLogger>("logger", { useClass: TestLogger }, { lifecycle: Lifecycle.Singleton });
+    container.register<BaseDatabase>("database", { useClass: DatabaseMock }, { lifecycle: Lifecycle.Singleton });
+    
     // Biker dependencies
     container.register<BikerController>("bikerController", { useClass: BikerController }, { lifecycle: Lifecycle.Singleton });
     container.register<BikerService>("bikerService", { useClass: BikerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<BikerRepositoryI>("bikerRepository", { useClass: MongoDBBikerRepository }, { lifecycle: Lifecycle.Singleton });
-
+    container.register<BikerRepositoryI>("bikerRepository", { useClass: BikerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
+    
     // Customer dependencies
     container.register<CustomerController>("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
     container.register<CustomerService>("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
