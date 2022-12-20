@@ -8,7 +8,7 @@ interface ConfigsI {
 }
 
 class Locals {
-    public static config(): ConfigsI {
+    private static config(): ConfigsI {
         const url = process.env.APP_URL || `http://localhost:${process.env.PORT}`;
         const port = process.env.PORT || 4040;
         const apiPrefix = process.env.API_PREFIX || 'api';

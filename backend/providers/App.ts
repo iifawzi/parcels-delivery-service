@@ -1,7 +1,10 @@
 import { BaseApp, BaseLogger } from "@/interfaces";
 import * as path from 'path';
 import * as dotenv from 'dotenv';
-import express from "express";
+import express, { NextFunction, Request, Response } from "express";
+import Locals from "./Locals";
+import Routes from "./Routes";
+import { BaseError, handleError } from "./ErrorHandler";
 
 export default class App implements BaseApp {
     
@@ -11,6 +14,7 @@ export default class App implements BaseApp {
         this.loadConfiguration();
         this.loadDatabase();
         this.instance = this.loadServer();
+        this.configureApp();
     }
 
     private loadConfiguration(): void {
@@ -27,6 +31,17 @@ export default class App implements BaseApp {
         this.logger.info("Server :: Loading");
         const expressApp = express();
         return expressApp;
+    }
+
+    private configureApp() {
+        // Set configs in locals
+        this.instance = Locals.init(this.instance);
+        // Mounting the routes: 
+        Routes.mountRoutes(this.instance);
+        // Global error handling: 
+        this.instance.use((err: BaseError, req: Request, res: Response, next: NextFunction) => {
+            handleError(err, res, next);
+        });
     }
 
     public get getInstance(): express.Application {
