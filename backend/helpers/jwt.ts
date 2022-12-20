@@ -18,3 +18,12 @@ export const checkToken = (token: string) => {
         throw new BaseError(401, 'Invalid token', err);
     }
 };
+
+export const decodeToken = (token: string) => {
+    try {
+        const data = jwt.decode(token);
+        return data;
+    } catch (err) {
+        throw new BaseError(401, 'Invalid token', err);
+    }
+};
