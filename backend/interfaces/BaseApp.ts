@@ -1,5 +1,4 @@
+import express from "express"
 export default interface BaseApp {
-    loadConfiguration(): void;
-    loadDatabase(): void;
-    loadServer(): void;
+    getInstance: express.Application;
 }
