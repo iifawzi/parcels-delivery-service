@@ -1,4 +1,3 @@
-import 'module-alias/register';
 import { BaseApp } from './interfaces';
 export default class Server {
 

@@ -1,13 +1,15 @@
+import 'module-alias/register';
+import "reflect-metadata"
 import http from "http"
 import { App } from "./providers";
 import Server from "./server";
-import { ConsoleLogger } from "./utils";
+import { container } from "tsyringe";
+// Inject dependencies: 
+import "./di/production"
 
-// Dependencies: 
-const logger = new ConsoleLogger();
-const app = new App(logger);
+
+const app = container.resolve(App);
 const serverInstance = Server.createInstance(app);
-
 // Server creation: 
 const port = process.env.PORT || 4040;
 const server = http.createServer(serverInstance.getApp);
