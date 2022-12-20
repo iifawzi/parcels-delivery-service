@@ -1,0 +1,1 @@
+export { comparePassword } from "./bcrypt"
