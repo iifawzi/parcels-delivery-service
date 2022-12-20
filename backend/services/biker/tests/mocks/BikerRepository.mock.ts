@@ -1,7 +1,7 @@
 import { BikerRepositoryI } from "../../repository/BikerRepository.contract";
 
 export default class BikerRepositoryMock implements BikerRepositoryI {
-    private users: Record<string, Record<string, any>> = {
+    private bikers: Record<string, Record<string, any>> = {
         biker1: {
             _id: "63a22b00a704bee4b0254f56",
             username: "biker1",
@@ -16,8 +16,8 @@ export default class BikerRepositoryMock implements BikerRepositoryI {
         }
     };
     async findBiker(username: string): Promise<any> {
-        if (this.users[username]) {
-            return this.users[username];
+        if (this.bikers[username]) {
+            return this.bikers[username];
         }
         return null;
     }

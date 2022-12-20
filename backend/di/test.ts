@@ -11,6 +11,8 @@ import { MongoDBCustomerRepository } from "@/services/customer/repository/mongod
 import { DatabaseMock } from "@/tests/mocks";
 import { BikerRepositoryMock } from "@/services/biker/tests/mocks";
 import TestLogger from '@/tests/mocks/Logger.mock';
+import { CustomerRepositoryMock } from '@/services/customer/tests/mocks';
+import { CustomerRepositoryI } from '@/services/customer/repository/CustomerRepository.contract';
 
 export default function regesterDependencies() {
     // Common Dependencies
@@ -25,5 +27,5 @@ export default function regesterDependencies() {
     // Customer dependencies
     container.register<CustomerController>("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
     container.register<CustomerService>("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<MongoDBCustomerRepository>("customerRepository", { useClass: MongoDBCustomerRepository }, { lifecycle: Lifecycle.Singleton });
+    container.register<CustomerRepositoryI>("customerRepository", { useClass: CustomerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
 }

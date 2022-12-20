@@ -9,6 +9,7 @@ import BikerController from "@/services/biker/Biker.controller";
 import CustomerController from "@/services/customer/Customer.controller";
 import { CustomerService } from "@/services/customer";
 import { MongoDBCustomerRepository } from "@/services/customer/repository/mongodb";
+import { CustomerRepositoryI } from "@/services/customer/repository/CustomerRepository.contract";
 
 export default function regesterDependencies() {
     // Common Dependencies
@@ -23,5 +24,5 @@ export default function regesterDependencies() {
     // Customer dependencies
     container.register<CustomerController>("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
     container.register<CustomerService>("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<MongoDBCustomerRepository>("customerRepository", { useClass: MongoDBCustomerRepository }, { lifecycle: Lifecycle.Singleton });
+    container.register<CustomerRepositoryI>("customerRepository", { useClass: MongoDBCustomerRepository }, { lifecycle: Lifecycle.Singleton });
 }

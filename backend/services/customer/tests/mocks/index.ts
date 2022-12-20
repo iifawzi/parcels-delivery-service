@@ -1,0 +1,1 @@
+export { default as CustomerRepositoryMock } from "./CustomerRepository.mock"

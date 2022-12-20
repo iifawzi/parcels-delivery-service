@@ -1,15 +1,23 @@
+import http from "http"
 import { BaseApp } from './interfaces';
 export default class Server {
 
-    private static serverInstance: Server;
+    private static serverInstance: http.Server;
+
     private constructor(private app: BaseApp) {
         this.app = app;
+        const port = process.env.PORT || 4040;
+        Server.serverInstance = http.createServer(this.app.getInstance);
+        Server.serverInstance.listen(port, () => {
+            console.log(`Server is listening on Port ${port}`);
+        });
     };
 
-    public static createInstance(app: BaseApp): Server {
+    public static getServer(app: BaseApp): http.Server {
         if (!Server.serverInstance) {
-            Server.serverInstance = new Server(app);
+            new Server(app);
         }
+
         return Server.serverInstance;
     }
 
