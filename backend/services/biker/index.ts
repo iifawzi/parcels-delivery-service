@@ -1,2 +1,2 @@
-export { default as BikerRouter } from "./biker.route"
-export { default as BikerService } from "./biker.service"
+export { default as BikerRouter } from "./Biker.route"
+export { default as BikerService } from "./Biker.service"

@@ -2,7 +2,7 @@ import { validateSchema } from "@/middlewares";
 import express from "express"
 import * as BikerSchemas from "./biker.validation"
 import { container } from "tsyringe";
-import BikerController from "./biker.controller";
+import BikerController from "./Biker.controller";
 
 class BikerRouter {
     private prefix: string = '/biker';

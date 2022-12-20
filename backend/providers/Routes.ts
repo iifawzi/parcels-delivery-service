@@ -1,6 +1,7 @@
 import { Application, NextFunction, Request, Response, Router } from 'express';
 import bodyParser from 'body-parser';
 import { BikerRouter } from '@/services/biker';
+import { CustomerRouter } from '@/services/customer';
 
 class Routes {
     private static router = Router()
@@ -33,6 +34,9 @@ class Routes {
         // Biker: 
         const bikerRouter = new BikerRouter();
         Routes.router.use(bikerRouter.getPrefix, bikerRouter.getRoutes);
+        // Customer: 
+        const customerRouter = new CustomerRouter();
+        Routes.router.use(customerRouter.getPrefix, customerRouter.getRoutes);
     }
 }
 
