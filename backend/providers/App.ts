@@ -21,7 +21,11 @@ export default class App implements BaseApp {
 
     private loadConfiguration(): void {
         this.logger.info("Configuration :: Loading");
-        dotenv.config({ path: path.join(__dirname, '../.env') });
+        if (process.env.NODE_ENV == 'production') {
+            dotenv.config({ path: path.join(__dirname, '../.env') });
+        } else {
+            dotenv.config({ path: path.join(__dirname, '../.env.test') });
+        }
     }
 
     private loadDatabase(): void {
