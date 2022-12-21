@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>8/16</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">50% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>8/16</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -88,15 +88,14 @@
 <a name='L23'></a><a href='#L23'>23</a>
 <a name='L24'></a><a href='#L24'>24</a>
 <a name='L25'></a><a href='#L25'>25</a>
-<a name='L26'></a><a href='#L26'>26</a>
-<a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
+<a name='L26'></a><a href='#L26'>26</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -106,44 +105,39 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { Database } from "@/providers/Database";
 import { ConsoleLogger } from "@/utils";
 import { Lifecycle, container } from "tsyringe";
-import { BikerController, BikerRepositoryI, BikerService, BikerRepositoryMongoDB } from "@/services/biker";
-import { CustomerController, CustomerRepositoryI, CustomerService, CustomerRepositoryMongoDB } from "@/services/customer";
+import { BikerRepositoryI, BikerService, BikerRepositoryMongoDB } from "@/services/biker";
+import { CustomerRepositoryI, CustomerService, CustomerRepositoryMongoDB } from "@/services/customer";
 import { BaseDatabase, BaseLogger } from "@/interfaces";
-import { ShipmentRepositoryMongoDB, ShipmentController, ShipmentService } from "@/services/shipment";
+import { ShipmentRepositoryMongoDB, ShipmentService } from "@/services/shipment";
+import { TOKENS } from "./Tokens";
 &nbsp;
 export default function <span class="fstat-no" title="function not covered" >regesterDependencies(</span>) {
     // Common Dependencies
-<span class="cstat-no" title="statement not covered" >    container.register&lt;BaseLogger&gt;("logger", { useClass: ConsoleLogger }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;BaseDatabase&gt;("database", { useClass: Database }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;BaseLogger&gt;(TOKENS.logger, { useClass: ConsoleLogger }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;BaseDatabase&gt;(TOKENS.database, { useClass: Database }, { lifecycle: Lifecycle.Singleton });</span>
 &nbsp;
     // Biker dependencies
-<span class="cstat-no" title="statement not covered" >    container.register&lt;BikerController&gt;("bikerController", { useClass: BikerController }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;BikerService&gt;("bikerService", { useClass: BikerService }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;BikerRepositoryI&gt;("bikerRepository", { useClass: BikerRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;BikerService&gt;(TOKENS.bikerService, { useClass: BikerService }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;BikerRepositoryI&gt;(TOKENS.bikerRepository, { useClass: BikerRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });</span>
 &nbsp;
     // Customer dependencies
-<span class="cstat-no" title="statement not covered" >    container.register&lt;CustomerController&gt;("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;CustomerService&gt;("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;CustomerRepositoryI&gt;("customerRepository", { useClass: CustomerRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;CustomerService&gt;(TOKENS.customerService, { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;CustomerRepositoryI&gt;(TOKENS.customerRepository, { useClass: CustomerRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });</span>
 &nbsp;
     // Shipment dependencies
-<span class="cstat-no" title="statement not covered" >    container.register&lt;ShipmentController&gt;("shipmentController", { useClass: ShipmentController }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;ShipmentService&gt;("shipmentService", { useClass: ShipmentService }, { lifecycle: Lifecycle.Singleton });</span>
-<span class="cstat-no" title="statement not covered" >    container.register&lt;ShipmentRepositoryMongoDB&gt;("shipmentRepository", { useClass: ShipmentRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;ShipmentService&gt;(TOKENS.shipmentService, { useClass: ShipmentService }, { lifecycle: Lifecycle.Singleton });</span>
+<span class="cstat-no" title="statement not covered" >    container.register&lt;ShipmentRepositoryMongoDB&gt;(TOKENS.shipmentRepository, { useClass: ShipmentRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });</span>
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -151,7 +145,7 @@ export default function <span class="fstat-no" title="function not covered" >reg
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-21T15:31:53.312Z
+                at 2022-12-21T16:45:35.694Z
             </div>
         <script src="../../prettify.js"></script>
         <script>

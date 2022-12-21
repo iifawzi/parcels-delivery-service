@@ -8,7 +8,7 @@ import { RequestWithRequester } from "@/interfaces";
 class ShipmentRouter {
     private prefix: string = '/shipment';
     private router: express.Router = express.Router();
-    private shipmentController = container.resolve<ShipmentController>('shipmentController');
+    private shipmentController = container.resolve<ShipmentController>(ShipmentController);
 
     constructor() {
         this.configureRoutes();

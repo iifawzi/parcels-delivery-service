@@ -4,10 +4,11 @@ import { BaseLogger } from "@/interfaces";
 import { CreateShipmentInfo, DeliverShipmentInfo } from "./interfaces";
 import { MatchShipmentInfo } from "./interfaces";
 import { ShipmentStatus } from "./repository/mongodb/shipment.model";
+import { TOKENS } from '@/di/Tokens';
 
 @injectable()
 export default class ShipmentService {
-    constructor(@inject('shipmentRepository') private shipmentRepository: ShipmentRepositoryI, @inject('logger') private logger: BaseLogger) {
+    constructor(@inject(TOKENS.shipmentRepository) private shipmentRepository: ShipmentRepositoryI, @inject(TOKENS.logger) private logger: BaseLogger) {
         this.shipmentRepository = shipmentRepository;
         this.logger = logger;
     }

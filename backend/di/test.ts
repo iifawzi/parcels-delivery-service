@@ -14,24 +14,25 @@ import { CustomerRepositoryMock } from '@/services/customer/tests/mocks';
 import { CustomerRepositoryI } from '@/services/customer/repository/CustomerRepository.contract';
 import { ShipmentController, ShipmentRepositoryI, ShipmentService } from '@/services/shipment';
 import { ShipmentRepositoryMock } from '@/services/shipment/tests/mocks';
+import { TOKENS } from './Tokens';
 
 export default function regesterDependencies() {
     // Common Dependencies
-    container.register<BaseLogger>("logger", { useClass: TestLogger }, { lifecycle: Lifecycle.Singleton });
-    container.register<BaseDatabase>("database", { useClass: DatabaseMock }, { lifecycle: Lifecycle.Singleton });
+    container.register<BaseLogger>(TOKENS.logger, { useClass: TestLogger }, { lifecycle: Lifecycle.Singleton });
+    container.register<BaseDatabase>(TOKENS.database, { useClass: DatabaseMock }, { lifecycle: Lifecycle.Singleton });
 
     // Biker dependencies
-    container.register<BikerController>("bikerController", { useClass: BikerController }, { lifecycle: Lifecycle.Singleton });
-    container.register<BikerService>("bikerService", { useClass: BikerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<BikerRepositoryI>("bikerRepository", { useClass: BikerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
+    container.register<BikerController>(TOKENS.bikerController, { useClass: BikerController }, { lifecycle: Lifecycle.Singleton });
+    container.register<BikerService>(TOKENS.bikerService, { useClass: BikerService }, { lifecycle: Lifecycle.Singleton });
+    container.register<BikerRepositoryI>(TOKENS.bikerRepository, { useClass: BikerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
 
     // Customer dependencies
-    container.register<CustomerController>("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
-    container.register<CustomerService>("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<CustomerRepositoryI>("customerRepository", { useClass: CustomerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
+    container.register<CustomerController>(TOKENS.customerController, { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
+    container.register<CustomerService>(TOKENS.customerService, { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
+    container.register<CustomerRepositoryI>(TOKENS.customerRepository, { useClass: CustomerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
 
     // Shipment dependencies
-    container.register<ShipmentController>("shipmentController", { useClass: ShipmentController }, { lifecycle: Lifecycle.Singleton });
-    container.register<ShipmentService>("shipmentService", { useClass: ShipmentService }, { lifecycle: Lifecycle.Singleton });
-    container.register<ShipmentRepositoryI>("shipmentRepository", { useClass: ShipmentRepositoryMock }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentController>(TOKENS.shipmentController, { useClass: ShipmentController }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentService>(TOKENS.shipmentService, { useClass: ShipmentService }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentRepositoryI>(TOKENS.shipmentRepository, { useClass: ShipmentRepositoryMock }, { lifecycle: Lifecycle.Singleton });
 }

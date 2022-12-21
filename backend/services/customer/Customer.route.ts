@@ -7,7 +7,7 @@ import CustomerController from "./Customer.controller";
 class CustomerRouter {
     private prefix: string = '/customer';
     private router: express.Router = express.Router();
-    private customerController = container.resolve<CustomerController>('customerController');
+    private customerController = container.resolve<CustomerController>(CustomerController);
 
     constructor() {
         this.configureRoutes();

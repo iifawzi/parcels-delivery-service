@@ -2,11 +2,11 @@ import * as mongoose from 'mongoose';
 import Locals from './Locals';
 import { BaseDatabase, BaseLogger } from '@/interfaces';
 import { inject, injectable } from 'tsyringe';
-
+import { TOKENS } from '@/di/Tokens';
 @injectable()
 export class Database implements BaseDatabase {
     private instanceCreated = false;
-    constructor(@inject('logger') private logger: BaseLogger) {
+    constructor(@inject(TOKENS.logger) private logger: BaseLogger) {
         this.logger = logger;
     }
 

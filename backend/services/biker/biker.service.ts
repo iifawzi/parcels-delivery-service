@@ -2,10 +2,11 @@ import { inject, injectable } from "tsyringe";
 import { BikerRepositoryI } from "./repository/BikerRepository.contract";
 import { BaseLogger } from "@/interfaces";
 import { comparePassword, createToken } from "@/helpers";
+import { TOKENS } from '@/di/Tokens';
 
 @injectable()
 export default class BikerService {
-    constructor(@inject('bikerRepository') private bikerRepository: BikerRepositoryI, @inject('logger') private logger: BaseLogger) {
+    constructor(@inject(TOKENS.bikerRepository) private bikerRepository: BikerRepositoryI, @inject(TOKENS.logger) private logger: BaseLogger) {
         this.bikerRepository = bikerRepository;
         this.logger = logger;
     }

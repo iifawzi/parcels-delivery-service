@@ -6,10 +6,11 @@ import { CreateShipmentInfo, DeliverShipmentInfo, MatchShipmentInfo, PickupShipm
 import { ResponseUtility } from "@/utils/Response";
 import { ShipmentStatus } from "./repository/mongodb/shipment.model";
 import { BaseError } from "@/providers";
+import { TOKENS } from '@/di/Tokens';
 
 @injectable()
 export default class ShipmentController {
-    constructor(@inject("logger") private logger: BaseLogger, @inject("shipmentService") private shipmentService: ShipmentService) {
+    constructor(@inject(TOKENS.logger) private logger: BaseLogger, @inject(TOKENS.shipmentService) private shipmentService: ShipmentService) {
         this.logger = logger;
         this.shipmentService = shipmentService;
     }

@@ -6,11 +6,12 @@ import Locals from "./Locals";
 import Routes from "./Routes";
 import { BaseError, handleError } from "./ErrorHandler";
 import { inject, injectable } from "tsyringe";
+import { TOKENS } from '@/di/Tokens';
 @injectable()
 export default class App implements BaseApp {
 
     private instance: express.Application;
-    constructor(@inject('logger') private logger: BaseLogger, @inject('database') private database: BaseDatabase) {
+    constructor(@inject(TOKENS.logger) private logger: BaseLogger, @inject(TOKENS.database) private database: BaseDatabase) {
         this.logger = logger;
         this.database = database;
         this.loadConfiguration();

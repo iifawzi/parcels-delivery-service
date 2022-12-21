@@ -7,7 +7,7 @@ import BikerController from "./Biker.controller";
 class BikerRouter {
     private prefix: string = '/biker';
     private router: express.Router = express.Router();
-    private bikerController = container.resolve<BikerController>('bikerController');
+    private bikerController = container.resolve<BikerController>(BikerController);
 
     constructor() {
         this.configureRoutes();

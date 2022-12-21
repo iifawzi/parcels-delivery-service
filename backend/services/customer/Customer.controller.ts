@@ -4,10 +4,11 @@ import CustomerService from "./Customer.service";
 import { BaseLogger } from "@/interfaces";
 import { ResponseUtility } from "@/utils/Response";
 import { BaseError } from "@/providers";
+import { TOKENS } from '@/di/Tokens';
 
 @injectable()
 export default class CustomerController {
-    constructor(@inject("logger") private logger: BaseLogger, @inject("customerService") private customerService: CustomerService) {
+    constructor(@inject(TOKENS.logger) private logger: BaseLogger, @inject(TOKENS.customerService) private customerService: CustomerService) {
         this.logger = logger;
         this.customerService = customerService;
     }

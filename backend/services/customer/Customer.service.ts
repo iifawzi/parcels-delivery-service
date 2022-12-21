@@ -2,10 +2,11 @@ import { inject, injectable } from "tsyringe";
 import { CustomerRepositoryI } from "./repository/CustomerRepository.contract";
 import { BaseLogger } from "@/interfaces";
 import { comparePassword, createToken } from "@/helpers";
+import { TOKENS } from '@/di/Tokens';
 
 @injectable()
 export default class CustomerService {
-    constructor(@inject('customerRepository') private customerRepository: CustomerRepositoryI, @inject('logger') private logger: BaseLogger) {
+    constructor(@inject(TOKENS.customerRepository) private customerRepository: CustomerRepositoryI, @inject(TOKENS.logger) private logger: BaseLogger) {
         this.customerRepository = customerRepository;
         this.logger = logger;
     }

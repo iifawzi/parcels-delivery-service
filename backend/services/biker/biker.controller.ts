@@ -1,15 +1,14 @@
-import { container, inject, injectable, singleton } from "tsyringe";
+import { inject, injectable } from "tsyringe";
 import { NextFunction, Request, Response } from "express";
 import BikerService from "./Biker.service";
 import { BaseLogger } from "@/interfaces";
 import { ResponseUtility } from "@/utils/Response";
 import { BaseError } from "@/providers";
-import { comparePassword } from "@/helpers";
-import { createToken } from "@/helpers/jwt";
+import { TOKENS } from '@/di/Tokens';
 
 @injectable()
 export default class BikerController {
-    constructor(@inject("logger") private logger: BaseLogger, @inject("bikerService") private bikerService: BikerService) {
+    constructor(@inject(TOKENS.logger) private logger: BaseLogger, @inject(TOKENS.bikerService) private bikerService: BikerService) {
         this.logger = logger;
         this.bikerService = bikerService;
     }
