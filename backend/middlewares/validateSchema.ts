@@ -2,10 +2,10 @@ import { NextFunction, Request, Response } from "express";
 import { BaseError } from "@/providers";
 import Joi from "joi";
 
-const validateSchema = (schema: Joi.Schema, property: 'body' = 'body', abortEarly = false) => {
+const validateSchema = (schema: Joi.Schema, property: 'body' | 'query' = 'body', abortEarly = false) => {
     return (req: Request, res: Response, next: NextFunction) => {
         if (!req[property]) {
-            req[property] = {}; // for the case if called with empty body, to return the errors.
+            req[property] = {}; // for the case if called with empty body or query, to return the errors.
         }
 
         const { error } = schema.validate(req[property], {
