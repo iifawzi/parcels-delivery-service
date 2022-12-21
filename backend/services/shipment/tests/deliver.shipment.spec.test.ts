@@ -39,7 +39,7 @@ describe("[Shipments APIs] | deliverShipment API", () => {
             describe('[When] Biker is trying to mark shipment as delivered with missing information', () => {
                 it("[Then] Should respond with 400", async () => {
                     let res = await request(server)
-                        .patch("/api/shipment/")
+                        .patch("/api/shipment/deliver")
                         .auth(bikerToken, { type: 'bearer' })
                         .send({ shipmentStatus: 'DELIVERED' });
                     expect(res.statusCode).toEqual(400);

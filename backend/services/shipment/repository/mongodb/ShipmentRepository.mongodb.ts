@@ -1,4 +1,4 @@
-import { CreateShipmentInfo, PickShipmentInfo } from "../../interfaces";
+import { CreateShipmentInfo, MatchShipmentInfo } from "../../interfaces";
 import { ShipmentRepositoryI } from "../ShipmentRepository.contract";
 import ShipmentModel, { ShipmentStatus } from "./shipment.model";
 
@@ -20,7 +20,7 @@ export default class ShipmentRepositoryMongoDB implements ShipmentRepositoryI {
         return shipment;
     }
 
-    async pickupShipment(shipmentInfo: PickShipmentInfo): Promise<any> {
+    async pickupShipment(shipmentInfo: MatchShipmentInfo): Promise<any> {
         const shipment = await this.shipmentModel.create(shipmentInfo);
         return shipment;
     }

@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import ShipmentService from "./Shipment.service";
 import { BaseLogger, RequestWithRequester } from "@/interfaces";
 import { NextFunction, Response } from "express";
-import { CreateShipmentInfo, DeliverShipmentInfo, PickShipmentInfo } from "./interfaces";
+import { CreateShipmentInfo, DeliverShipmentInfo, MatchShipmentInfo } from "./interfaces";
 import { ResponseUtility } from "@/utils/Response";
 import { ShipmentStatus } from "./repository/mongodb/shipment.model";
 import { BaseError } from "@/providers";
@@ -25,11 +25,11 @@ export default class ShipmentController {
         }
     }
 
-    public async pickupShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
+    public async matchShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
         try {
-            this.logger.info(`ShipmentController :: pickupShipment :: ${JSON.stringify(req.body)}`);
-            const shimpentInfo = { ...req.body, biker: req.requester?._id, shipmentStatus: ShipmentStatus.PICKED } as unknown as PickShipmentInfo;
-            const [status, info] = await this.shipmentService.pickupShipment(shimpentInfo);
+            this.logger.info(`ShipmentController :: matchShipment :: ${JSON.stringify(req.body)}`);
+            const shimpentInfo = { ...req.body, biker: req.requester?._id, shipmentStatus: ShipmentStatus.MATCHED } as unknown as MatchShipmentInfo;
+            const [status, info] = await this.shipmentService.matchShipment(shimpentInfo);
             if (!status) {
                 switch (info) {
                     case 'notfound':
