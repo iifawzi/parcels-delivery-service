@@ -4,8 +4,8 @@ import server from "@/index"
 import { createToken } from "@/helpers";
 
 describe("[Shipments APIs] | CreateShipment API", () => {
-    const bikerToken = createToken({ username: "bikerTest", fullname: "biker", _id: "598398298198", role: "biker" });
-    const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "99ZKJA98198A", role: "customer" });
+    const bikerToken = createToken({ username: "bikerTest", fullname: "biker", _id: "63a22b00a704bee4b0254f4c", role: "biker" });
+    const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "63a22b00a704bee4b0254f4d", role: "customer" });
 
     afterAll(() => {
         server.close();
@@ -52,7 +52,7 @@ describe("[Shipments APIs] | CreateShipment API", () => {
                         .auth(customerToken, { type: 'bearer' })
                         .send({ shipmentDescription: "Rolex", pickUpAddress: "Egypt", pickOfAddress: "Germany" });
                     expect(res.statusCode).toEqual(201);
-                    expect(res.body.data.customerId).toEqual('99ZKJA98198A');
+                    expect(res.body.data.customerId).toEqual('63a22b00a704bee4b0254f4d');
                     expect(res.body.data.pickOfAddress).toEqual('Germany');
                     expect(res.body.data.pickUpAddress).toEqual('Egypt');
                     expect(res.body.data.shipmentStatus).toEqual('WAITING');

@@ -1,4 +1,4 @@
-export interface PickShipmentInfo {
+export default interface PickShipmentInfo {
     bikerId: string,
     shipmentId: string,
     pickupTime: string,

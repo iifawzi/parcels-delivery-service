@@ -6,8 +6,12 @@ export const createShipmentSchema = Joi.object({
     pickOfAddress: Joi.string().required(),
 });
 
-export const pickUpShipmentSchema = Joi.object({
+export const pickupShipmentSchema = Joi.object({
     shipmentId: Joi.string().required(),
     pickupTime: Joi.number().required(),
     deliveryTime: Joi.number().required()
+});
+
+export const deliverShipmentSchema = Joi.object({
+    shipmentId: Joi.string().required(),
 });

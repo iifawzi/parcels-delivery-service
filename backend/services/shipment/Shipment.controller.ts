@@ -2,10 +2,9 @@ import { inject, injectable } from "tsyringe";
 import ShipmentService from "./Shipment.service";
 import { BaseLogger, RequestWithRequester } from "@/interfaces";
 import { NextFunction, Response } from "express";
-import { CreateShipmentInfo } from "./interfaces";
+import { CreateShipmentInfo, DeliverShipmentInfo, PickShipmentInfo } from "./interfaces";
 import { ResponseUtility } from "@/utils/Response";
 import { ShipmentStatus } from "./repository/mongodb/shipment.model";
-import { PickShipmentInfo } from "./interfaces/pickShipmentInfo";
 import { BaseError } from "@/providers";
 
 @injectable()
@@ -26,17 +25,36 @@ export default class ShipmentController {
         }
     }
 
-    public async pickUpShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
+    public async pickupShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
         try {
-            this.logger.info(`ShipmentController :: pickUpShipment :: ${JSON.stringify(req.body)}`);
+            this.logger.info(`ShipmentController :: pickupShipment :: ${JSON.stringify(req.body)}`);
             const shimpentInfo = { ...req.body, bikerId: req.requester?._id, shipmentStatus: ShipmentStatus.PICKED } as unknown as PickShipmentInfo;
             const [status, info] = await this.shipmentService.pickupShipment(shimpentInfo);
             if (!status) {
                 switch (info) {
                     case 'notfound':
                         throw new BaseError(409, 'Shipment is not found');
-                    case 'waiting':
+                    case 'notwaiting':
                         throw new BaseError(609, 'Shipment can\'t be picked');
+                }
+            }
+            return ResponseUtility.Success(200, true, res);
+        } catch (err: any) {
+            next(err);
+        }
+    }
+
+    public async deliverShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
+        try {
+            this.logger.info(`ShipmentController :: deliverShipment :: ${JSON.stringify(req.body)}`);
+            const shimpentInfo = { ...req.body, bikerId: req.requester?._id, shipmentStatus: ShipmentStatus.DELIVERED } as unknown as DeliverShipmentInfo;
+            const [status, info] = await this.shipmentService.deliverShipment(shimpentInfo);
+            if (!status) {
+                switch (info) {
+                    case 'notfound':
+                        throw new BaseError(409, 'Shipment is not found');
+                    case 'notpicked':
+                        throw new BaseError(609, 'Shipment can\'t be delivered');
                 }
             }
             return ResponseUtility.Success(200, true, res);

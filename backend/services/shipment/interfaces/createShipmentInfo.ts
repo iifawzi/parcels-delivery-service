@@ -1,4 +1,4 @@
-export interface CreateShipmentInfo {
+export default interface CreateShipmentInfo {
     customerId: string,
     pickUpAddress: string,
     pickOfAddress: string,
