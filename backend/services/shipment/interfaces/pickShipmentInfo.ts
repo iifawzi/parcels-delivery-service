@@ -1,5 +1,5 @@
 export default interface PickShipmentInfo {
-    bikerId: string,
+    biker: string,
     shipmentId: string,
     pickupTime: string,
     deliveryTime: string,

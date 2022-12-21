@@ -52,7 +52,7 @@ describe("[Shipments APIs] | CreateShipment API", () => {
                         .auth(customerToken, { type: 'bearer' })
                         .send({ shipmentDescription: "Rolex", pickUpAddress: "Egypt", pickOfAddress: "Germany" });
                     expect(res.statusCode).toEqual(201);
-                    expect(res.body.data.customerId).toEqual('63a22b00a704bee4b0254f4d');
+                    expect(res.body.data.customer).toEqual('63a22b00a704bee4b0254f4d');
                     expect(res.body.data.pickOfAddress).toEqual('Germany');
                     expect(res.body.data.pickUpAddress).toEqual('Egypt');
                     expect(res.body.data.shipmentStatus).toEqual('WAITING');

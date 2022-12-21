@@ -9,22 +9,22 @@ export enum ShipmentStatus {
 
 interface shipmentSchemaI {
 	shipmentDescripton: string,
-	customerId: Schema.Types.ObjectId,
+	customer: Schema.Types.ObjectId,
 	pickUpAddress: string,
 	pickOfAddress: string,
 	shipmentStatus: ShipmentStatus,
-	bikerId?: Schema.Types.ObjectId
+	biker?: Schema.Types.ObjectId
 	pickupTime?: number,
 	deliveryTime?: number,
 }
 
 export const ShipmentSchema = new mongoose.Schema<shipmentSchemaI>({
 	shipmentDescripton: { type: String },
-	customerId: { type: Schema.Types.ObjectId, ref: 'customers' },
+	customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
 	pickUpAddress: { type: String },
 	pickOfAddress: { type: String },
 	shipmentStatus: { type: String, enum: ShipmentStatus },
-	bikerId: { type: Schema.Types.ObjectId, ref: 'bikers', required: false },
+	biker: { type: Schema.Types.ObjectId, ref: 'Biker', required: false },
 	pickupTime: { type: Number, required: false },
 	deliveryTime: { type: Number, required: false },
 }, {

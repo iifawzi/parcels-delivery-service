@@ -17,7 +17,7 @@ export default class ShipmentController {
     public async createShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
         try {
             this.logger.info(`ShipmentController :: createShipment :: ${JSON.stringify(req.body)}`);
-            const shimpentInfo = { ...req.body, customerId: req.requester?._id, shipmentStatus: ShipmentStatus.WAITING } as unknown as CreateShipmentInfo;
+            const shimpentInfo = { ...req.body, customer: req.requester?._id, shipmentStatus: ShipmentStatus.WAITING } as unknown as CreateShipmentInfo;
             const [_, shipmentData] = await this.shipmentService.addShipment(shimpentInfo);
             return ResponseUtility.Success(201, shipmentData, res);
         } catch (err: any) {
@@ -28,7 +28,7 @@ export default class ShipmentController {
     public async pickupShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
         try {
             this.logger.info(`ShipmentController :: pickupShipment :: ${JSON.stringify(req.body)}`);
-            const shimpentInfo = { ...req.body, bikerId: req.requester?._id, shipmentStatus: ShipmentStatus.PICKED } as unknown as PickShipmentInfo;
+            const shimpentInfo = { ...req.body, biker: req.requester?._id, shipmentStatus: ShipmentStatus.PICKED } as unknown as PickShipmentInfo;
             const [status, info] = await this.shipmentService.pickupShipment(shimpentInfo);
             if (!status) {
                 switch (info) {
@@ -47,7 +47,7 @@ export default class ShipmentController {
     public async deliverShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
         try {
             this.logger.info(`ShipmentController :: deliverShipment :: ${JSON.stringify(req.body)}`);
-            const shimpentInfo = { ...req.body, bikerId: req.requester?._id, shipmentStatus: ShipmentStatus.DELIVERED } as unknown as DeliverShipmentInfo;
+            const shimpentInfo = { ...req.body, biker: req.requester?._id, shipmentStatus: ShipmentStatus.DELIVERED } as unknown as DeliverShipmentInfo;
             const [status, info] = await this.shipmentService.deliverShipment(shimpentInfo);
             if (!status) {
                 switch (info) {
@@ -58,6 +58,16 @@ export default class ShipmentController {
                 }
             }
             return ResponseUtility.Success(200, true, res);
+        } catch (err: any) {
+            next(err);
+        }
+    }
+
+    public async getWaitingShipments(req: RequestWithRequester, res: Response, next: NextFunction) {
+        try {
+            this.logger.info(`ShipmentController :: getWaitingShipments :: ${JSON.stringify(req.body)}`);
+            const data = await this.shipmentService.getWaitingShipments();
+            return ResponseUtility.Success(200, data, res);
         } catch (err: any) {
             next(err);
         }

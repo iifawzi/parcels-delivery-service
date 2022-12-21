@@ -1,5 +1,5 @@
 export default interface DeliverShipmentInfo {
     shipmentId: string,
-    bikerId: string,
+    biker: string,
     shipmentStatus: string
 }

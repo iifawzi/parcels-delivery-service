@@ -4,4 +4,5 @@ export interface ShipmentRepositoryI {
     findShipment(shipmentId: string): Promise<any>,
     updateShipment(shipmentId: string, updatedInfo: any): Promise<any>,
     findShipmentByIdAndBiker(shipmentId: string, bikerId: string): Promise<any>,
+    findWaitingShipments(): Promise<any>,
 }

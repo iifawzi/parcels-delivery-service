@@ -37,7 +37,7 @@ export default class ShipmentService {
 
     public async deliverShipment(shipmentInfo: DeliverShipmentInfo): Promise<any> {
         this.logger.info(`ShipmentService :: deliverShipment :: ${JSON.stringify(shipmentInfo)}`);
-        const shipment = await this.shipmentRepository.findShipmentByIdAndBiker(shipmentInfo.shipmentId, shipmentInfo.bikerId);
+        const shipment = await this.shipmentRepository.findShipmentByIdAndBiker(shipmentInfo.shipmentId, shipmentInfo.biker);
         if (!shipment) {
             return [false, 'notfound']
         }
@@ -50,6 +50,12 @@ export default class ShipmentService {
         delete updatedInfo.shipmentId;
         const updatedShipment = await this.shipmentRepository.updateShipment(shipmentInfo.shipmentId, updatedInfo);
         return [true, updatedShipment];
+    }
+
+    public async getWaitingShipments(): Promise<any> {
+        this.logger.info(`ShipmentService :: getWaitingShipments ::`);
+        const shipments = await this.shipmentRepository.findWaitingShipments();
+        return shipments;
     }
 
 }

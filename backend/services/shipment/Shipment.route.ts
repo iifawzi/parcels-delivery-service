@@ -18,6 +18,7 @@ class ShipmentRouter {
         this.router.post('/', isAuth, isAllowed(['customer']), validateSchema(ShipmentSchemas.createShipmentSchema), this.shipmentController.createShipment.bind(this.shipmentController));
         this.router.patch('/', isAuth, isAllowed(['biker']), validateSchema(ShipmentSchemas.pickupShipmentSchema), this.shipmentController.pickupShipment.bind(this.shipmentController));
         this.router.patch('/deliver', isAuth, isAllowed(['biker']), validateSchema(ShipmentSchemas.deliverShipmentSchema), this.shipmentController.deliverShipment.bind(this.shipmentController));
+        this.router.get('/waiting', isAuth, isAllowed(['biker']), this.shipmentController.getWaitingShipments.bind(this.shipmentController));
     }
 
     public get getRoutes(): express.Router {

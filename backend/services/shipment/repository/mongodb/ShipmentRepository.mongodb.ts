@@ -1,6 +1,6 @@
 import { CreateShipmentInfo, PickShipmentInfo } from "../../interfaces";
 import { ShipmentRepositoryI } from "../ShipmentRepository.contract";
-import ShipmentModel from "./shipment.model";
+import ShipmentModel, { ShipmentStatus } from "./shipment.model";
 
 export default class ShipmentRepositoryMongoDB implements ShipmentRepositoryI {
     private shipmentModel = ShipmentModel;
@@ -30,4 +30,8 @@ export default class ShipmentRepositoryMongoDB implements ShipmentRepositoryI {
         return shipment;
     }
 
+    async findWaitingShipments(): Promise<any> {
+        const shipments = await this.shipmentModel.find({ shipmentStatus: ShipmentStatus.WAITING }).populate('customer', 'fullName -_id').lean();
+        return shipments;
+    }
 }
