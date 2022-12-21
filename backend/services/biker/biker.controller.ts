@@ -16,7 +16,7 @@ export default class BikerController {
 
     public async login(req: Request, res: Response, next: NextFunction) {
         try {
-            this.logger.info(`BikerService :: login :: ${JSON.stringify(req.body.username)}`);
+            this.logger.info(`BikerController :: login :: ${JSON.stringify(req.body.username)}`);
             const [status, loginInfo] = await this.bikerService.login(req.body.username, req.body.password);
             if (!status) {
                 throw new BaseError(401, "You're not authenticated");

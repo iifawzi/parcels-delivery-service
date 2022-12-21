@@ -20,7 +20,7 @@ export default class CustomerService {
         const passwordIsSame = await comparePassword(password, customer.password);
         if (!passwordIsSame) {
             this.logger.error(`CustomerService :: login :: invalid password ::`);
-            return [false, 'null'];
+            return [false, null];
         }
 
         delete customer.password;

@@ -1,6 +1,6 @@
-import { Document, Types } from "mongoose";
+import { Types } from "mongoose";
 import { BikerRepositoryI } from "../BikerRepository.contract";
-import BikerModel, { bikerSchemaI } from "./biker.model";
+import BikerModel from "./biker.model";
 
 export default class BikerRepositoryMongoDB implements BikerRepositoryI {
     private bikerModel = BikerModel;
