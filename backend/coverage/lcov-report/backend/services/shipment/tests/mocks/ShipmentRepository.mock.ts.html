@@ -25,7 +25,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/15</span>
+                <span class='fraction'>19/19</span>
             </div>
         
             
@@ -39,14 +39,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>11/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>14/14</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
@@ -160,11 +160,20 @@
 <a name='L95'></a><a href='#L95'>95</a>
 <a name='L96'></a><a href='#L96'>96</a>
 <a name='L97'></a><a href='#L97'>97</a>
-<a name='L98'></a><a href='#L98'>98</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">7x</span>
-<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">9x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -257,6 +266,15 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import { CreateShipmentInfo } from "../../interfaces";
 import { ShipmentRepositoryI } from "../../repository/ShipmentRepository.contract";
 &nbsp;
@@ -271,13 +289,13 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             }
         },
         "63a271ebbe91afafb4d48c61": {
-            customerId: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "PICKED",
         },
         "63a271ebbe91afafb4d48c63": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "PICKED",
@@ -286,7 +304,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c64": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "PICKED",
@@ -295,7 +313,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c65": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "DELIVERED",
@@ -304,7 +322,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c66": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "MATCHED",
@@ -313,7 +331,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c67": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "MATCHED",
@@ -354,6 +372,15 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
     async findWaitingShipments(): Promise&lt;any&gt; {
         return Object.values(this.shipments).filter(shipment =&gt; shipment.shipmentStatus === 'WAITING');
     }
+&nbsp;
+    async findCustomerShipments(customer: string): Promise&lt;any&gt; {
+        return Object.values(this.shipments).filter(shipment =&gt; shipment.customer === customer);
+    }
+    
+    async findBikerShipments(biker: string): Promise&lt;any&gt; {
+        return Object.values(this.shipments).filter(shipment =&gt; shipment.biker === biker);
+&nbsp;
+    }
 }</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -361,7 +388,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2022-12-21T15:15:31.796Z
+                at 2022-12-21T15:31:53.312Z
             </div>
         <script src="../../../../../prettify.js"></script>
         <script>

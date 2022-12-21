@@ -34,4 +34,14 @@ export default class ShipmentRepositoryMongoDB implements ShipmentRepositoryI {
         const shipments = await this.shipmentModel.find({ shipmentStatus: ShipmentStatus.WAITING }).populate('customer', 'fullName -_id').lean();
         return shipments;
     }
+
+    async findBikerShipments(biker: string): Promise<any> {
+        const shipments = await this.shipmentModel.find({ biker }).populate('customer', 'fullName -_id').lean();
+        return shipments;
+    }
+
+    async findCustomerShipments(customer: string): Promise<any> {
+        const shipments = await this.shipmentModel.find({ customer }).populate('biker', 'fullName -_id').lean();
+        return shipments;
+    }
 }

@@ -12,13 +12,13 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             }
         },
         "63a271ebbe91afafb4d48c61": {
-            customerId: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "PICKED",
         },
         "63a271ebbe91afafb4d48c63": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "PICKED",
@@ -27,7 +27,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c64": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "PICKED",
@@ -36,7 +36,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c65": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "DELIVERED",
@@ -45,7 +45,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c66": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "MATCHED",
@@ -54,7 +54,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c67": {
-            customer: "63a22b00a704bee4b0254f56",
+            customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
             shipmentStatus: "MATCHED",
@@ -94,5 +94,14 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
 
     async findWaitingShipments(): Promise<any> {
         return Object.values(this.shipments).filter(shipment => shipment.shipmentStatus === 'WAITING');
+    }
+
+    async findCustomerShipments(customer: string): Promise<any> {
+        return Object.values(this.shipments).filter(shipment => shipment.customer === customer);
+    }
+    
+    async findBikerShipments(biker: string): Promise<any> {
+        return Object.values(this.shipments).filter(shipment => shipment.biker === biker);
+
     }
 }

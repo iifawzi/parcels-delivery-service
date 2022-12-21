@@ -75,4 +75,16 @@ export default class ShipmentService {
         return shipments;
     }
 
+    public async getBikerShipments(bikerId: string): Promise<any> {
+        this.logger.info(`ShipmentService :: getBikerShipments ::`);
+        const shipments = await this.shipmentRepository.findBikerShipments(bikerId);
+        return shipments;
+    }
+
+    public async getCustomerShipments(customerId: string): Promise<any> {
+        this.logger.info(`ShipmentService :: getCustomerShipments ::`);
+        const shipments = await this.shipmentRepository.findCustomerShipments(customerId);
+        return shipments;
+    }
+
 }

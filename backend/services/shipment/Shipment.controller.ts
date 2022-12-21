@@ -91,4 +91,24 @@ export default class ShipmentController {
             next(err);
         }
     }
+
+    public async getBikerShipments(req: RequestWithRequester, res: Response, next: NextFunction) {
+        try {
+            this.logger.info(`ShipmentController :: getBikerShipments :: ${JSON.stringify(req.body)}`);
+            const data = await this.shipmentService.getBikerShipments(req.requester?._id as string);
+            return ResponseUtility.Success(200, data, res);
+        } catch (err: any) {
+            next(err);
+        }
+    }
+
+    public async getCustomerShipments(req: RequestWithRequester, res: Response, next: NextFunction) {
+        try {
+            this.logger.info(`ShipmentController :: getCustomerShipments :: ${JSON.stringify(req.body)}`);
+            const data = await this.shipmentService.getCustomerShipments(req.requester?._id as string);
+            return ResponseUtility.Success(200, data, res);
+        } catch (err: any) {
+            next(err);
+        }
+    }
 }
