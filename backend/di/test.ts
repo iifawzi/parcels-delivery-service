@@ -13,6 +13,7 @@ import { BikerRepositoryMock } from "@/services/biker/tests/mocks";
 import TestLogger from '@/tests/mocks/Logger.mock';
 import { CustomerRepositoryMock } from '@/services/customer/tests/mocks';
 import { CustomerRepositoryI } from '@/services/customer/repository/CustomerRepository.contract';
+import { ShipmentController, ShipmentRepositoryMongoDB, ShipmentService } from '@/services/shipment';
 
 export default function regesterDependencies() {
     // Common Dependencies
@@ -28,4 +29,9 @@ export default function regesterDependencies() {
     container.register<CustomerController>("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
     container.register<CustomerService>("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
     container.register<CustomerRepositoryI>("customerRepository", { useClass: CustomerRepositoryMock }, { lifecycle: Lifecycle.Singleton });
+
+    // Shipment dependencies
+    container.register<ShipmentController>("shipmentController", { useClass: ShipmentController }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentService>("shipmentService", { useClass: ShipmentService }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentRepositoryMongoDB>("shipmentRepository", { useClass: ShipmentRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });
 }
