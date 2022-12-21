@@ -44,6 +44,24 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             deliveryTime: new Date().getTime(),
             pickupTime: new Date().getTime(),
         },
+        "63a271ebbe91afafb4d48c66": {
+            customer: "63a22b00a704bee4b0254f56",
+            pickUpAddress: "Egypt",
+            pickOfAddress: "Germany",
+            shipmentStatus: "MATCHED",
+            biker: "63a22b00a704bee4b0254f4c",
+            deliveryTime: new Date().getTime(),
+            pickupTime: new Date().getTime(),
+        },
+        "63a271ebbe91afafb4d48c67": {
+            customer: "63a22b00a704bee4b0254f56",
+            pickUpAddress: "Egypt",
+            pickOfAddress: "Germany",
+            shipmentStatus: "MATCHED",
+            biker: "63a22b00a704bee4b0254f4e",
+            deliveryTime: new Date().getTime(),
+            pickupTime: new Date().getTime(),
+        },
     };
 
     async findShipment(shipmentId: string): Promise<any> {

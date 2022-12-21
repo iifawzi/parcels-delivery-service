@@ -2,7 +2,7 @@ import { inject, injectable } from "tsyringe";
 import ShipmentService from "./Shipment.service";
 import { BaseLogger, RequestWithRequester } from "@/interfaces";
 import { NextFunction, Response } from "express";
-import { CreateShipmentInfo, DeliverShipmentInfo, MatchShipmentInfo } from "./interfaces";
+import { CreateShipmentInfo, DeliverShipmentInfo, MatchShipmentInfo, PickupShipmentInfo } from "./interfaces";
 import { ResponseUtility } from "@/utils/Response";
 import { ShipmentStatus } from "./repository/mongodb/shipment.model";
 import { BaseError } from "@/providers";
@@ -35,6 +35,25 @@ export default class ShipmentController {
                     case 'notfound':
                         throw new BaseError(409, 'Shipment is not found');
                     case 'notwaiting':
+                        throw new BaseError(609, 'Shipment can\'t be picked');
+                }
+            }
+            return ResponseUtility.Success(200, true, res);
+        } catch (err: any) {
+            next(err);
+        }
+    }
+
+    public async pickupShipment(req: RequestWithRequester, res: Response, next: NextFunction) {
+        try {
+            this.logger.info(`ShipmentController :: pickupShipment :: ${JSON.stringify(req.body)}`);
+            const shimpentInfo = { ...req.body, biker: req.requester?._id, shipmentStatus: ShipmentStatus.PICKED } as unknown as PickupShipmentInfo;
+            const [status, info] = await this.shipmentService.pickupShipment(shimpentInfo);
+            if (!status) {
+                switch (info) {
+                    case 'notfound':
+                        throw new BaseError(409, 'Shipment is not found');
+                    case 'notmatched':
                         throw new BaseError(609, 'Shipment can\'t be picked');
                 }
             }

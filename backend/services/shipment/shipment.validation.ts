@@ -12,6 +12,10 @@ export const matchShipmentSchema = Joi.object({
     deliveryTime: Joi.number().required()
 });
 
+export const pickupShipmentSchema = Joi.object({
+    shipmentId: Joi.string().required(),
+});
+
 export const deliverShipmentSchema = Joi.object({
     shipmentId: Joi.string().required(),
 });

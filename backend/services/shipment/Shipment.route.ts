@@ -17,6 +17,7 @@ class ShipmentRouter {
     private configureRoutes() {
         this.router.post('/', isAuth, isAllowed(['customer']), validateSchema(ShipmentSchemas.createShipmentSchema), this.shipmentController.createShipment.bind(this.shipmentController));
         this.router.patch('/match', isAuth, isAllowed(['biker']), validateSchema(ShipmentSchemas.matchShipmentSchema), this.shipmentController.matchShipment.bind(this.shipmentController));
+        this.router.patch('/pickup', isAuth, isAllowed(['biker']), validateSchema(ShipmentSchemas.pickupShipmentSchema), this.shipmentController.pickupShipment.bind(this.shipmentController));
         this.router.patch('/deliver', isAuth, isAllowed(['biker']), validateSchema(ShipmentSchemas.deliverShipmentSchema), this.shipmentController.deliverShipment.bind(this.shipmentController));
         this.router.get('/waiting', isAuth, isAllowed(['biker']), this.shipmentController.getWaitingShipments.bind(this.shipmentController));
     }
