@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1671634778766" clover="3.2.0">
-  <project timestamp="1671634778766" name="All files">
-    <metrics statements="487" coveredstatements="426" conditionals="63" coveredconditionals="50" methods="131" coveredmethods="95" elements="681" coveredelements="571" complexity="0" loc="487" ncloc="487" packages="16" files="53" classes="53"/>
+<coverage generated="1671635113798" clover="3.2.0">
+  <project timestamp="1671635113798" name="All files">
+    <metrics statements="478" coveredstatements="425" conditionals="63" coveredconditionals="50" methods="127" coveredmethods="95" elements="668" coveredelements="570" complexity="0" loc="478" ncloc="478" packages="16" files="52" classes="52"/>
     <package name="backend">
       <metrics statements="25" coveredstatements="22" conditionals="6" coveredconditionals="3" methods="4" coveredmethods="3"/>
       <file name="index.ts" path="/Users/fawzi/Desktop/parcels-delivery-service/backend/index.ts">
@@ -670,19 +670,7 @@
       </file>
     </package>
     <package name="backend.utils">
-      <metrics statements="15" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="8" coveredmethods="2"/>
-      <file name="ConsoleLogger.ts" path="/Users/fawzi/Desktop/parcels-delivery-service/backend/utils/ConsoleLogger.ts">
-        <metrics statements="9" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="0"/>
-        <line num="5" count="0" type="stmt"/>
-        <line num="9" count="0" type="stmt"/>
-        <line num="13" count="0" type="stmt"/>
-        <line num="17" count="0" type="stmt"/>
-        <line num="18" count="0" type="stmt"/>
-        <line num="19" count="0" type="stmt"/>
-        <line num="20" count="0" type="stmt"/>
-        <line num="21" count="0" type="stmt"/>
-        <line num="25" count="6" type="stmt"/>
-      </file>
+      <metrics statements="6" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="2"/>
       <file name="Response.ts" path="/Users/fawzi/Desktop/parcels-delivery-service/backend/utils/Response.ts">
         <metrics statements="5" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="2"/>
         <line num="3" count="6" type="stmt"/>

@@ -48,7 +48,10 @@
     },
     "moduleNameMapper": {
       "^@/(.*)$": "<rootDir>/$1"
-    } ,
+    },
+    "collectCoverageFrom": [
+      "./**/{!(ConsoleLogger.ts),}.ts"
+    ],
     "testEnvironment": "node",
     "testTimeout": 10000,
     "modulePathIgnorePatterns": ["<rootDir>/di/"]
