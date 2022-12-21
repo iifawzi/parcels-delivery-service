@@ -10,12 +10,8 @@ const isAuth = (req: RequestWithRequester, res: Response, next: NextFunction) =>
             throw new BaseError(401, "You\'re not authenticated");
         } else {
             let splicedToken;
-            if (encoded_token.startsWith("Bearer ")) {
-                const spliced = encoded_token.split(" ");
-                splicedToken = spliced[1];
-            } else {
-                splicedToken = encoded_token;
-            }
+            const spliced = encoded_token.split(" ");
+            splicedToken = spliced[1];
 
             let decoded_token = checkToken(splicedToken) as RequesterInfo;
             if (decoded_token) {
