@@ -7,7 +7,7 @@ const isAuth = (req: RequestWithRequester, res: Response, next: NextFunction) =>
     try {
         const encoded_token = req.headers.authorization;
         if (!encoded_token) {
-            throw new BaseError(401, "User is not Authenticated");
+            throw new BaseError(401, "You\'re not authenticated");
         } else {
             let splicedToken;
             if (encoded_token.startsWith("Bearer ")) {

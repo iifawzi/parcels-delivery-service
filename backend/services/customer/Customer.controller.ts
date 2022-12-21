@@ -4,8 +4,6 @@ import CustomerService from "./Customer.service";
 import { BaseLogger } from "@/interfaces";
 import { ResponseUtility } from "@/utils/Response";
 import { BaseError } from "@/providers";
-import { comparePassword } from "@/helpers";
-import { createToken } from "@/helpers/jwt";
 
 @injectable()
 export default class CustomerController {

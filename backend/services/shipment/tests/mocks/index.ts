@@ -1,0 +1,1 @@
+export { default as ShipmentRepositoryMock } from "./ShipmentRepository.mock"

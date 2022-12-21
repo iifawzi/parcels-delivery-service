@@ -1,6 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-enum ShipmentStatus {
+export enum ShipmentStatus {
 	WAITING = "WAITING",
 	MATCHED = "MATCHED",
 	PICKED = "PICKED",
@@ -10,8 +10,8 @@ enum ShipmentStatus {
 interface shipmentSchemaI {
 	shipmentDescripton: string,
 	customerId: Schema.Types.ObjectId,
-	pickUpAdress: string,
-	pickOfAdress: string,
+	pickUpAddress: string,
+	pickOfAddress: string,
 	shipmentStatus: ShipmentStatus,
 	bikerId?: Schema.Types.ObjectId
 	pickUpTime?: number,
@@ -21,8 +21,8 @@ interface shipmentSchemaI {
 export const ShipmentSchema = new mongoose.Schema<shipmentSchemaI>({
 	shipmentDescripton: { type: String },
 	customerId: { type: Schema.Types.ObjectId, ref: 'customers' },
-	pickUpAdress: { type: String },
-	pickOfAdress: { type: String },
+	pickUpAddress: { type: String },
+	pickOfAddress: { type: String },
 	shipmentStatus: { type: String, enum: ShipmentStatus },
 	bikerId: { type: Schema.Types.ObjectId, ref: 'bikers', required: false },
 	pickUpTime: { type: Number, required: false },

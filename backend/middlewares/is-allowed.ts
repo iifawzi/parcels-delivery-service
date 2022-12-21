@@ -9,7 +9,7 @@ const isAllowed = (allowedFor: string[]) => {
             if (allowedFor.includes(requesterInfo.role)) {
                 next();
             } else {
-                throw new BaseError(403, "You're not authorized to preform this action");
+                throw new BaseError(403, "You're not authorized to perform this action");
             }
         } catch (err: any) {
             err.statusCode = 403;

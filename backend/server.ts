@@ -9,7 +9,9 @@ export default class Server {
         const port = process.env.PORT || 4040;
         Server.serverInstance = http.createServer(this.app.getInstance);
         Server.serverInstance.listen(port, () => {
-            console.log(`Server is listening on Port ${port}`);
+            if (process.env.NODE_ENV != 'test') {
+                console.log(`Server is listening on Port ${port}`);
+            }
         });
     };
 

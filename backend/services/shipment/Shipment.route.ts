@@ -1,8 +1,9 @@
-import { validateSchema } from "@/middlewares";
-import express from "express"
+import { isAllowed, isAuth, validateSchema } from "@/middlewares";
+import express, { NextFunction, Request, Response } from "express"
 import { container } from "tsyringe";
 import * as ShipmentSchemas from "./shipment.validation"
 import ShipmentController from "./Shipment.controller";
+import { RequestWithRequester } from "@/interfaces";
 
 class ShipmentRouter {
     private prefix: string = '/shipment';
@@ -14,6 +15,7 @@ class ShipmentRouter {
     }
 
     private configureRoutes() {
+        this.router.post('/', isAuth, isAllowed(['customer']), validateSchema(ShipmentSchemas.createShipmentSchema), this.shipmentController.createShipment.bind(this.shipmentController));
     }
 
     public get getRoutes(): express.Router {
