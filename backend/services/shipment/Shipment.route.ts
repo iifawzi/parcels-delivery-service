@@ -16,6 +16,7 @@ class ShipmentRouter {
 
     private configureRoutes() {
         this.router.post('/', isAuth, isAllowed(['customer']), validateSchema(ShipmentSchemas.createShipmentSchema), this.shipmentController.createShipment.bind(this.shipmentController));
+        this.router.patch('/', isAuth, isAllowed(['biker']), validateSchema(ShipmentSchemas.pickUpShipmentSchema), this.shipmentController.pickUpShipment.bind(this.shipmentController));
     }
 
     public get getRoutes(): express.Router {

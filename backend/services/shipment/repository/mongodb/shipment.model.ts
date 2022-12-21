@@ -14,7 +14,7 @@ interface shipmentSchemaI {
 	pickOfAddress: string,
 	shipmentStatus: ShipmentStatus,
 	bikerId?: Schema.Types.ObjectId
-	pickUpTime?: number,
+	pickupTime?: number,
 	deliveryTime?: number,
 }
 
@@ -25,7 +25,7 @@ export const ShipmentSchema = new mongoose.Schema<shipmentSchemaI>({
 	pickOfAddress: { type: String },
 	shipmentStatus: { type: String, enum: ShipmentStatus },
 	bikerId: { type: Schema.Types.ObjectId, ref: 'bikers', required: false },
-	pickUpTime: { type: Number, required: false },
+	pickupTime: { type: Number, required: false },
 	deliveryTime: { type: Number, required: false },
 }, {
 	timestamps: true
