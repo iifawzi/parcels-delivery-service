@@ -7,7 +7,7 @@ import { BaseDatabase, BaseLogger } from "@/interfaces";
 import BikerController from "@/services/biker/Biker.controller";
 import CustomerController from "@/services/customer/Customer.controller";
 import { CustomerService } from "@/services/customer";
-import { MongoDBCustomerRepository } from "@/services/customer/repository/mongodb";
+import { CustomerRepositoryMongoDB } from "@/services/customer/repository/mongodb";
 import { DatabaseMock } from "@/tests/mocks";
 import { BikerRepositoryMock } from "@/services/biker/tests/mocks";
 import TestLogger from '@/tests/mocks/Logger.mock';

@@ -1,15 +1,10 @@
-import { MongoDBBikerRepository } from "@/services/biker/repository/mongodb";
 import { Database } from "@/providers/Database";
 import { ConsoleLogger } from "@/utils";
 import { Lifecycle, container } from "tsyringe";
-import { BikerService } from "@/services/biker";
-import { BikerRepositoryI } from "@/services/biker/repository/BikerRepository.contract";
+import { BikerController, BikerRepositoryI, BikerService, BikerRepositoryMongoDB } from "@/services/biker";
+import { CustomerController, CustomerRepositoryI, CustomerService, CustomerRepositoryMongoDB } from "@/services/customer";
 import { BaseDatabase, BaseLogger } from "@/interfaces";
-import BikerController from "@/services/biker/Biker.controller";
-import CustomerController from "@/services/customer/Customer.controller";
-import { CustomerService } from "@/services/customer";
-import { MongoDBCustomerRepository } from "@/services/customer/repository/mongodb";
-import { CustomerRepositoryI } from "@/services/customer/repository/CustomerRepository.contract";
+import { ShipmentRepositoryMongoDB, ShipmentController, ShipmentService } from "@/services/shipment";
 
 export default function regesterDependencies() {
     // Common Dependencies
@@ -19,10 +14,15 @@ export default function regesterDependencies() {
     // Biker dependencies
     container.register<BikerController>("bikerController", { useClass: BikerController }, { lifecycle: Lifecycle.Singleton });
     container.register<BikerService>("bikerService", { useClass: BikerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<BikerRepositoryI>("bikerRepository", { useClass: MongoDBBikerRepository }, { lifecycle: Lifecycle.Singleton });
+    container.register<BikerRepositoryI>("bikerRepository", { useClass: BikerRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });
 
     // Customer dependencies
     container.register<CustomerController>("customerController", { useClass: CustomerController }, { lifecycle: Lifecycle.Singleton });
     container.register<CustomerService>("customerService", { useClass: CustomerService }, { lifecycle: Lifecycle.Singleton });
-    container.register<CustomerRepositoryI>("customerRepository", { useClass: MongoDBCustomerRepository }, { lifecycle: Lifecycle.Singleton });
+    container.register<CustomerRepositoryI>("customerRepository", { useClass: CustomerRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });
+
+    // Shipment dependencies
+    container.register<ShipmentController>("shipmentController", { useClass: ShipmentController }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentService>("shipmentService", { useClass: ShipmentService }, { lifecycle: Lifecycle.Singleton });
+    container.register<ShipmentRepositoryMongoDB>("shipmentRepository", { useClass: ShipmentRepositoryMongoDB }, { lifecycle: Lifecycle.Singleton });
 }

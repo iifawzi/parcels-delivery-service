@@ -1,12 +1,12 @@
 import { Document, Types } from "mongoose";
 import { BikerRepositoryI } from "../BikerRepository.contract";
-import BikerModel, { BikerI } from "./biker.model";
+import BikerModel, { bikerSchemaI } from "./biker.model";
 
-export default class MongoDBBikerRepository implements BikerRepositoryI {
+export default class BikerRepositoryMongoDB implements BikerRepositoryI {
     private bikerModel = BikerModel;
 
     public async findBiker(username: string): Promise<any> {
-        const biker: & BikerI & { _id: Types.ObjectId } | null  = await this.bikerModel.findOne({ username }).lean();
+        const biker = await this.bikerModel.findOne({ username }).lean();
         return biker;
     }
 

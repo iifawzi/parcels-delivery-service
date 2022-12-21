@@ -1,2 +1,5 @@
 export { default as CustomerRouter } from "./Customer.route"
 export { default as CustomerService } from "./Customer.service"
+export { default as CustomerController } from "./Customer.controller"
+export { CustomerRepositoryI } from "./repository/CustomerRepository.contract"
+export { CustomerRepositoryMongoDB } from "./repository/mongodb"

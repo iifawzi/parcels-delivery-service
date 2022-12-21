@@ -1,7 +1,7 @@
 import "reflect-metadata"
 import request from 'supertest';
 import server from "@/index"
-import { decodeToken } from "@/helpers/jwt";
+import { decodeToken } from "@/helpers";
 
 describe("[Biker APIs] | Login API", () => {
     afterAll(() => {

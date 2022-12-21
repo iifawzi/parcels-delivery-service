@@ -1,1 +1,1 @@
-export { default as MongoDBCustomerRepository } from "./CustomerRepository.mongodb"
+export { default as CustomerRepositoryMongoDB } from "./CustomerRepository.mongodb"

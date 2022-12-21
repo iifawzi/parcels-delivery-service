@@ -1,1 +1,1 @@
-export { default as MongoDBBikerRepository } from "./BikerRepository.mongodb"
+export { default as BikerRepositoryMongoDB } from "./BikerRepository.mongodb"

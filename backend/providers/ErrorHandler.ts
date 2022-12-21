@@ -3,8 +3,7 @@ import { Response } from "express";
 
 export class BaseError extends Error {
     constructor(public statusCode: number, public message: string, public errors?: any) {
-        super();
-        this.message = message;
+        super(message);
         this.statusCode = statusCode;
         this.errors = errors;
     }

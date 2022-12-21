@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-export interface BikerI {
+export interface bikerSchemaI {
 	username: string,
 	password: string,
 	fullname: string
 }
 
-export const BikerSchema = new mongoose.Schema<BikerI>({
+export const BikerSchema = new mongoose.Schema<bikerSchemaI>({
 	username: { type: String, unique: true },
 	password: { type: String },
 	fullname: { type: String },
@@ -15,6 +15,6 @@ export const BikerSchema = new mongoose.Schema<BikerI>({
 });
 
 
-const BikerModel = mongoose.model<BikerI>('Biker', BikerSchema);
+const BikerModel = mongoose.model<bikerSchemaI>('Biker', BikerSchema);
 
 export default BikerModel;

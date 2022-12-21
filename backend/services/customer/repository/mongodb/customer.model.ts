@@ -1,12 +1,12 @@
 import mongoose from 'mongoose';
 
-interface customerI {
+interface CustomerSchemaI {
 	username: string,
 	password: string,
 	fullname: string
 }
 
-export const CustomerSchema = new mongoose.Schema<customerI>({
+export const CustomerSchema = new mongoose.Schema<CustomerSchemaI>({
 	username: { type: String, unique: true },
 	password: { type: String },
 	fullname: { type: String },
@@ -15,6 +15,6 @@ export const CustomerSchema = new mongoose.Schema<customerI>({
 });
 
 
-const CustomerModel = mongoose.model<customerI>('Customer', CustomerSchema);
+const CustomerModel = mongoose.model<CustomerSchemaI>('Customer', CustomerSchema);
 
 export default CustomerModel;
