@@ -2,10 +2,12 @@ import "reflect-metadata"
 import request from 'supertest';
 import server from "@/index"
 import { decodeToken } from "@/helpers";
+import mongoose from "mongoose";
 
 describe("[Biker APIs] | Login API", () => {
     afterAll(() => {
         server.close();
+        mongoose.disconnect();
     })
     describe("[Given] Biker is trying to login", () => {
         describe('[When] There is an error on the Schema', () => {

@@ -5,6 +5,7 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "joi": "^17.7.0",
+    "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^8.5.1",
     "module-alias": "^2.2.2",
     "mongoose": "^6.8.1",
@@ -26,8 +27,13 @@
     "ts-jest": "^29.0.3"
   },
   "scripts": {
-    "test:e2e": "NODE_ENV=test & jest --no-cache --runInBand",
-    "test:cov": "NODE_ENV=test & jest --coverage --no-cache --runInBand",
+    "test:e2e": "NODE_ENV=test jest --runInBand",
+    "test:live": "NODE_ENV=integration-coverage jest --runInBand --detectOpenHandles",
+    "test:e2e-cov": "NODE_ENV=test jest --coverageDirectory='e2e-coverage' --coverage --runInBand",
+    "test:live-cov": "NODE_ENV=integration-coverage jest --coverage --coverageDirectory='integration-coverage' --runInBand",
+    "test:merged-cov": "npx istanbul-merge --out ./coverage.json ./integration-coverage/coverage-final.json ./e2e-coverage/coverage-final.json && npx istanbul report --include coverage.json --dir full-coverage html",
+    "test:clean-files": "rm -r ./e2e-coverage && rm -r ./integration-coverage && rm ./coverage.json",
+    "test:cov": "npm run test:e2e-cov && npm run test:live-cov && npm run test:merged-cov && npm run test:clean-files",
     "start": "NODE_ENV=production  nodemon index.ts"
   },
   "author": "",
@@ -54,6 +60,8 @@
     ],
     "testEnvironment": "node",
     "testTimeout": 10000,
-    "modulePathIgnorePatterns": ["<rootDir>/di/"]
+    "modulePathIgnorePatterns": [
+      "<rootDir>/di/"
+    ]
   }
 }

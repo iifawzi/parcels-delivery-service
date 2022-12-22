@@ -2,6 +2,7 @@ import "reflect-metadata"
 import request from 'supertest';
 import server from "@/index"
 import { createToken } from "@/helpers";
+import mongoose from "mongoose";
 
 describe("[Shipments APIs] | CreateShipment API", () => {
     const bikerToken = createToken({ username: "bikerTest", fullname: "biker", _id: "63a22b00a704bee4b0254f4c", role: "biker" });
@@ -9,6 +10,7 @@ describe("[Shipments APIs] | CreateShipment API", () => {
 
     afterAll(() => {
         server.close();
+        mongoose.disconnect();
     })
     describe("[Given] Someone is trying to create a shipment", () => {
 

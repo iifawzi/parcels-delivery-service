@@ -22,9 +22,5 @@ export default class Server {
 
         return Server.serverInstance;
     }
-
-    public get getApp() {
-        return this.app.getInstance;
-    }
 }
 

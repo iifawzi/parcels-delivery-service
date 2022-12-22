@@ -20,13 +20,8 @@ export default class ShipmentRepositoryMongoDB implements ShipmentRepositoryI {
         return shipment;
     }
 
-    async pickupShipment(shipmentInfo: MatchShipmentInfo): Promise<any> {
-        const shipment = await this.shipmentModel.create(shipmentInfo);
-        return shipment;
-    }
-
-    async findShipmentByIdAndBiker(shipmentId: string, bikerId: string): Promise<any> {
-        const shipment = await this.shipmentModel.findOne({ _id: shipmentId, bikerId }).lean();
+    async findShipmentByIdAndBiker(shipmentId: string, biker: string): Promise<any> {
+        const shipment = await this.shipmentModel.findOne({ _id: shipmentId, biker }).lean();
         return shipment;
     }
 

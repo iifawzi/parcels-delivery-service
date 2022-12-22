@@ -7,15 +7,15 @@ export const createShipmentSchema = Joi.object({
 });
 
 export const matchShipmentSchema = Joi.object({
-    shipmentId: Joi.string().required(),
+    shipmentId: Joi.string().hex().length(24).required(),
     pickupTime: Joi.number().required(),
     deliveryTime: Joi.number().required()
 });
 
 export const pickupShipmentSchema = Joi.object({
-    shipmentId: Joi.string().required(),
+    shipmentId: Joi.string().hex().length(24).required(),
 });
 
 export const deliverShipmentSchema = Joi.object({
-    shipmentId: Joi.string().required(),
+    shipmentId: Joi.string().hex().length(24).required(),
 });

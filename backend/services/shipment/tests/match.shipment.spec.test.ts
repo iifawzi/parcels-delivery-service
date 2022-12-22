@@ -2,13 +2,40 @@ import "reflect-metadata"
 import request from 'supertest';
 import server from "@/index"
 import { createToken } from "@/helpers";
+import ShipmentModel from "../repository/mongodb/shipment.model";
+import mongoose from "mongoose";
 
-describe("[Shipments APIs] | pickupShipment API", () => {
+describe("[Shipments APIs] | matchShipment API", () => {
     const bikerToken = createToken({ username: "bikerTest", fullname: "biker", _id: "63a22b00a704bee4b0254f4c", role: "biker" });
     const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "63a22b00a704bee4b0254f4d", role: "customer" });
 
+    beforeAll(async () => {
+        if (process.env.NODE_ENV === 'integration-coverage') {
+            await ShipmentModel.deleteMany({});
+            await ShipmentModel.insertMany([
+                {
+                    _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c61"),
+                    customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
+                    pickUpAddress: "Egypt",
+                    pickOfAddress: "Germany",
+                    shipmentStatus: "PICKED",
+                },
+                {
+                    _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c63"),
+                    customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
+                    pickUpAddress: "Egypt",
+                    pickOfAddress: "Germany",
+                    shipmentStatus: "WAITING",
+                    biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4c"),
+                    deliveryTime: new Date().getTime(),
+                    pickupTime: new Date().getTime(),
+                },
+            ])
+        }
+    })
     afterAll(() => {
         server.close();
+        mongoose.disconnect();
     })
     describe("[Given] Someone is trying to match a shipment", () => {
 
@@ -51,7 +78,7 @@ describe("[Shipments APIs] | pickupShipment API", () => {
                         let res = await request(server)
                             .patch("/api/shipment/match")
                             .auth(bikerToken, { type: 'bearer' })
-                            .send({ pickupTime: new Date().getTime(), deliveryTime: new Date().getTime(), shipmentId: "1029092" });
+                            .send({ pickupTime: new Date().getTime(), deliveryTime: new Date().getTime(), shipmentId: "63a34c27cc14e52028bacc72" });
                         expect(res.statusCode).toEqual(409);
                         expect(res.body.message).toEqual('Shipment is not found');
                     });
@@ -73,7 +100,7 @@ describe("[Shipments APIs] | pickupShipment API", () => {
                         let res = await request(server)
                             .patch("/api/shipment/match")
                             .auth(bikerToken, { type: 'bearer' })
-                            .send({ pickupTime: new Date().getTime(), deliveryTime: new Date().getTime(), shipmentId: "63a271ebbe91afafb4d48c62" });
+                            .send({ pickupTime: new Date().getTime(), deliveryTime: new Date().getTime(), shipmentId: "63a271ebbe91afafb4d48c63" });
                         expect(res.statusCode).toEqual(200);
                         expect(res.body.data).toEqual(true);
                     });

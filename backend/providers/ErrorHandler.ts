@@ -1,3 +1,4 @@
+import { ResponseUtility } from "@/utils/Response";
 import { NextFunction } from "connect";
 import { Response } from "express";
 
@@ -11,9 +12,5 @@ export class BaseError extends Error {
 
 export const handleError = (err: BaseError, res: Response, next: NextFunction) => {
     const { message, statusCode = 500, errors = {} } = err;
-    res.status(statusCode).json({
-        status: false,
-        message,
-        errors
-    });
+    ResponseUtility.Failure(statusCode, message, errors, res);
 };

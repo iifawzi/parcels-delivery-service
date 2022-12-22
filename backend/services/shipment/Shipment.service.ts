@@ -1,7 +1,7 @@
 import { inject, injectable } from "tsyringe";
 import { ShipmentRepositoryI } from "./repository/ShipmentRepository.contract";
 import { BaseLogger } from "@/interfaces";
-import { CreateShipmentInfo, DeliverShipmentInfo } from "./interfaces";
+import { CreateShipmentInfo, DeliverShipmentInfo, PickupShipmentInfo } from "./interfaces";
 import { MatchShipmentInfo } from "./interfaces";
 import { ShipmentStatus } from "./repository/mongodb/shipment.model";
 import { TOKENS } from '@/di/Tokens';
@@ -36,7 +36,7 @@ export default class ShipmentService {
         return [true, updatedShipment];
     }
 
-    public async pickupShipment(shipmentInfo: DeliverShipmentInfo): Promise<any> {
+    public async pickupShipment(shipmentInfo: PickupShipmentInfo): Promise<any> {
         this.logger.info(`ShipmentService :: pickupShipment :: ${JSON.stringify(shipmentInfo)}`);
         const shipment = await this.shipmentRepository.findShipmentByIdAndBiker(shipmentInfo.shipmentId, shipmentInfo.biker);
         if (!shipment) {

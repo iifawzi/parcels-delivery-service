@@ -2,14 +2,45 @@ import "reflect-metadata"
 import request from 'supertest';
 import server from "@/index"
 import { createToken } from "@/helpers";
+import mongoose from "mongoose";
+import ShipmentModel from "../repository/mongodb/shipment.model";
 
 describe("[Shipments APIs] | deliverShipment API", () => {
     const bikerToken = createToken({ username: "bikerTest", fullname: "biker", _id: "63a22b00a704bee4b0254f4c", role: "biker" });
     const bikerToken2 = createToken({ username: "bikerTest2", fullname: "biker2", _id: "63a22b00a704bee4b0254f4e", role: "biker" });
     const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "63a22b00a704bee4b0254f4d", role: "customer" });
 
+    beforeAll(async () => {
+        if (process.env.NODE_ENV === 'integration-coverage') {
+            await ShipmentModel.deleteMany({});
+            await ShipmentModel.insertMany([
+                {
+                    _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c65"),
+                    customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
+                    pickUpAddress: "Egypt",
+                    pickOfAddress: "Germany",
+                    shipmentStatus: "MATCHED",
+                    biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4e"),
+                    deliveryTime: new Date().getTime(),
+                    pickupTime: new Date().getTime(),
+                },
+                {
+                    _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c67"),
+                    customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
+                    pickUpAddress: "Egypt",
+                    pickOfAddress: "Germany",
+                    shipmentStatus: "PICKED",
+                    biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4c"),
+                    deliveryTime: new Date().getTime(),
+                    pickupTime: new Date().getTime(),
+                },
+            ])
+        }
+    });
+
     afterAll(() => {
         server.close();
+        mongoose.disconnect();
     })
     describe("[Given] Someone is trying to deliver a shipment", () => {
 
@@ -52,7 +83,7 @@ describe("[Shipments APIs] | deliverShipment API", () => {
                         let res = await request(server)
                             .patch("/api/shipment/deliver")
                             .auth(bikerToken, { type: 'bearer' })
-                            .send({ shipmentId: "1029092" });
+                            .send({ shipmentId: "63a34c27cc14e52028bacc72" });
                         expect(res.statusCode).toEqual(409);
                         expect(res.body.message).toEqual('Shipment is not found');
                     });
@@ -64,7 +95,7 @@ describe("[Shipments APIs] | deliverShipment API", () => {
                         let res = await request(server)
                             .patch("/api/shipment/deliver")
                             .auth(bikerToken, { type: 'bearer' })
-                            .send({ shipmentId: "63a271ebbe91afafb4d48c64" });
+                            .send({ shipmentId: "63a271ebbe91afafb4d48c65" });
                         expect(res.statusCode).toEqual(409);
                         expect(res.body.message).toEqual('Shipment is not found');
                     });
@@ -86,7 +117,7 @@ describe("[Shipments APIs] | deliverShipment API", () => {
                         let res = await request(server)
                             .patch("/api/shipment/deliver")
                             .auth(bikerToken, { type: 'bearer' })
-                            .send({ shipmentId: "63a271ebbe91afafb4d48c63" });
+                            .send({ shipmentId: "63a271ebbe91afafb4d48c67" });
                         expect(res.statusCode).toEqual(200);
                         expect(res.body.data).toEqual(true);
                     });

@@ -2,7 +2,7 @@ import { CreateShipmentInfo } from "../../interfaces";
 import { ShipmentRepositoryI } from "../../repository/ShipmentRepository.contract";
 
 export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
-    private shipments: Record<string, any> = {
+    private shipmentsOriginal: Record<string, any> = {
         "63a271ebbe91afafb4d48c62": {
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
@@ -21,7 +21,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
-            shipmentStatus: "PICKED",
+            shipmentStatus: "WAITING",
             biker: "63a22b00a704bee4b0254f4c",
             deliveryTime: new Date().getTime(),
             pickupTime: new Date().getTime(),
@@ -57,12 +57,14 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
             pickOfAddress: "Germany",
-            shipmentStatus: "MATCHED",
-            biker: "63a22b00a704bee4b0254f4e",
+            shipmentStatus: "PICKED",
+            biker: "63a22b00a704bee4b0254f4c",
             deliveryTime: new Date().getTime(),
             pickupTime: new Date().getTime(),
         },
     };
+
+    private shipments = this.shipmentsOriginal;
 
     async findShipment(shipmentId: string): Promise<any> {
         if (this.shipments[shipmentId]) {
@@ -82,9 +84,9 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
         return shipmentInfo;
     }
 
-    async findShipmentByIdAndBiker(shipmentId: string, bikerId: string): Promise<any> {
+    async findShipmentByIdAndBiker(shipmentId: string, biker: string): Promise<any> {
         if (this.shipments[shipmentId]) {
-            if (this.shipments[shipmentId].biker != bikerId) {
+            if (this.shipments[shipmentId].biker != biker) {
                 return null;
             }
             return this.shipments[shipmentId]
