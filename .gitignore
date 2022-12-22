@@ -1,5 +1,5 @@
 */node_modules
-*/.DS_Store
+**/.DS_Store
 */integration-coverage
 */e2e-coverage
 */full-coverage
