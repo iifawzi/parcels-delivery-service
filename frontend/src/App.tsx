@@ -1,8 +1,9 @@
 import React from 'react';
 import "assets/scss/main.scss"
 import { AuthProvider } from 'providers';
-import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
-import Home from 'pages/Home';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { Home } from 'pages';
+import { AuthContainer } from 'containers';
 
 function App() {
   return (
@@ -10,6 +11,7 @@ function App() {
       <AuthProvider>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/auth/*" element={<AuthContainer />} />
         </Routes>
       </AuthProvider>
     </BrowserRouter>
