@@ -1,7 +1,7 @@
 export interface ShipmentInfo {
     _id: string,
     pickUpAddress: string,
-    pickOfAddress: string,
+    dropOfAddress: string,
     shipmentStatus: string
     shipmentDescription: string,
     deliveryTime?: string,

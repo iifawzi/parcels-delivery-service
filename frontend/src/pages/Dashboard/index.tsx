@@ -15,7 +15,6 @@ function Dashboard() {
     return (
         <DashboardLayout>
             <div className={classes.dashboardPage}>
-                <h3>Welcome to your dashboard!</h3>
                 {userInfo.role === 'biker' ? <BikerShipments /> : <CustomerShipments />}
             </div>
         </DashboardLayout>

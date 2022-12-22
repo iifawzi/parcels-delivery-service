@@ -23,7 +23,7 @@ function createData(
   _id: string,
   shipmentDescription: string,
   pickupAddress: string,
-  pickOfAddress: string,
+  dropOfAddress: string,
   shipmentStatus: string,
   biker: {
     fullname: string,
@@ -35,7 +35,7 @@ function createData(
     _id,
     shipmentDescription,
     pickupAddress,
-    pickOfAddress,
+    dropOfAddress,
     shipmentStatus,
     biker,
     deliveryTime,
@@ -78,7 +78,7 @@ function Row(props: { row: ShipmentInfo }) {
           {row.shipmentDescription}
         </TableCell>
         <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
-        <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickOfAddress}</TableCell>
+        <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.dropOfAddress}</TableCell>
         <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
       </StyledTableRow>
       <StyledTableRow>
