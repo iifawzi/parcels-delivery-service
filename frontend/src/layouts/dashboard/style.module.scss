@@ -15,5 +15,7 @@
         max-height: calc(100vh - #{$navbar-height});
         padding-bottom: 20px;
         overflow-y: scroll;
+        margin: 0 auto;
+        width: $max-width;
     }
 }

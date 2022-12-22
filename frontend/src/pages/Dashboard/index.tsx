@@ -4,13 +4,13 @@ import { DashboardLayout } from "layouts";
 
 function Dashboard() {
     React.useEffect(() => {
-        document.title = "Dashboard"
+        document.title = "Dashboard - Home"
     }, []);
 
     return (
         <DashboardLayout>
             <div className={classes.dashboardPage}>
-                <h1>Welcome to the dashboard</h1>
+                <h3>Welcome to your dashboard!</h3>
             </div>
         </DashboardLayout>
     )

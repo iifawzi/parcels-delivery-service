@@ -1,7 +1,7 @@
 @import "../../../../assets/scss/sizes.scss";
 @import "../../../../assets/scss/z-index.scss";
 .sideBar {
-    width: $sidebar-width;
+    min-width: $sidebar-width;
     background-color: var(--purple);
     height: 100vh;
     position: relative;
@@ -73,6 +73,7 @@
                 }
             }
             .userInfo {
+                font-size: 1.4rem;
                 font-weight: 900;
             }
         }
