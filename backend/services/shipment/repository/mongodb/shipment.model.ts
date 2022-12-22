@@ -8,7 +8,7 @@ export enum ShipmentStatus {
 }
 
 interface shipmentSchemaI {
-	shipmentDescripton: string,
+	shipmentDescription: string,
 	customer: Schema.Types.ObjectId,
 	pickUpAddress: string,
 	pickOfAddress: string,
@@ -19,7 +19,7 @@ interface shipmentSchemaI {
 }
 
 export const ShipmentSchema = new mongoose.Schema<shipmentSchemaI>({
-	shipmentDescripton: { type: String },
+	shipmentDescription: { type: String },
 	customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
 	pickUpAddress: { type: String },
 	pickOfAddress: { type: String },

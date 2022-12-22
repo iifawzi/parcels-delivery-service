@@ -1,5 +1,4 @@
 import classes from "./style.module.scss";
-
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Collapse from '@mui/material/Collapse';
@@ -10,12 +9,15 @@ import TableCell, { tableCellClasses } from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import styled from "@emotion/styled";
-import { XColored } from "components/shared";
+import { XAlert, XColored, XLoading } from "components/shared";
+import { ShipmentInfo } from "services/shipments/types";
+import { ShipmentsServices } from "services";
+import { Grid } from "components/shared/xLoading/templates";
+import { AlertColor } from "@mui/material";
 
 function createData(
   _id: string,
@@ -56,7 +58,7 @@ const StyledTableRow = styled(TableRow)(({ theme }: any) => ({
   },
 }));
 
-function Row(props: { row: ReturnType<typeof createData> }) {
+function Row(props: { row: ShipmentInfo }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -75,7 +77,7 @@ function Row(props: { row: ReturnType<typeof createData> }) {
         <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
           {row.shipmentDescription}
         </TableCell>
-        <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickupAddress}</TableCell>
+        <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
         <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickOfAddress}</TableCell>
         <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
       </StyledTableRow>
@@ -84,25 +86,37 @@ function Row(props: { row: ReturnType<typeof createData> }) {
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box sx={{ margin: 1 }}>
               <div className={classes.bikerInfo}>
-                 <XColored color={`var(--${row.shipmentStatus})`}>Biker information</XColored>
-                 </div>
+                <XColored color={`var(--${row.shipmentStatus})`}>Biker information</XColored>
+              </div>
               <Table size="medium" aria-label="deliveyr-info">
                 <TableHead>
                   <TableRow>
                     <TableCell style={{ fontSize: '1.4rem' }}>Name</TableCell>
-                    <TableCell style={{ fontSize: '1.4rem' }} align="center">Delivery Time</TableCell>
                     <TableCell style={{ fontSize: '1.4rem' }} align="center">Pickup Time</TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">Delivery Time</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                <TableRow sx={{ '*': { borderBottom: 'unset' } }}>
-                      <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
-                        {row.biker.fullname}
-                      </TableCell>
-                      <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.pickupTime).toDateString()}</TableCell>
-                      <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.pickupTime).toDateString()}</TableCell>
+                  <TableRow sx={{ '*': { borderBottom: 'unset' } }}>
+                    {row.biker ? 
+                    <>
+                    <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
+                      {row.biker.fullName}
+                    </TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.pickupTime as string).toLocaleString()}</TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.deliveryTime as string).toLocaleString()}</TableCell>
+                    </>
+                    :
+                    <>
+                    <TableCell style={{ textAlign: 'center', fontSize: '1.4rem' }} component="th" scope="row" colSpan={4}>
+                        Waiting for matching with a biker!
+                    </TableCell>
+                    </>
 
-                    </TableRow>
+                  }
+                    
+
+                  </TableRow>
                 </TableBody>
               </Table>
             </Box>
@@ -113,37 +127,66 @@ function Row(props: { row: ReturnType<typeof createData> }) {
   );
 }
 
-const rows = [
-  createData("2982982389", 'A bag of Rolex watches', 'Egypt, Portsaid Street', 'Germany, Munich Sreet', 'WAITING', { fullname: 'fawzi'}, new Date().getTime(), new Date().getTime()),
-  createData("2982982389", 'A bag of Rolex watches', 'Egypt, Portsaid Street', 'Germany, Munich Sreet', 'MATCHED', { fullname: 'fawzi'}, new Date().getTime(), new Date().getTime()),
-  createData("2982982389", 'A bag of Rolex watches', 'Egypt, Portsaid Street', 'Germany, Munich Sreet', 'PICKED', { fullname: 'fawzi'}, new Date().getTime(), new Date().getTime()),
-  createData("2982982389", 'A bag of Rolex watches', 'Egypt, Portsaid Street', 'Germany, Munich Sreet', 'DELIVERED', { fullname: 'fawzi'}, new Date().getTime(), new Date().getTime()),
-];
-
 export default function CustomerShipments() {
+  const [loadingStatus, setLoading] = React.useState(false);
+  const [alert, setAlert] = React.useState({ message: '', severity: '' });
+  const [shipmentsInfo, setShipmentsInfo] = React.useState<ShipmentInfo[]>([]);
+  /** 
+  ***************
+  Fetching data: 
+  ***************
+  */
+  // will only run in the first redner
+  // I've used self invoking function to be able to await on the request. 
+  React.useEffect(() => {
+    (async () => {
+      try {
+        setLoading(true)
+        const request = await ShipmentsServices.CustomerShipments();
+        setShipmentsInfo(request.data.data);
+        setLoading(false);
+        setAlert({ message: 'Retreived successfully', severity: 'success' });
+      } catch (err) {
+        setLoading(false)
+      }
+    })();
+  }, []);
   return (
-    <div className={classes.customerShipments}>
-      <p className={classes.title}>
-        Your shipments list
-      </p>
-      <TableContainer component={Paper}>
-        <Table aria-label="collapsible table">
-          <TableHead>
-            <TableRow>
-              <StyledTableCell />
-              <StyledTableCell>Description</StyledTableCell>
-              <StyledTableCell align="center">Pickup Address</StyledTableCell>
-              <StyledTableCell align="center">Pickof Address</StyledTableCell>
-              <StyledTableCell align="center">Status</StyledTableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {rows.map((row, index) => (
-              <Row key={row._id} row={row} />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-    </div>
+    <XLoading loadingStatus={loadingStatus} lMessage="We're processing your request.." LoadingType={<Grid />}>
+      {alert.message !== '' ? <XAlert message={alert.message} severity={alert.severity as AlertColor} /> : ''}
+      <div className={classes.customerShipments}>
+        <p className={classes.title}>
+          Your shipments list
+        </p>
+        <TableContainer component={Paper}>
+          <Table aria-label="collapsible table">
+            <TableHead>
+              <TableRow>
+                <StyledTableCell />
+                <StyledTableCell>Description</StyledTableCell>
+                <StyledTableCell align="center">Pickup Address</StyledTableCell>
+                <StyledTableCell align="center">Pickof Address</StyledTableCell>
+                <StyledTableCell align="center">Status</StyledTableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {shipmentsInfo.length ?
+                <>
+                  {shipmentsInfo.map((row, index) => (
+                    <Row key={index} row={row} />
+                  ))}
+                </>
+                :
+                <TableRow>
+                  <TableCell style={{ paddingBottom: 0, paddingTop: 0, textAlign: 'center', fontSize: '1.4rem' }} colSpan={4}>
+                    No shipments created yet
+                  </TableCell>
+                </TableRow>
+              }
+            </TableBody>
+          </Table>
+        </TableContainer>
+      </div>
+    </XLoading>
   );
 }

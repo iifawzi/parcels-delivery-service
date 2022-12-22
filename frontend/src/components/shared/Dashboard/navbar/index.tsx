@@ -10,7 +10,7 @@ interface componentProps {
 }
 
 function Navbar({ onMenuIconClick, open }: componentProps) {
-    const { state, dispatch } = useAuth();
+    const { state } = useAuth();
     const userInfo = state.user as UserInfoI
     return (
         <div className={classes.xNavbar}>
@@ -20,7 +20,7 @@ function Navbar({ onMenuIconClick, open }: componentProps) {
                         !open ? (<MenuIcon className={classes.menuIcon} fontSize='large' onClick={onMenuIconClick} />)
                             : (<MenuOpenIcon className={`${classes.menuIcon} ${classes.closeIcon}`} fontSize='large' onClick={onMenuIconClick} />)
                     }
-                    <h2 className={classes.name}>Parcels System | {userInfo.role}s Dashboard</h2>
+                    <h2 className={classes.name}>Parcels System - {userInfo.role}s</h2>
                 </div>
             </div>
         </div>
