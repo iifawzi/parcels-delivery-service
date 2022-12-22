@@ -18,6 +18,7 @@ describe("[Shipments APIs] | bikerShipments API", () => {
                         _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c67"),
                         customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
                         pickUpAddress: "Egypt",
+                        shipmentDescription: "WATCH",
                         pickOfAddress: "Germany",
                         shipmentStatus: "PICKED",
                         biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4c"),

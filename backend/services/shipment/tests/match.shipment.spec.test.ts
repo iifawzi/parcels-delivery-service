@@ -18,6 +18,7 @@ describe("[Shipments APIs] | matchShipment API", () => {
                     customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
                     pickUpAddress: "Egypt",
                     pickOfAddress: "Germany",
+                    shipmentDescription: "WATCH",
                     shipmentStatus: "PICKED",
                 },
                 {
@@ -25,6 +26,7 @@ describe("[Shipments APIs] | matchShipment API", () => {
                     customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
                     pickUpAddress: "Egypt",
                     pickOfAddress: "Germany",
+                    shipmentDescription: "WATCH",
                     shipmentStatus: "WAITING",
                     biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4c"),
                     deliveryTime: new Date().getTime(),

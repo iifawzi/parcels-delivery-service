@@ -1,4 +1,4 @@
-import { CreateShipmentInfo, MatchShipmentInfo } from "../../interfaces";
+import { CreateShipmentInfo } from "../../interfaces";
 import { ShipmentRepositoryI } from "../ShipmentRepository.contract";
 import ShipmentModel, { ShipmentStatus } from "./shipment.model";
 

@@ -3,4 +3,5 @@ export default interface CreateShipmentInfo {
     pickUpAddress: string,
     pickOfAddress: string,
     shipmentStatus: string
+    shipmentDescription: string
 }

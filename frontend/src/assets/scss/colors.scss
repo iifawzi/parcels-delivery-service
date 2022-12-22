@@ -2,6 +2,8 @@
   // Primary: 
   --primary-color: #0a8fe7;
   --light-primary-color: #169af1;
+  // blue
+  --blue: #169af1;
   // Secondary: 
   --secondary-color: #fd772a;
   --light-secondary-color: #ff6f1b;
@@ -27,4 +29,10 @@
   --purple-1: #1E1B30;
   // Red: 
   --red: #f14747;
+
+  // Status colors:
+  --WAITING: #f1165f;
+  --MATCHED: rgb(6, 148, 224);
+  --PICKED: rgb(149, 3, 239);
+  --DELIVERED: rgb(12, 154, 121);
   }

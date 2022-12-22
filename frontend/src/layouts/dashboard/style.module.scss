@@ -12,14 +12,19 @@
     flex-flow: column;
 
     .backdropEnabled {
+        height: 100vh;
+        position: absolute;
+        width: 100%;
         background-color: rgba(103, 102, 102, 0.383);
-        height: 100vh;
     }
+
+
     .backdropDisabled {
-        height: 100vh;
+        background-color: inherit !important;
     }
+
     .content {
-        max-height: calc(100vh - #{$navbar-height});
+        height: calc(100vh - #{$navbar-height});
         padding-bottom: 20px;
         overflow-y: scroll;
         margin: 0 auto;
