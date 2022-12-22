@@ -1,0 +1,18 @@
+// REF: https://stackoverflow.com/questions/2781549/removing-input-background-colour-for-chrome-autocomplete
+.input:-webkit-autofill,
+.input:-webkit-autofill:hover, 
+.input:-webkit-autofill:focus, 
+.input:-webkit-autofill:active
+{
+    box-shadow: 0 0 0 30px var(--white-1) inset !important;
+    -webkit-box-shadow: 0 0 0 30px var(--white-1) inset !important;
+    background-clip: content-box !important;
+}
+
+.input {
+    font-size: 1.6rem !important;
+}
+
+.label, fieldset {
+    font-size: 1.6rem !important;
+}
