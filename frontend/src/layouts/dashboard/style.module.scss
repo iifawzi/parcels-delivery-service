@@ -1,4 +1,4 @@
-@import "../../assets/scss/sizes.scss";
+@import "assets/scss/sizes.scss";
 
 .layoutContainer {
     display: flex;
@@ -17,6 +17,7 @@
         position: absolute;
         width: 100%;
         background-color: rgba(103, 102, 102, 0.383);
+        z-index: 100;
     }
 
 

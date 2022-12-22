@@ -20,7 +20,7 @@ const theme = createTheme({
   }
 });
 
-function MuiThemeProvider({children}: {children: React.ReactNode}){
+function MuiThemeProvider({ children }: { children: React.ReactNode }) {
   return (
     <ThemeProvider theme={theme}>
       {children}

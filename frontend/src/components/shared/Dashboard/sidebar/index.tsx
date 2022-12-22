@@ -29,7 +29,7 @@ const Sidebar = ({ animationClass, shownBefore }: componentProps) => {
             <div className={`${classes.sideBar} ${shownBefore && classes[animationClass]}`}>
                 <div className={classes.sideBar__content}>
                     <ul>
-                        <NavLink className={classNameFunc} to="/dashboard"
+                        <NavLink className={classNameFunc} end to="/dashboard"
                             onMouseEnter={() => location.pathname != '/dashboard' ? setHideActive(true) : ''}
                             onMouseLeave={() => setHideActive(false)}>
                             <li>
@@ -39,7 +39,7 @@ const Sidebar = ({ animationClass, shownBefore }: componentProps) => {
                         </NavLink>
                         {
                         userInfo.role === 'customer' ?
-                            <NavLink className={classNameFunc} to="/dashboard/newShipment"
+                            <NavLink className={classNameFunc} end to="/dashboard/newShipment"
                                 onMouseEnter={() => location.pathname != '/dashboard/newShipment' ? setHideActive(true) : ''}
                                 onMouseLeave={() => setHideActive(false)}>
                                 <li>

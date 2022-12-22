@@ -1,24 +1,29 @@
 import { useAuth } from 'contexts/Auth.context';
-import { useEffect, useState } from 'react';
-import { Navigate, Outlet } from 'react-router-dom';
+import Cookies from 'js-cookie';
+import { ChangeUserInfo, getInfoFromToken } from 'providers/auth/authReducer';
+import { useEffect } from 'react';
+import { Navigate } from 'react-router-dom';
 import { UserInfoI } from 'types/auth/context.types';
 
-const AllowedForRoute = ({role}: {role: string}) => {
-    const { state } = useAuth()
-    const [loading, setLoading] = useState(true);
-    const [allowed, isAllowed] = useState(false);
+export const AllowedForRoute: React.FC<{ children: JSX.Element, role: string }> = ({ children, role }) => {
+    const { state, dispatch } = useAuth()
     const userInfo = state.user as UserInfoI;
     useEffect(() => {
-        if (role === userInfo.role) isAllowed(true)
-        setLoading(false)
+        const token = Cookies.get('authorization');
+        if (!state.isAuth && token) {
+            const payload = getInfoFromToken(token);
+            dispatch(ChangeUserInfo(payload));
+        }
     }, [])
+    if (userInfo.role !== role) {
+        console.log(userInfo.role);
+        setTimeout(() => {
+            return <Navigate to="/dashboard" />;
+        }, 5000);
+    }
 
-    return (
-        <>
-            {!loading ? (allowed ? <Outlet /> : <Navigate to="/dashboard" />) : ('')}
-        </>
-    )
-
+    return children;
 };
 
 export default AllowedForRoute;
+
