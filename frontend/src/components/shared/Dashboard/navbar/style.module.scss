@@ -1,0 +1,45 @@
+@import '../../../../assets/scss/sizes.scss';
+@import '../../../../assets/scss/z-index.scss';
+
+.xNavbar {
+    width: 100%;
+    height: $navbar-height;
+    background-color: var(--white);
+    box-shadow: 0px 0px 8px 0px var(--grey-2);
+
+    &__content {
+        padding: 0px 20px;
+        margin: 0 auto;
+        max-width: $max-width;
+        height: 100%;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        justify-content: space-between;
+
+        .leftSide {
+            font-size: 1.4rem;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+
+            .name {
+                margin-left: 20px;
+                color: var(--primary-color);
+            }
+
+            .menuIcon {
+                animation: ease-in-out 0.3s color;
+
+                &:hover {
+                    color: var(--primary-color);
+                    cursor: pointer;
+                }
+            }
+
+            .closeIcon {
+                color: var(--primary-color);
+            }
+        }
+    }
+}

@@ -1,34 +1,40 @@
 @import "./colors.scss";
 @import "./sizes.scss";
+@import "./z-index.scss";
+
 html {
-    font-size: 10px;
-    word-spacing: 1px;
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    font-family:  Tajawal;
-  }
+  font-size: 10px;
+  word-spacing: 1px;
+  -ms-text-size-adjust: 100%;
+  -webkit-text-size-adjust: 100%;
+  font-family: Tajawal;
+}
 
-  body {
-    font-size: 1.6rem;
-    color: var(--black-1);
-    background-color: var(--white-1);
-  }
-  input, button {
-    font-family:  Tajawal;
-  }
-  input[type=text] {   
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-  }
-  *,
-  *:before,
-  *:after {
-    margin: 0;
-    box-sizing: border-box;
-  }
+body {
+  font-size: 1.6rem;
+  color: var(--black-1);
+  background-color: var(--white-1);
+}
 
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
+input,
+button {
+  font-family: Tajawal;
+}
+
+input[type=text] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+*,
+*:before,
+*:after {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}

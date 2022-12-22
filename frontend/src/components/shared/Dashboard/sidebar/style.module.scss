@@ -1,0 +1,117 @@
+@import "../../../../assets/scss/sizes.scss";
+@import "../../../../assets/scss/z-index.scss";
+.sideBar {
+    width: $sidebar-width;
+    background-color: var(--purple);
+    height: 100vh;
+    position: relative;
+    z-index: $z-sidebar;
+    left: 0px;
+    &__content {
+        overflow-y: scroll;
+        color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: 100%;
+        padding-top: calc(#{$navbar-height+40px});
+        justify-content: space-between;
+        padding-bottom: 30px;
+        ul {
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+            text-decoration: none;
+            list-style: none;
+            li {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                padding-left: 40px;
+                font-size: 1.8rem;
+                height: 60px;
+                transition: ease-in-out 0.3s;
+                cursor: pointer;
+                &:hover {
+                    background-color: var(--white);
+                    color: var(--purple);
+                    border-right: 5px solid var(--primary-color);
+                    .listIcon {
+                        color: var(--primary-color);
+                    }
+                }
+            }
+            .listIcon {
+                margin-right: 20px;
+                font-size: 2rem;
+            }
+            .active li {
+                background-color: var(--white);
+                color: var(--purple);
+                border-right: 5px solid var(--primary-color);
+                .listIcon {
+                    color: var(--primary-color);
+                }
+            }
+        }
+        .userContainer {
+            width: 80%;
+            margin: 0 auto;
+            background-color: var(--purple-1);
+            height: 40px;
+            border-radius: 20px;
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            justify-content: space-around;
+            .logoutIcon {
+                font-size: 1.6rem;
+                cursor: pointer;
+                transition: ease-in-out 0.3s color;
+                &:hover {
+                    color: var(--primary-color);
+                }
+            }
+            .userInfo {
+                font-weight: 900;
+            }
+        }
+    }
+}
+
+.animateHide {
+    animation: hideDropDown 0.3s forwards;
+}
+.animateShow {
+    animation: showDropDown 0.3s forwards;
+}
+
+////////////////////////////// KEY FRAMES ////////////////////////////
+@keyframes showDropDown {
+    0% {
+        opacity: 0;
+        left: -40px;
+    }
+    100% {
+        opacity: 1;
+        left: 0px;
+    }
+}
+
+@keyframes hideDropDown {
+    0% {
+        opacity: 1;
+        left: 0px;
+    }
+    100% {
+        opacity: 0;
+        left: -40px;
+    }
+}
+
+
+@media (max-width: $small-devices) {
+    .sideBar {
+        position: absolute;
+    }
+}

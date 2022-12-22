@@ -1,0 +1,19 @@
+@import "../../assets/scss/sizes.scss";
+
+.layoutContainer {
+    display: flex;
+    flex-flow: row;
+    max-height: 100vh;
+}
+
+.columns {
+    flex-grow: 1;
+    display: flex;
+    flex-flow: column;
+
+    .content {
+        max-height: calc(100vh - #{$navbar-height});
+        padding-bottom: 20px;
+        overflow-y: scroll;
+    }
+}
