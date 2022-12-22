@@ -64,9 +64,13 @@ describe("[Shipments APIs] | customerShipments API", () => {
                         .get("/api/shipment/customerShipments")
                         .auth(customerToken, { type: 'bearer' })
                     expect(res.statusCode).toEqual(200);
-                    expect(res.body.data[0].pickUpAddress).toBeDefined()
-                    expect(res.body.data[0].pickOfAddress).toBeDefined()
-                    expect(res.body.data[0].shipmentStatus).toBeDefined()
+                    console.log(res.body.data);
+                    expect(res.body.data[0].pickUpAddress).toBeDefined();
+                    expect(res.body.data[0].pickOfAddress).toBeDefined();
+                    expect(res.body.data[0].shipmentStatus).toBeDefined();
+                    expect(res.body.data[0].biker.fullName).not.toBeNull();
+                    expect(res.body.data[0].deliveryTime).toBeDefined();
+                    expect(res.body.data[0].pickupTime).toBeDefined();
                 });
             });
         });

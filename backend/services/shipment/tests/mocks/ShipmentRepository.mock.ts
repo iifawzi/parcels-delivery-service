@@ -8,9 +8,10 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
             pickOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "WAITING",
-            customer: {
-                fullName: "Fawzi",
-            }
+            customer: "63a22b00a704bee4b0254f4d",
+            biker: "63a22b00a704bee4b0254f4c",
+            deliveryTime: new Date().getTime(),
+            pickupTime: new Date().getTime(),
         },
         "63a271ebbe91afafb4d48c61": {
             customer: "63a22b00a704bee4b0254f4d",
@@ -102,11 +103,25 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
     }
 
     async findWaitingShipments(): Promise<any> {
-        return Object.values(this.shipments).filter(shipment => shipment.shipmentStatus === 'WAITING');
+        return Object.values(this.shipments).filter(shipment => shipment.shipmentStatus === 'WAITING').map(shipment => {
+            return {
+                ...shipment,
+                customer: {
+                    fullName: 'Customer',
+                }
+            }
+        });
     }
 
     async findCustomerShipments(customer: string): Promise<any> {
-        return Object.values(this.shipments).filter(shipment => shipment.customer === customer);
+        return Object.values(this.shipments).filter(shipment => shipment.customer === customer).map(shipment => {
+            return {
+                ...shipment,
+                biker: {
+                    fullName: 'Biker',
+                }
+            }
+        });
     }
     
     async findBikerShipments(biker: string): Promise<any> {
