@@ -11,6 +11,13 @@
     display: flex;
     flex-flow: column;
 
+    .backdropEnabled {
+        background-color: rgba(103, 102, 102, 0.383);
+        height: 100vh;
+    }
+    .backdropDisabled {
+        height: 100vh;
+    }
     .content {
         max-height: calc(100vh - #{$navbar-height});
         padding-bottom: 20px;

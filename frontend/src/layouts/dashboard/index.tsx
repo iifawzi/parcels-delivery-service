@@ -32,11 +32,13 @@ const DashboardLayout = ({ children }: componentProps) => {
             <div className={classes.layoutContainer}>
                 {open ? (<Sidebar animationClass={animateClass} shownBefore={shownBefore} />) : ('')}
                 <div className={classes.columns}>
-                    <div className={classes.navbarContainer}>
-                        <Navbar open={open} onMenuIconClick={toggleMenu} />
-                    </div>
-                    <div className={classes.content}>
-                        {children}
+                    <div className={open ? classes.backdropEnabled : classes.backdropDisabled} onClick={() => open ? setOpen(false) : ''}>
+                        <div className={classes.navbarContainer}>
+                            <Navbar open={open} onMenuIconClick={toggleMenu} />
+                        </div>
+                        <div className={classes.content}>
+                            {children}
+                        </div>
                     </div>
                 </div>
             </div>
