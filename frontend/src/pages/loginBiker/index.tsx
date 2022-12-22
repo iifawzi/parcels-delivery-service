@@ -21,7 +21,7 @@ function LoginBikerPage() {
     return (
         <div className={classes.LoginBikerPage}>
             <h3>Welcome back biker!</h3>
-            {alert.message !== '' ? <XAlert message={alert.message} severity={alert.severity as AlertColor} /> : 'wow'}
+            {alert.message !== '' ? <XAlert message={alert.message} severity={alert.severity as AlertColor} /> : ''}
             <div className={`${classes.animateLogin} ${classes.formContainer}`}>
                 {<LoginBikerForm setAlert={showAlert} />}
             </div>
