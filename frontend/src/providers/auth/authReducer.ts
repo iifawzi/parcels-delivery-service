@@ -5,7 +5,7 @@ import { contextTypes } from "types/auth";
 export default function authReducer(state: contextTypes.AuthStateI, action: contextTypes.AuthReducerAction): contextTypes.AuthStateI {
     switch (action.type) {
         case contextTypes.ActionType.ChangeUserInfo:
-            return { ...state, isAuth: action.payload.isAuth, user: action.payload.user };
+            return { isAuth: action.payload.isAuth, user: action.payload.user };
 
         default:
             return state;

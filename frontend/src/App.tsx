@@ -2,7 +2,7 @@ import "assets/scss/main.scss"
 import { AuthProvider, MuiThemeProvider } from 'providers';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Home } from 'pages';
-import { AuthContainer } from 'containers';
+import { AuthContainer, DashboardContainer } from 'containers';
 
 function App() {
   return (
@@ -12,6 +12,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth/*" element={<AuthContainer />} />
+            <Route path="/dashboard/*" element={<DashboardContainer />} />
             <Route path="/*" element={<Home />} />
           </Routes>
         </AuthProvider>

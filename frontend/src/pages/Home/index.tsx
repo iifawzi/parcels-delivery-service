@@ -1,6 +1,6 @@
 import React from "react"
 import classes from "./style.module.scss"
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Home() {
     React.useEffect(() => {

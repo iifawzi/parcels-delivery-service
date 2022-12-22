@@ -59,7 +59,7 @@ function LoginBikerForm({ setAlert }: ComponentProps) {
             Cookies.set('authorization', req.data.data.token);
             setAlert({ message: 'Successfull login, you will be redirected', severity: "success" });
             setTimeout(() => {
-                navigate("/fawzi");
+                navigate("/dashboard");
             }, 1500);
         } catch (err: any) {
             setLoading(false)
