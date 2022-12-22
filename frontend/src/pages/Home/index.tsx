@@ -11,7 +11,7 @@ function Home() {
         <div className={classes.homePage}>
             <h1>Parcels Management System</h1>
             <p className={classes.authLink}>
-                <Link to="auth">Let's authenticate</Link>
+                <Link to="auth/biker">Let's authenticate</Link>
             </p>
         </div>
     )

@@ -1,0 +1,53 @@
+@import "../../assets/scss/sizes.scss";
+.LoginCustomerPage {
+    width: 100%;
+    min-height: 100vh;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    .logo {
+        width: 100px;
+        height: 70px;
+        margin-bottom: 20px;
+    }
+    .formContainer {
+        position: relative;
+        opacity: 0;
+        width: 400px;
+        text-align: center;
+    }
+    .animateLogin {
+        top: 0px;
+        animation: showRegister 1s forwards;
+    }
+}
+
+
+@media (max-width: $medium-devices){
+.LoginCustomerPage {
+            .formContainer {
+                width: 90vw;
+                margin: 0 auto;
+                text-align: center;
+            }
+    }
+}
+
+/** 
+***************
+Animations: 
+***************
+*/
+
+// Forms Animations: 
+@keyframes showRegister{
+    0% {
+        opacity: 0;
+        top: 60px;
+    }
+    100% {
+        opacity: 1;
+        top: 0px;
+    }
+}

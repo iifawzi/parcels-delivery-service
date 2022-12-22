@@ -8,22 +8,22 @@ import { xAlertI } from "components/shared/xAlert";
 import { XLoading } from "components/shared"
 import { Ripple } from "components/shared/xLoading/templates"
 import { useNavigate } from "react-router-dom";
-import { BikerServices } from "services";
+import { CustomerServices } from "services";
 import Cookies from "js-cookie";
 
 interface ComponentProps {
     setAlert: (alertInfo: xAlertI) => void
 }
 
-function LoginBikerForm({ setAlert }: ComponentProps) {
+function LoginCustomerForm({ setAlert }: ComponentProps) {
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange" });
     const [loadingStatus, setLoading] = React.useState(false);
     const navigate = useNavigate();
 
     const renderComponents = () => {
         return (
-            <div className={classes.loginBikerContainer}>
-                <form className={classes.LoginBikerForm}>
+            <div className={classes.loginCustomerContainer}>
+                <form className={classes.LoginCustomerForm}>
                     {/* Inputs */}
                     <div className={classes.inputWrapper}>
                         <XInput iconComponent={<PersonIcon />} label="Username" type="text" register={register} required></XInput>
@@ -36,11 +36,11 @@ function LoginBikerForm({ setAlert }: ComponentProps) {
                     </div>
                     {/* End Inputs */}
                     <div className={classes.buttonWrapper}>
-                        <XSubmit submitFunction={() => handleSubmit(onSubmit)} color="primary" label="Log in" />
+                        <XSubmit submitFunction={() => handleSubmit(onSubmit)} color="secondary" label="Log in" />
                     </div>
                 </form>
 
-                <p className={classes.customer}>Are you a customer? <b onClick={() => { navigate('/auth/customer') }} >Login now!</b></p>
+                <p className={classes.biker}>Are you a biker? <b onClick={() => { navigate('/auth/biker') }} >Login now!</b></p>
             </div>
         )
     }
@@ -54,7 +54,7 @@ function LoginBikerForm({ setAlert }: ComponentProps) {
     const onSubmit = async (data: any) => {
         setLoading(true)
         try {
-            const req = await BikerServices.login(data);
+            const req = await CustomerServices.login(data);
             setLoading(false);
             Cookies.set('authorization', req.data.data.token);
             setAlert({ message: 'Successfull login, you will be redirected', severity: "success" });
@@ -74,4 +74,4 @@ function LoginBikerForm({ setAlert }: ComponentProps) {
     )
 }
 
-export default LoginBikerForm;
+export default LoginCustomerForm;

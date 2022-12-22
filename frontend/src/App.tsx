@@ -12,6 +12,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/auth/*" element={<AuthContainer />} />
+            <Route path="/*" element={<Home />} />
           </Routes>
         </AuthProvider>
       </MuiThemeProvider>
