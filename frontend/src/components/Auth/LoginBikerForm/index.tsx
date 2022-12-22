@@ -8,6 +8,8 @@ import { xAlertI } from "components/shared/xAlert";
 import { XLoading } from "components/shared"
 import { Ripple } from "components/shared/xLoading/templates"
 import { useNavigate } from "react-router-dom";
+import { BikerServices } from "services";
+import Cookies from "js-cookie";
 
 interface ComponentProps {
     setAlert: (alertInfo: xAlertI) => void
@@ -51,6 +53,18 @@ function LoginBikerForm({ setAlert }: ComponentProps) {
 
     const onSubmit = async (data: any) => {
         setLoading(true)
+        try {
+            const req = await BikerServices.login(data);
+            setLoading(false);
+            Cookies.set('authorization', req.data.data.accessToken);
+            setAlert({ message: 'Successfull login, you will be redirected', severity: "success" });
+            setTimeout(() => {
+                navigate("/fawzi");
+            }, 1500);
+        } catch (err: any) {
+            setLoading(false)
+            setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
+        }
     }
 
     return (

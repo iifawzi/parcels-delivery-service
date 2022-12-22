@@ -12,14 +12,16 @@ function LoginBikerPage() {
 
 
     const showAlert = (alert: xAlertI) => {
-        setAlert({ message: '', severity: '' })
-        setAlert(alert)
+        setAlert({ message: '', severity: '' });
+        setTimeout(() => {
+            setAlert(alert)
+        }, 0);
     }
 
     return (
         <div className={classes.LoginBikerPage}>
             <h3>Welcome back biker!</h3>
-            {alert.message !== '' ? (<XAlert message={alert.message} severity={alert.severity as AlertColor} />) : ''}
+            {alert.message !== '' ? <XAlert message={alert.message} severity={alert.severity as AlertColor} /> : 'wow'}
             <div className={`${classes.animateLogin} ${classes.formContainer}`}>
                 {<LoginBikerForm setAlert={showAlert} />}
             </div>

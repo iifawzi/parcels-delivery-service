@@ -31,14 +31,21 @@ export default function XAlert({ message, severity }: xAlertI) {
 
     return (
         <div>
+            {/* show if open is true */}
             <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-                <Alert
-                    onClose={handleClose}
-                    severity={severity}
-               
-                >
-                    {message}
-                </Alert>
+                <div>
+                    <Alert
+                        onClose={handleClose}
+                        severity={severity}
+                        classes={
+                            {
+                                root: classes.alert
+                            }
+                        }
+                    >
+                        {message}
+                    </Alert>
+                </div>
             </Snackbar>
         </div >
     );
