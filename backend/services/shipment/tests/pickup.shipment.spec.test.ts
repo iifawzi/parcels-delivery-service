@@ -11,7 +11,7 @@ describe("[Shipments APIs] | pickupShipment API", () => {
     const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "63a22b00a704bee4b0254f4d", role: "customer" });
 
     beforeAll(async () => {
-        if (process.env.NODE_ENV === 'integration-coverage') {
+        if (process.env.NODE_ENV === 'integration') {
             await ShipmentModel.deleteMany({});
             await ShipmentModel.insertMany([
                 {
@@ -39,8 +39,8 @@ describe("[Shipments APIs] | pickupShipment API", () => {
     })
 
     afterAll(async () => {
+        await mongoose.disconnect();
         server.close();
-        mongoose.disconnect();
     });
     describe("[Given] Someone is trying to pickup a shipment", () => {
         describe('[When] Customer is trying to pickup a shipment', () => {

@@ -8,9 +8,9 @@ describe("[Shipments APIs] | CreateShipment API", () => {
     const bikerToken = createToken({ username: "bikerTest", fullname: "biker", _id: "63a22b00a704bee4b0254f4c", role: "biker" });
     const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "63a22b00a704bee4b0254f4d", role: "customer" });
 
-    afterAll(() => {
+    afterAll(async () => {
+        await mongoose.disconnect();
         server.close();
-        mongoose.disconnect();
     })
     describe("[Given] Someone is trying to create a shipment", () => {
 

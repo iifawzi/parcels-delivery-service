@@ -28,13 +28,13 @@
   },
   "scripts": {
     "test:e2e": "NODE_ENV=test jest --runInBand",
-    "test:live": "NODE_ENV=integration-coverage jest --runInBand --detectOpenHandles",
+    "test:integration": "NODE_ENV=integration jest --runInBand --detectOpenHandles",
     "test:e2e-cov": "NODE_ENV=test jest --coverageDirectory='e2e-coverage' --coverage --runInBand",
-    "test:live-cov": "NODE_ENV=integration-coverage jest --coverage --coverageDirectory='integration-coverage' --runInBand",
+    "test:integration-cov": "NODE_ENV=integration jest --coverageDirectory='integration-coverage' --coverage --runInBand",
     "test:merged-cov": "npx istanbul-merge --out ./coverage.json ./integration-coverage/coverage-final.json ./e2e-coverage/coverage-final.json && npx istanbul report --include coverage.json --dir full-coverage html",
     "test:clean-files": "rm -r ./e2e-coverage && rm -r ./integration-coverage && rm ./coverage.json",
-    "test:cov": "npm run test:e2e-cov && npm run test:live-cov && npm run test:merged-cov && npm run test:clean-files",
-    "start": "NODE_ENV=production  nodemon index.ts"
+    "test:cov": "npm run test:integration-cov && npm run test:e2e-cov && npm run test:merged-cov && npm run test:clean-files",
+    "start": "NODE_ENV=production nodemon index.ts"
   },
   "author": "",
   "license": "ISC",

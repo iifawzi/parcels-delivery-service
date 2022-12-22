@@ -10,8 +10,8 @@ describe("[Shipments APIs] | getWaiting API", () => {
     const customerToken = createToken({ username: "customerTest", fullname: "customer", _id: "63a22b00a704bee4b0254f4d", role: "customer" });
     
     beforeAll(async () => {
-        if (process.env.NODE_ENV === 'integration-coverage') {
-            if (process.env.NODE_ENV === 'integration-coverage') {
+        if (process.env.NODE_ENV === 'integration') {
+            if (process.env.NODE_ENV === 'integration') {
                 await ShipmentModel.deleteMany({});
                 await ShipmentModel.create(
                     {
@@ -26,9 +26,9 @@ describe("[Shipments APIs] | getWaiting API", () => {
         }
     });
 
-    afterAll(() => {
+    afterAll(async () => {
+        await mongoose.disconnect();
         server.close();
-        mongoose.disconnect();
     })
     describe("[Given] Someone is trying to find the available shipments", () => {
 

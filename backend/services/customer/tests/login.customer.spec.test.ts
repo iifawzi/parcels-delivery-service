@@ -5,9 +5,9 @@ import { decodeToken } from "@/helpers";
 import mongoose from "mongoose";
 
 describe("[Customers APIs] | Login API", () => {
-    afterAll(() => {
+    afterAll(async () => {
+        await mongoose.disconnect();
         server.close();
-        mongoose.disconnect();
     })
     describe("[Given] Customer is trying to login", () => {
         describe('[When] There is an error on the Schema', () => {

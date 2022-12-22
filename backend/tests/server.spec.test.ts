@@ -5,8 +5,8 @@ import mongoose from "mongoose";
 
 describe("[HEALTHY SERVER] | HEALTHY API", () => {
     afterAll(async () => {
+        await mongoose.disconnect();
         server.close();
-        mongoose.disconnect();
     });
 
     it("Should respond with 200", async () => {
