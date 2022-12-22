@@ -6,8 +6,8 @@ const AuthContainer = () => {
     return (
         <Routes>
             <Route path='/' element={<Dashboard />}> </Route>
-            <Route path='/newShipment' element={<ProtectedRoute><AllowedForRoute role='customer'><NewShipmentPage /></AllowedForRoute></ProtectedRoute>}> </Route>
-            <Route path='/*' element={<ProtectedRoute><Dashboard /></ProtectedRoute>}> </Route>
+            <Route path='/newShipment' element={<AllowedForRoute role='biker'><NewShipmentPage/></AllowedForRoute>}> </Route>
+            <Route path='/*' element={<Dashboard />}></Route>
         </Routes>
     );
 };

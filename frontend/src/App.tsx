@@ -13,7 +13,7 @@ function App() {
           <Routes>
             <Route path="/" element={<GuestRoute><Home /></GuestRoute>} />
             <Route path="/auth/*" element={<GuestRoute><AuthContainer /></GuestRoute>} />
-            <Route path="/dashboard/*" element={<DashboardContainer />} />
+            <Route path="/dashboard/*" element={<ProtectedRoute><DashboardContainer /></ProtectedRoute>} />
             <Route path="/*" element={<GuestRoute><Home /></GuestRoute>} />
           </Routes>
         </AuthProvider>
