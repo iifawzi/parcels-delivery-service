@@ -5,7 +5,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
     private shipmentsOriginal: Record<string, any> = {
         "63a271ebbe91afafb4d48c62": {
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "WAITING",
             customer: "63a22b00a704bee4b0254f4d",
@@ -16,14 +16,14 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
         "63a271ebbe91afafb4d48c61": {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "PICKED",
         },
         "63a271ebbe91afafb4d48c63": {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "WAITING",
             biker: "63a22b00a704bee4b0254f4c",
@@ -33,7 +33,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
         "63a271ebbe91afafb4d48c64": {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "PICKED",
             biker: "63a22b00a704bee4b0254f4e",
@@ -43,7 +43,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
         "63a271ebbe91afafb4d48c65": {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "DELIVERED",
             biker: "63a22b00a704bee4b0254f4e",
@@ -53,7 +53,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
         "63a271ebbe91afafb4d48c66": {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "MATCHED",
             biker: "63a22b00a704bee4b0254f4c",
@@ -63,7 +63,7 @@ export default class ShipmentRepositoryMock implements ShipmentRepositoryI {
         "63a271ebbe91afafb4d48c67": {
             customer: "63a22b00a704bee4b0254f4d",
             pickUpAddress: "Egypt",
-            pickOfAddress: "Germany",
+            dropOfAddress: "Germany",
             shipmentDescription: "WATCH",
             shipmentStatus: "PICKED",
             biker: "63a22b00a704bee4b0254f4c",

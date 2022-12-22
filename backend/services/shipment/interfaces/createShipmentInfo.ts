@@ -1,7 +1,7 @@
 export default interface CreateShipmentInfo {
     customer: string,
     pickUpAddress: string,
-    pickOfAddress: string,
+    dropOfAddress: string,
     shipmentStatus: string
     shipmentDescription: string
 }

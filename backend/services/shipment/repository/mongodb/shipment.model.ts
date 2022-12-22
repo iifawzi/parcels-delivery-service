@@ -11,7 +11,7 @@ interface shipmentSchemaI {
 	shipmentDescription: string,
 	customer: Schema.Types.ObjectId,
 	pickUpAddress: string,
-	pickOfAddress: string,
+	dropOfAddress: string,
 	shipmentStatus: ShipmentStatus,
 	biker?: Schema.Types.ObjectId
 	pickupTime?: number,
@@ -22,7 +22,7 @@ export const ShipmentSchema = new mongoose.Schema<shipmentSchemaI>({
 	shipmentDescription: { type: String },
 	customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
 	pickUpAddress: { type: String },
-	pickOfAddress: { type: String },
+	dropOfAddress: { type: String },
 	shipmentStatus: { type: String, enum: ShipmentStatus },
 	biker: { type: Schema.Types.ObjectId, ref: 'Biker', required: false },
 	pickupTime: { type: Number, required: false },

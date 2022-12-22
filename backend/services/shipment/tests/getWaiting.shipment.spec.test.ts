@@ -18,7 +18,7 @@ describe("[Shipments APIs] | getWaiting API", () => {
                         _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c67"),
                         customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
                         pickUpAddress: "Egypt",
-                        pickOfAddress: "Germany",
+                        dropOfAddress: "Germany",
                         shipmentDescription: "WATCH",
                         shipmentStatus: "WAITING",
                     },
@@ -64,7 +64,7 @@ describe("[Shipments APIs] | getWaiting API", () => {
                     expect(res.body.data[0].customer.fullName).toBeDefined()
                     expect(res.body.data[0].customer.password).toBeUndefined()
                     expect(res.body.data[0].pickUpAddress).toBeDefined()
-                    expect(res.body.data[0].pickOfAddress).toBeDefined()
+                    expect(res.body.data[0].dropOfAddress).toBeDefined()
                     expect(res.body.data[0].shipmentStatus).toBeDefined()
                 });
             });

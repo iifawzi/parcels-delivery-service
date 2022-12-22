@@ -19,7 +19,7 @@ describe("[Shipments APIs] | bikerShipments API", () => {
                         customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
                         pickUpAddress: "Egypt",
                         shipmentDescription: "WATCH",
-                        pickOfAddress: "Germany",
+                        dropOfAddress: "Germany",
                         shipmentStatus: "PICKED",
                         biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4c"),
                         deliveryTime: new Date().getTime(),
@@ -67,7 +67,7 @@ describe("[Shipments APIs] | bikerShipments API", () => {
                     expect(res.body.data[0].deliveryTime).toBeDefined()
                     expect(res.body.data[0].pickupTime).toBeDefined()
                     expect(res.body.data[0].pickUpAddress).toBeDefined()
-                    expect(res.body.data[0].pickOfAddress).toBeDefined()
+                    expect(res.body.data[0].dropOfAddress).toBeDefined()
                     expect(res.body.data[0].shipmentStatus).toBeDefined()
                 });
             });

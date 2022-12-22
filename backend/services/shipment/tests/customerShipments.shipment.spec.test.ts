@@ -18,7 +18,7 @@ describe("[Shipments APIs] | customerShipments API", () => {
                         _id: new mongoose.Types.ObjectId("63a271ebbe91afafb4d48c67"),
                         customer: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4d"),
                         pickUpAddress: "Egypt",
-                        pickOfAddress: "Germany",
+                        dropOfAddress: "Germany",
                         shipmentDescription: "WATCH",
                         shipmentStatus: "PICKED",
                         biker: new mongoose.Types.ObjectId("63a22b00a704bee4b0254f4c"),
@@ -64,9 +64,8 @@ describe("[Shipments APIs] | customerShipments API", () => {
                         .get("/api/shipment/customerShipments")
                         .auth(customerToken, { type: 'bearer' })
                     expect(res.statusCode).toEqual(200);
-                    console.log(res.body.data);
                     expect(res.body.data[0].pickUpAddress).toBeDefined();
-                    expect(res.body.data[0].pickOfAddress).toBeDefined();
+                    expect(res.body.data[0].dropOfAddress).toBeDefined();
                     expect(res.body.data[0].shipmentDescription).toBeDefined();
                     expect(res.body.data[0].shipmentStatus).toBeDefined();
                     expect(res.body.data[0].biker.fullName).not.toBeNull();
