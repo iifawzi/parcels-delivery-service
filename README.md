@@ -279,7 +279,7 @@ but the time was the main constraint:
 - Focusing in decreasing the lage components files, by splitting them into more shared components. 
 
 - Applying DDD techniques to have the domain fully isolated, for the current implemntation, I've only focused into having the use-casses isolated, but in fact, there're no domain objects involved, this's huge to be implemented in 4 days, I've planned to work on it, but then relized that this will not be finished in 4 days, thus decided to relax the complixity and focus on the use-casses. 
-Btw, here's a sketch of the initial plan before relaxing the complixity ( not completed and might have some defects ). 
+Btw, here's a sketch of the initial plan before relaxing the complixity ( just initial thoughts, not completed and might have some business-defects ). 
 
 ![Untitled-2022-12-19-1817 excalidraw](https://user-images.githubusercontent.com/46695441/209370480-f72f10cd-2d04-469c-94ff-f5c91b89d117.png)
 
