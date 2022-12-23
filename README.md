@@ -90,7 +90,7 @@ below is the file strucutre of the services, where each service have its `tests`
 
 <img width="375" alt="Screen Shot 2022-12-23 at 5 04 33 PM" src="https://user-images.githubusercontent.com/46695441/209357229-f95a233c-1ae6-4363-8edb-fcd5bb9910f1.png">
 
-More informations will be explained below: 
+More technical details and information are explained below.
 
 ### Deep Dive
 
