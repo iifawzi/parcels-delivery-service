@@ -59,7 +59,7 @@ export default function BikerShipments() {
                     color="success"
                 />
             default:
-                return <>No Available actions</>
+                return <>no actions available</>
         }
     }
 

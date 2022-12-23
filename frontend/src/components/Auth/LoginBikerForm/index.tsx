@@ -57,6 +57,7 @@ function LoginBikerForm({ setAlert }: ComponentProps) {
             const req = await BikerServices.login(data);
             setLoading(false);
             Cookies.set('authorization', req.data.data.token);
+            navigate("/dashboard");
         } catch (err: any) {
             setLoading(false)
             setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });

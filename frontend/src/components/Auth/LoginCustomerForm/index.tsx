@@ -57,6 +57,7 @@ function LoginCustomerForm({ setAlert }: ComponentProps) {
             const req = await CustomerServices.login(data);
             setLoading(false);
             Cookies.set('authorization', req.data.data.token);
+            navigate("/dashboard");
         } catch (err: any) {
             setLoading(false)
             setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
