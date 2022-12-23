@@ -7,7 +7,7 @@ export interface bikerSchemaI {
 }
 
 export const BikerSchema = new mongoose.Schema<bikerSchemaI>({
-	username: { type: String, unique: true },
+	username: { type: String, unique: true, index: true },
 	password: { type: String },
 	fullname: { type: String },
 }, {
