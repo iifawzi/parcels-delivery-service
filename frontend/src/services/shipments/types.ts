@@ -40,3 +40,7 @@ export interface CreateShipmentResponse {
     dropOfAddress: string,
     shipmentDescription: string
 }
+
+export interface UpdatedShipmentResponse {
+    data: boolean
+}

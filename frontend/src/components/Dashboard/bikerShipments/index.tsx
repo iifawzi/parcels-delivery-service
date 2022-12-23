@@ -34,63 +34,84 @@ export enum ShipmentStatus {
     DELIVERED = "DELIVERED",
 }
 
-function handleMarkPicked(setOpen: (status: boolean) => any, shipmentId: string) {
-    setOpen(false);
-    console.log(shipmentId);
-}
-
-function handleMarkDelivered(setOpen: (status: boolean) => any, shipmentId: string) {
-    setOpen(false);
-    console.log(shipmentId);
-}
-
-function ShowAction(currentStatus: ShipmentStatus, shipmentId: string) {
-    switch (currentStatus) {
-        case ShipmentStatus.MATCHED:
-            return <XAlertDialog
-                handleAgree={(setOpen: () => any) => () => handleMarkPicked(setOpen, shipmentId)}
-                description="Are you sure you want to mark this shipment as picked?"
-                value="Mark as Picked"
-                title="Confirmation"
-                color="warning"
-            />
-        case ShipmentStatus.PICKED:
-            return <XAlertDialog
-                handleAgree={(setOpen: () => any) => () => handleMarkDelivered(setOpen, shipmentId)}
-                description="Are you sure you want to mark this shipment as delivered?"
-                value="Mark as Delivered"
-                title="Confirmation"
-                color="success"
-            />
-    }
-}
-
-function Row(props: { row: BikerShipmentInfo }) {
-    const { row } = props;
-
-    return (
-        <React.Fragment>
-            <StyledTableRow>
-                <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
-                    {row.shipmentDescription}
-                </TableCell>
-                <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.pickupTime as string).toLocaleString()}</TableCell>
-                <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
-                <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.dropOfAddress}</TableCell>
-                <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.deliveryTime as string).toLocaleString()}</TableCell>
-                <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
-                <TableCell style={{ fontSize: '1.4rem' }} align="center">
-                    {ShowAction(row.shipmentStatus as ShipmentStatus, row._id)}
-                </TableCell>
-            </StyledTableRow>
-        </React.Fragment>
-    );
-}
-
 export default function CustomerShipments() {
     const [loadingStatus, setLoading] = React.useState(false);
     const [alert, setAlert] = React.useState({ message: '', severity: '' });
     const [shipmentsInfo, setShipmentsInfo] = React.useState<BikerShipmentInfo[]>([]);
+    let [updated, setUpdated] = React.useState(0);
+
+    function ShowAction(currentStatus: ShipmentStatus, shipmentId: string) {
+        switch (currentStatus) {
+            case ShipmentStatus.MATCHED:
+                return <XAlertDialog
+                    handleAgree={(setOpen: () => any) => () => handleMarkPicked(setOpen, shipmentId)}
+                    description="Are you sure you want to mark this shipment as picked?"
+                    value="Mark as Picked"
+                    title="Confirmation"
+                    color="warning"
+                />
+            case ShipmentStatus.PICKED:
+                return <XAlertDialog
+                    handleAgree={(setOpen: () => any) => () => handleMarkDelivered(setOpen, shipmentId)}
+                    description="Are you sure you want to mark this shipment as delivered?"
+                    value="Mark as Delivered"
+                    title="Confirmation"
+                    color="success"
+                />
+            default:
+                return <>No Available actions</>
+        }
+    }
+
+    function Row(props: { row: BikerShipmentInfo }) {
+        const { row } = props;
+
+        return (
+            <React.Fragment>
+                <StyledTableRow>
+                    <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
+                        {row.shipmentDescription}
+                    </TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.pickupTime as string).toLocaleString()}</TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.dropOfAddress}</TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.deliveryTime as string).toLocaleString()}</TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">
+                        {ShowAction(row.shipmentStatus as ShipmentStatus, row._id)}
+                    </TableCell>
+                </StyledTableRow>
+            </React.Fragment>
+        );
+    }
+
+    async function handleMarkPicked(setOpen: (status: boolean) => any, shipmentId: string) {
+        setOpen(false);
+        try {
+            setLoading(true)
+            await ShipmentsServices.markAsPicked(shipmentId);
+            setLoading(false);
+            setAlert({ message: 'Marked as picked successfully', severity: 'success' });
+            setUpdated(updated + 1)
+        } catch (err: any) {
+            setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
+            setLoading(false)
+        }
+    }
+
+    async function handleMarkDelivered(setOpen: (status: boolean) => any, shipmentId: string) {
+        setOpen(false);
+        try {
+            setLoading(true)
+            await ShipmentsServices.markAsDelivered(shipmentId);
+            setLoading(false);
+            setAlert({ message: 'Marked as deliverd successfully', severity: 'success' });
+            setUpdated(updated + 1)
+        } catch (err: any) {
+            setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
+            setLoading(false)
+        }
+    }
 
     /** 
     ***************
@@ -106,13 +127,16 @@ export default function CustomerShipments() {
                 const request = await ShipmentsServices.BikerShipments();
                 setShipmentsInfo(request.data.data);
                 setLoading(false);
-                setAlert({ message: 'Retreived successfully', severity: 'success' });
+                // to only show the retrieved message in first render.
+                if (!alert.message.length) {
+                    setAlert({ message: 'Retreived successfully', severity: 'success' });
+                }
             } catch (err: any) {
                 setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
                 setLoading(false)
             }
         })();
-    }, []);
+    }, [updated]);
     return (
         <XLoading loadingStatus={loadingStatus} lMessage="We're processing your request.." LoadingType={<Grid />}>
             {alert.message !== '' ? <XAlert message={alert.message} severity={alert.severity as AlertColor} /> : ''}
