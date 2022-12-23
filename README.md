@@ -35,7 +35,7 @@ In this document I will give you an overview about the project, grab a cup of co
 
 
 </br>
-In the rest of the document, I will be discussing how I tried to achieve the requirements. 
+In the rest of the document, I will be discussing how I tried to achieve the requirements and the technical decisions around it.
 
 ## tl;dr - Installation
 
