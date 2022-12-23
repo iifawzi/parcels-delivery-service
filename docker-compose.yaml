@@ -10,6 +10,7 @@ services:
       - 27270:27017
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+      - ./mongodb/data:/data/db
   parcels_frontend:
     build:
       context: frontend
