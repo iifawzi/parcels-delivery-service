@@ -62,6 +62,15 @@ user: `biker1`, `biker2`, `biker3`, `biker4` or `biker5`, `biker6`, `biker7`, `b
 pass: `password`
 
 
+Note: if you're willing to run the backend locally, without docker, don't forget to change the module alias configuration in package.json to:
+
+```JS
+  "_moduleAliases": {
+    "@": "."
+  },
+```
+
+
 ## Principles and goals
 
 ---
