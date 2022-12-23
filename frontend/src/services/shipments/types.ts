@@ -4,14 +4,29 @@ export interface ShipmentInfo {
     dropOfAddress: string,
     shipmentStatus: string
     shipmentDescription: string,
+}
+
+export interface CustomerShipmentInfo extends ShipmentInfo{
     deliveryTime?: string,
     pickupTime?: string,
     biker?: {
         fullName: string
     }
 }
+export interface BikerShipmentInfo extends ShipmentInfo {
+    deliveryTime?: string,
+    pickupTime?: string,
+    customer: {
+        fullName: string
+    }
+}
+
 export interface CustomerShipmentsResponse {
-    data: [ShipmentInfo]
+    data: [CustomerShipmentInfo]
+}
+
+export interface BikerShipmentsResponse {
+    data: [BikerShipmentInfo]
 }
 
 export interface CreateShipmentBody {

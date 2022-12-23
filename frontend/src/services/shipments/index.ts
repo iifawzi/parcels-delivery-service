@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import BaseService from "../base";
-import { CreateShipmentBody, CreateShipmentResponse, CustomerShipmentsResponse } from "./types";
+import { BikerShipmentsResponse, CreateShipmentBody, CreateShipmentResponse, CustomerShipmentsResponse } from "./types";
 
 class ShipmentsServices extends BaseService {
     routeName = '/shipment'
@@ -11,6 +11,10 @@ class ShipmentsServices extends BaseService {
 
     async CreateShipment(data: CreateShipmentBody): Promise<AxiosResponse<CreateShipmentResponse>> {
         return await this.http.post<CreateShipmentResponse>(`${this.routeName}/`, data);
+    }
+
+    async BikerShipments(): Promise<AxiosResponse<BikerShipmentsResponse>> {
+        return await this.http.get<BikerShipmentsResponse>(`${this.routeName}/bikerShipments`)
     }
 }
 

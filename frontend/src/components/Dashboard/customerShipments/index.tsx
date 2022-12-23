@@ -14,34 +14,11 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import styled from "@emotion/styled";
 import { XAlert, XColored, XLoading } from "components/shared";
-import { ShipmentInfo } from "services/shipments/types";
+import { CustomerShipmentInfo } from "services/shipments/types";
 import { ShipmentsServices } from "services";
 import { Grid } from "components/shared/xLoading/templates";
 import { AlertColor } from "@mui/material";
 
-function createData(
-  _id: string,
-  shipmentDescription: string,
-  pickupAddress: string,
-  dropOfAddress: string,
-  shipmentStatus: string,
-  biker: {
-    fullname: string,
-  },
-  deliveryTime: number,
-  pickupTime: number
-) {
-  return {
-    _id,
-    shipmentDescription,
-    pickupAddress,
-    dropOfAddress,
-    shipmentStatus,
-    biker,
-    deliveryTime,
-    pickupTime
-  };
-}
 
 const StyledTableCell = styled(TableCell)(({ theme }: any) => ({
   [`&.${tableCellClasses.head}`]: {
@@ -58,7 +35,7 @@ const StyledTableRow = styled(TableRow)(({ theme }: any) => ({
   },
 }));
 
-function Row(props: { row: ShipmentInfo }) {
+function Row(props: { row: CustomerShipmentInfo }) {
   const { row } = props;
   const [open, setOpen] = React.useState(false);
 
@@ -130,7 +107,7 @@ function Row(props: { row: ShipmentInfo }) {
 export default function CustomerShipments() {
   const [loadingStatus, setLoading] = React.useState(false);
   const [alert, setAlert] = React.useState({ message: '', severity: '' });
-  const [shipmentsInfo, setShipmentsInfo] = React.useState<ShipmentInfo[]>([]);
+  const [shipmentsInfo, setShipmentsInfo] = React.useState<CustomerShipmentInfo[]>([]);
   /** 
   ***************
   Fetching data: 
@@ -146,7 +123,8 @@ export default function CustomerShipments() {
         setShipmentsInfo(request.data.data);
         setLoading(false);
         setAlert({ message: 'Retreived successfully', severity: 'success' });
-      } catch (err) {
+      } catch (err: any) {
+        setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
         setLoading(false)
       }
     })();
