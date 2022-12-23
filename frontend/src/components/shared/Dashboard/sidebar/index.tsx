@@ -8,6 +8,8 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import classes from "./style.module.scss"
 import { useAuth } from "contexts/Auth.context";
 import WidgetsIcon from '@mui/icons-material/Widgets';
+import TimerIcon from '@mui/icons-material/Timer';
+
 interface componentProps {
     animationClass: string,
     shownBefore: boolean
@@ -38,17 +40,30 @@ const Sidebar = ({ animationClass, shownBefore }: componentProps) => {
                             </li>
                         </NavLink>
                         {
-                        userInfo.role === 'customer' ?
-                            <NavLink className={classNameFunc} end to="/dashboard/newShipment"
-                                onMouseEnter={() => location.pathname != '/dashboard/newShipment' ? setHideActive(true) : ''}
-                                onMouseLeave={() => setHideActive(false)}>
-                                <li>
-                                    <WidgetsIcon className={classes.listIcon} />
-                                    <p className={classes.listName}>New Shipment</p>
-                                </li>
-                            </NavLink>
-                            :
-                            <></>
+                            userInfo.role === 'customer' ?
+                                <NavLink className={classNameFunc} end to="/dashboard/newShipment"
+                                    onMouseEnter={() => location.pathname != '/dashboard/newShipment' ? setHideActive(true) : ''}
+                                    onMouseLeave={() => setHideActive(false)}>
+                                    <li>
+                                        <WidgetsIcon className={classes.listIcon} />
+                                        <p className={classes.listName}>New Shipment</p>
+                                    </li>
+                                </NavLink>
+                                :
+                                <></>
+                        }
+                        {
+                            userInfo.role === 'biker' ?
+                                <NavLink className={classNameFunc} end to="/dashboard/waitingShipments"
+                                    onMouseEnter={() => location.pathname != '/dashboard/waitingShipments' ? setHideActive(true) : ''}
+                                    onMouseLeave={() => setHideActive(false)}>
+                                    <li>
+                                        <TimerIcon className={classes.listIcon} />
+                                        <p className={classes.listName}>Waiting Shipments</p>
+                                    </li>
+                                </NavLink>
+                                :
+                                <></>
                         }
                     </ul>
                     <div className={classes.userContainer}>

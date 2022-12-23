@@ -6,6 +6,12 @@ export interface ShipmentInfo {
     shipmentDescription: string,
 }
 
+export interface WaitingShipmentInfo extends ShipmentInfo {
+    customer: {
+        fullName: string
+    }
+}
+
 export interface CustomerShipmentInfo extends ShipmentInfo{
     deliveryTime?: string,
     pickupTime?: string,
@@ -27,6 +33,10 @@ export interface CustomerShipmentsResponse {
 
 export interface BikerShipmentsResponse {
     data: [BikerShipmentInfo]
+}
+
+export interface WaitingShipmentsResponse {
+    data: [WaitingShipmentInfo]
 }
 
 export interface CreateShipmentBody {

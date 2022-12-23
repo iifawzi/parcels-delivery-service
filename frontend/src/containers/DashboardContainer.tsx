@@ -1,5 +1,5 @@
-import { Dashboard, Home, NewShipmentPage } from 'pages';
-import { AllowedForRoute, ProtectedRoute } from 'protection';
+import { Dashboard, NewShipmentPage, WaitingShipmentsPage } from 'pages';
+import { AllowedForRoute } from 'protection';
 import { Route, Routes } from 'react-router-dom';
 
 const AuthContainer = () => {
@@ -7,6 +7,7 @@ const AuthContainer = () => {
         <Routes>
             <Route path='/' element={<Dashboard />}> </Route>
             <Route path='/newShipment' element={<AllowedForRoute role='customer'><NewShipmentPage/></AllowedForRoute>}> </Route>
+            <Route path='/waitingShipments' element={<AllowedForRoute role='biker'><WaitingShipmentsPage/></AllowedForRoute>}> </Route>
             <Route path='/*' element={<Dashboard />}></Route>
         </Routes>
     );

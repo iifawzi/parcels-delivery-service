@@ -1,5 +1,4 @@
 import { Home, LoginBikerPage, LoginCustomerPage } from 'pages';
-import { GuestRoute } from 'protection';
 import { Route, Routes } from 'react-router-dom';
 
 const AuthContainer = () => {
