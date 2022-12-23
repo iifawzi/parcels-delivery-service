@@ -56,7 +56,7 @@ pass: `password`
 
 For the bikers login info:
 
-user: `biker1`, `biker2`, `biker3`, `biker4` or `biker5`, `biker6`, `biker7`, `biker8`, `biker9` or `biker10`
+user: `biker1`, `biker2`, `biker3`, `biker4`, `biker5`, `biker6`, `biker7`, `biker8`, `biker9` or `biker10`
 </br>
 
 pass: `password`
