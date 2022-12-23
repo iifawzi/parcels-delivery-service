@@ -261,3 +261,26 @@ https://github.com/iifawzi/parcels-delivery-service/blob/917827d1ce752d6c9570c84
 <img width="1498" alt="Screen Shot 2022-12-23 at 6 20 37 PM" src="https://user-images.githubusercontent.com/46695441/209366973-373f7c7e-d455-475f-ad70-c7c75665c4de.png">
 <img width="867" alt="Screen Shot 2022-12-23 at 6 22 13 PM" src="https://user-images.githubusercontent.com/46695441/209367093-d372540a-0a7a-42db-9c5c-1d2e59ed3455.png">
 <img width="863" alt="Screen Shot 2022-12-23 at 6 25 29 PM" src="https://user-images.githubusercontent.com/46695441/209367494-b650f72c-2e83-4373-ad93-e3471847c9ec.png">
+
+
+# Conclusions 
+
+All of the work mentioned above have been done in the past 4 days, I'm pretty sure there're a lot of areas, aspects, and decisions that can be improved. 
+but the time was the main constraint: 
+
+- The most important one of them, is the types, I've used `any` at many places because having a proper and correct types would time, so at some places, I decided to use `any`, if I had more time i'd ensure that everything is well typed. 
+
+- I've also planned to add a `Continious integration`, so the `e2e` tests can run on each commit / pull request, which's possible due to the fact that we're testing against a mocked database. 
+
+- The error handling and the domain exceptions, as mentioned above. 
+
+- Moving the errors messages to a single file, instead of having them directly set in-place.
+
+- Focusing in decreasing the lage components files, by splitting them into more shared components. 
+
+- Applying DDD techniques to have the domain fully isolated, for the current implemntation, I've only focused into having the use-casses isolated, but in fact, there're no domain objects involved, this's huge to be implemented in 4 days, I've planned to work on it, but then relized that this will not be finished in 4 days, thus decided to relax the complixity and focus on the use-casses. 
+Btw, here's a sketch of the initial plan before relaxing the complixity ( not completed and might have some defects ). 
+
+![Untitled-2022-12-19-1817 excalidraw](https://user-images.githubusercontent.com/46695441/209370480-f72f10cd-2d04-469c-94ff-f5c91b89d117.png)
+
+That's it think. I've really enjoyed working on this, and spent too much time ensuring and caring about the testability and the code quality. 
