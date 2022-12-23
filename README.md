@@ -296,4 +296,5 @@ You might also want to take a look on some of the other open-source sample proje
 
 
 Let's always hope we keep learning, love what we're doing, and more importantly, caring about our users. 
+</br>
 Thank you!
