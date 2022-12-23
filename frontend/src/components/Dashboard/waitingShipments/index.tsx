@@ -92,7 +92,7 @@ export default function WaitingShipments() {
                     <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
                     <TableCell style={{ fontSize: '1.4rem' }} align="center">
                         <div onClick={() => setOpen(!open)} className={classes.matchingBtn}>
-                            <XColored color={`var(--MATCHED)`}>Matching the shipment</XColored>
+                            <XColored color={`var(--MATCHED)`}>Matching</XColored>
                         </div>
                     </TableCell>
                 </StyledTableRow>
