@@ -9,7 +9,6 @@ import { XLoading } from "components/shared"
 import { Ripple } from "components/shared/xLoading/templates"
 import { useNavigate } from "react-router-dom";
 import { ShipmentsServices } from "services";
-import Cookies from "js-cookie";
 import { CreateShipmentBody } from "services/shipments/types";
 
 interface ComponentProps {

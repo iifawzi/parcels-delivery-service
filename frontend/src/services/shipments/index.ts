@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import BaseService from "../base";
-import { BikerShipmentsResponse, CreateShipmentBody, CreateShipmentResponse, CustomerShipmentsResponse, UpdatedShipmentResponse, WaitingShipmentsResponse } from "./types";
+import { BikerShipmentsResponse, CreateShipmentBody, CreateShipmentResponse, CustomerShipmentsResponse, MatchingShipmentBody, UpdatedShipmentResponse, WaitingShipmentsResponse } from "./types";
 
 class ShipmentsServices extends BaseService {
     routeName = '/shipment'
@@ -27,6 +27,10 @@ class ShipmentsServices extends BaseService {
 
     async waitingShipments(): Promise<AxiosResponse<WaitingShipmentsResponse>> {
         return await this.http.get<WaitingShipmentsResponse>(`${this.routeName}/waiting`);
+    }
+
+    async matchingShipment(data: MatchingShipmentBody): Promise<AxiosResponse<UpdatedShipmentResponse>> {
+        return await this.http.patch<UpdatedShipmentResponse>(`${this.routeName}/match`,  data);
     }
 }
 

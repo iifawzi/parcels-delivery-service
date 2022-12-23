@@ -72,6 +72,7 @@ export default function BikerShipments() {
                     <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
                         {row.shipmentDescription}
                     </TableCell>
+                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.customer?.fullName}</TableCell>
                     <TableCell style={{ fontSize: '1.4rem' }} align="center">{new Date(row.pickupTime as string).toLocaleString()}</TableCell>
                     <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
                     <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.dropOfAddress}</TableCell>
@@ -149,6 +150,7 @@ export default function BikerShipments() {
                         <TableHead>
                             <TableRow>
                                 <StyledTableCell>Description</StyledTableCell>
+                                <StyledTableCell align="center">Customer name</StyledTableCell>
                                 <StyledTableCell align="center">Pickup time</StyledTableCell>
                                 <StyledTableCell align="center">Pickup Address</StyledTableCell>
                                 <StyledTableCell align="center">Destination Address</StyledTableCell>

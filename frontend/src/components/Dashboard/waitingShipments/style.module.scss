@@ -1,24 +1,68 @@
-.bikerShipments {
+.waitingShipments {
     display: flex;
     flex-flow: column;
     height: 100vh;
     width: 100%;
     margin-top: 40px;
+
     .title {
         margin-bottom: 20px;
         font-size: 2.4rem;
     }
+
     .nodata {
         margin-left: 10px;
     }
-}
 
-.customerInfo {
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: left;
-    font-size: 1.5rem;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    .matchingBtn {
+        cursor: pointer;
+    }
+
+    .matchingForm {
+        display: flex;
+        flex-flow: column;
+        align-items: left;
+        .note {
+            font-size: 1.4rem;
+        }
+
+        .matchingInputs {
+            display: flex;
+            flex-flow: row;
+            align-items: center;
+            margin-top: 25px;
+            .inputWrapper {
+                &:not(:first-child) {
+                    margin-left: 10px;
+                }
+                width: 300px;
+                height: 40px;
+                margin-bottom: 20px;
+    
+                .helpers {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: space-between;
+                    margin-top: 5px;
+    
+                    .error {
+                        font-size: 1.4rem;
+                        margin-inline-start: 5px;
+                        color: var(--red);
+                    }
+                }
+            }
+            .buttonWrapper {
+                display: flex;
+                flex-flow: row;
+                align-items: center;
+                width: 100px;
+                height: 30px;
+                margin-left: 20px;
+            }
+    
+        }
+
+    }
+
 }

@@ -57,10 +57,6 @@ function LoginCustomerForm({ setAlert }: ComponentProps) {
             const req = await CustomerServices.login(data);
             setLoading(false);
             Cookies.set('authorization', req.data.data.token);
-            setAlert({ message: 'Successfull login, you will be redirected', severity: "success" });
-            setTimeout(() => {
-                navigate("/dashboard");
-            }, 1500);
         } catch (err: any) {
             setLoading(false)
             setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });

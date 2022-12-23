@@ -12,7 +12,7 @@ export interface WaitingShipmentInfo extends ShipmentInfo {
     }
 }
 
-export interface CustomerShipmentInfo extends ShipmentInfo{
+export interface CustomerShipmentInfo extends ShipmentInfo {
     deliveryTime?: string,
     pickupTime?: string,
     biker?: {
@@ -53,4 +53,10 @@ export interface CreateShipmentResponse {
 
 export interface UpdatedShipmentResponse {
     data: boolean
+}
+
+export interface MatchingShipmentBody {
+    shipmentId: string,
+    pickupTime: number,
+    deliveryTime: number
 }
