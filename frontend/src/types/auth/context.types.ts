@@ -14,6 +14,6 @@ export enum ActionType {
 }
 
 export interface AuthReducerAction {
-    type: ActionType.ChangeUserInfo;
+    type: ActionType;
     payload: AuthStateI;
 }
