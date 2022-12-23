@@ -280,6 +280,8 @@ but the time was the main constraint:
 
 - Using `class-validator` and data-transfer-objects (DTOs) instead of JOI. 
 
+- Adding `Swagger` documintation for the APIs
+
 - Moving the errors messages to a single file, instead of having them directly set in-place.
 
 - Using `socket` for the shipments status updates, so the biker and the customer can see the changes in real time
