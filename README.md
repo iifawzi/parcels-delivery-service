@@ -278,6 +278,8 @@ but the time was the main constraint:
 
 - The error handling and the domain exceptions, as mentioned above. 
 
+- Using `class-validator` and data-transfer-objects (DTOs) instead of JOI. 
+
 - Moving the errors messages to a single file, instead of having them directly set in-place.
 
 - Using `socket` for the shipments status updates, so the biker and the customer can see the changes in real time
