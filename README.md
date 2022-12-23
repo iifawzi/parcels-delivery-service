@@ -34,6 +34,31 @@ In this document I will give you an overview about the project, grab a cup of co
 </br>
 In this rest of the document, I will be discussing how I tried to achieve the requirements. 
 
+## tl;dr - Installation
+
+All of the system componenets is configured in the `docker-compose.yaml` file, that you don't need anything other than
+- Clone the project and `cd` into it
+- Docker compose up
+- Enjoy!
+
+The backend will be running at `http://localhost:4040/api/`
+</br>
+The frontend will be running at `http://localhost:3005/auth/`
+
+For the customers login info: 
+
+user: `customer1`, `customer2`, `customer3`, `customer4` or `customer5`
+</br>
+pass: `password`
+
+For the bikers login info:
+
+user: `biker1`, `biker2`, `biker3`, `biker4` or `biker5`, `biker6`, `biker7`, `biker8`, `biker9` or `biker10`
+</br>
+
+pass: `password`
+
+
 ## Principles and goals
 
 ---
