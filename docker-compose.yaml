@@ -10,3 +10,17 @@ services:
       - 27270:27017
     volumes:
       - ./init-mongo.js:/docker-entrypoint-initdb.d/init-mongo.js
+  parcels_frontend:
+    build:
+      context: frontend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 3005:3000
+  parcels_backend:
+    build:
+      context: backend
+      dockerfile: Dockerfile
+    restart: always
+    ports:
+      - 4040:4040
