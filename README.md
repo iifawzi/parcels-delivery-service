@@ -1,5 +1,8 @@
 # Parcels Management System
 
+<img width="1498" alt="Screen Shot 2022-12-23 at 6 20 37 PM" src="https://user-images.githubusercontent.com/46695441/209366911-9e92ea62-e6d5-4b45-bfdb-9dabdc243f48.png">
+
+
 ## Introduction **📺**
 
 Parcels Management Service consists of the backend and the dashboard that will allow the customers to create shipments and bikers to pick and deliver them. 
@@ -241,3 +244,11 @@ https://github.com/iifawzi/parcels-delivery-service/blob/917827d1ce752d6c9570c84
 
 ### Some Views of the Application 
 
+<img width="1494" alt="Screen Shot 2022-12-23 at 5 58 35 PM" src="https://user-images.githubusercontent.com/46695441/209366942-6e1cab96-9250-4a20-999a-68c6d62f4b6d.png">
+<img width="1555" alt="Screen Shot 2022-12-23 at 6 18 15 PM" src="https://user-images.githubusercontent.com/46695441/209366952-3bb6b7c5-ac21-4031-a362-ec9e5b606828.png">
+<img width="1523" alt="Screen Shot 2022-12-23 at 6 18 37 PM" src="https://user-images.githubusercontent.com/46695441/209366957-2965f93c-0b69-4e29-829d-6cf8f614d4fc.png">
+<img width="1535" alt="Screen Shot 2022-12-23 at 6 24 06 PM" src="https://user-images.githubusercontent.com/46695441/209367364-a801dbac-9116-4fb9-943c-2a4e82e0614e.png">
+<img width="1494" alt="Screen Shot 2022-12-23 at 6 23 59 PM" src="https://user-images.githubusercontent.com/46695441/209367368-9ea854ae-e4e1-4ba5-9b2c-9f043789ef3a.png">
+<img width="1498" alt="Screen Shot 2022-12-23 at 6 20 37 PM" src="https://user-images.githubusercontent.com/46695441/209366973-373f7c7e-d455-475f-ad70-c7c75665c4de.png">
+<img width="867" alt="Screen Shot 2022-12-23 at 6 22 13 PM" src="https://user-images.githubusercontent.com/46695441/209367093-d372540a-0a7a-42db-9c5c-1d2e59ed3455.png">
+<img width="863" alt="Screen Shot 2022-12-23 at 6 25 29 PM" src="https://user-images.githubusercontent.com/46695441/209367494-b650f72c-2e83-4373-ad93-e3471847c9ec.png">
