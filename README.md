@@ -284,3 +284,4 @@ Btw, here's a sketch of the initial plan before relaxing the complixity ( just i
 ![Untitled-2022-12-19-1817 excalidraw](https://user-images.githubusercontent.com/46695441/209370480-f72f10cd-2d04-469c-94ff-f5c91b89d117.png)
 
 That's it think. I've really enjoyed working on this, and spent too much time ensuring and caring about the testability and the code quality. 
+If you reached this section, thank you for your time going through it, I hope you enjoyed it. 
