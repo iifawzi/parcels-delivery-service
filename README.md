@@ -177,6 +177,55 @@ npm run test:cov // will run both tests and gather the coverage reports.
 ```
 
 
+# Architecture - Frontend
+
+For the frontend side, I've used `REACT`, `SCSS` and `Typescript`, resposntivity and modularity were kept in mind too while implemnting the frontend dashboard, I've tried as much as possible to divide a files and the components in well-structured manner, for better reusability of the shared components and for making it easier to develop and maintain the code. 
+
+I've also used some components from `Material UI`
+
+Below is the file strucute of the application: 
+
+<img width="432" alt="Screen Shot 2022-12-23 at 5 43 07 PM" src="https://user-images.githubusercontent.com/46695441/209362128-1edbd6c2-dad4-40d9-9805-cf3eb857d1dd.png">
 
 
+## Architecture - Frontend
 
+### State Management
+
+I've used the `useReducer` hook along with the `Context` for the state management across the application, and the simple `useState` hook, for in-component state. The contexts are defined in the `contexts` folder, and the providers with the reducers are defined in the `providers` folder
+
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/providers/auth/Auth.provider.tsx#L9-L18
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/providers/auth/authReducer.ts#L4-L13
+
+### Components, Pages, and containers 
+
+I've put all of the shared components under the `components/shared` folder, and kept the pages as simple as possible and moved all the forms and comples views to the `components` page as well.
+
+for the containers, I'm using them for grouping the related paths and pages together, so I can simply apply the `protection` components against them easily
+
+The main app router, pointing to the container with applying the required protection rules using the proection components: 
+
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/App.tsx#L8-L23
+
+The containers: 
+
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/containers/DashboardContainer.tsx#L5-L14
+
+And lastly the protection components: 
+
+- Guest pages: 
+This helper component will not allow authenticated users from opening/navigating/routing to the only guest routes ( so a logged in user can't navigate to the auth page again )
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/guestRoute.tsx#L7-L23
+
+- Protected pages: 
+This helper component will not allow guest users from opening/navigating/routing to the protected routes ( dashboard ).
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/protectedRoute.tsx#L7-L23
+
+- Protected pages: 
+This helper component will not allow guest users from opening/navigating/routing to the protected routes ( dashboard ).
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/protectedRoute.tsx#L7-L23
+
+
+- Allowed for specific roles pages: 
+This helper component will only allow the authorized roles to opening/navigating/routing their specific pages, ( a biker shouldn't be allowe to navigate to the customers routes 'new shipmnent route' for example )
+https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/AllowedForRoute.tsx#L5-L11
