@@ -35,99 +35,86 @@ export enum ShipmentStatus {
     WAITING = "WAITING",
 }
 
-export default function WaitingShipments() {
+const onSubmit = (shipmentId: string, updated: number, setAlert: any, setUpdated: any, setLoading: any) => async (data: any) => {
+    setLoading(true)
+    try {
+        const body: MatchingShipmentBody = {
+            pickupTime: new Date(data.pickupTime).getTime(),
+            deliveryTime: new Date(data.deliveryTime).getTime(),
+            shipmentId
+        }
+
+        await ShipmentsServices.matchingShipment(body);
+        setLoading(false);
+        setAlert({ message: 'Marked as matched successfully', severity: 'success' });
+        setUpdated(updated + 1)
+    } catch (err: any) {
+        setLoading(false)
+        setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
+    }
+}
+
+
+function Row(props: { row: BikerShipmentInfo, updated: number, setAlert: any, setUpdated: any, setLoading: any }) {
+    const [open, setOpen] = React.useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange" });
+    const { row, updated, setAlert, setUpdated, setLoading } = props;
+
+    return (
+        <React.Fragment>
+            <StyledTableRow>
+                <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
+                    {row.shipmentDescription}
+                </TableCell>
+                <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.customer?.fullName}</TableCell>
+                <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
+                <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.dropOfAddress}</TableCell>
+                <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
+                <TableCell style={{ fontSize: '1.4rem' }} align="center">
+                    <div onClick={() => setOpen(!open)} className={classes.matchingBtn}>
+                        <XColored color={`var(--MATCHED)`}>Matching</XColored>
+                    </div>
+                </TableCell>
+            </StyledTableRow>
+            <StyledTableRow>
+                <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
+                    <Collapse in={open} timeout="auto" unmountOnExit>
+                        <Box sx={{ margin: 5 }}>
+                            <div className={classes.matchingForm}>
+                                <p className={classes.note}>Kindly, confirm the pickup time and delivery time from below</p>
+                                <div className={classes.matchingInputs}>
+                                    <div className={classes.inputWrapper}>
+                                        <XInput iconComponent={<PasswordIcon />} label="Pickup Time" type="datetime-local" register={register} required></XInput>
+                                        <div className={classes.helpers}>
+                                            <p className={classes.error}>{errors.pickupTime && <span>Pickup time is required</span>}</p>
+                                        </div>
+                                    </div>
+                                    <div className={classes.inputWrapper}>
+                                        <XInput iconComponent={<PasswordIcon />} label="Delivery Time" type="datetime-local" register={register} required></XInput>
+                                        <div className={classes.helpers}>
+                                            <p className={classes.error}>{errors.deliveryTime && <span>Delivery time is required</span>}</p>
+                                        </div>
+                                    </div>
+                                    <div className={classes.buttonWrapper}>
+                                        <XSubmit submitFunction={() => handleSubmit(onSubmit(row._id, updated, setAlert, setUpdated, setLoading))} color="primary" label="Confirm" />
+                                    </div>
+                                </div>
+
+                            </div>
+                        </Box>
+                    </Collapse>
+                </TableCell>
+            </StyledTableRow>
+        </React.Fragment>
+    );
+}
+
+export default function WaitingShipments() {
     const [loadingStatus, setLoading] = React.useState(false);
     const [alert, setAlert] = React.useState({ message: '', severity: '' });
     const [shipmentsInfo, setShipmentsInfo] = React.useState<WaitingShipmentInfo[]>([]);
     let [updated, setUpdated] = React.useState(0);
-    const [open, setOpen] = React.useState(false);
 
-    async function handleMatching(setOpen: (status: boolean) => any, shipmentId: string) {
-        setOpen(false);
-        try {
-            setLoading(true)
-            await ShipmentsServices.markAsPicked(shipmentId);
-            setLoading(false);
-            setAlert({ message: 'Marked as picked successfully', severity: 'success' });
-            setUpdated(updated + 1)
-        } catch (err: any) {
-            setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
-            setLoading(false)
-        }
-    }
-
-    const onSubmit = (shipmentId: string) => async (data: any) => {
-        setLoading(true)
-        try {
-            const body: MatchingShipmentBody = {
-                pickupTime: new Date(data.pickupTime).getTime(),
-                deliveryTime: new Date(data.deliveryTime).getTime(),
-                shipmentId
-            }
-
-            await ShipmentsServices.matchingShipment(body);
-            setLoading(false);
-            setAlert({ message: 'Marked as matched successfully', severity: 'success' });
-            setUpdated(updated + 1)
-        } catch (err: any) {
-            setLoading(false)
-            setAlert({ message: err.response?.data?.message || 'Something went wrong', severity: "error" });
-        }
-    }
-
-
-    function Row(props: { row: BikerShipmentInfo }) {
-        const { row } = props;
-
-        return (
-            <React.Fragment>
-                <StyledTableRow>
-                    <TableCell style={{ fontSize: '1.4rem' }} component="th" scope="row">
-                        {row.shipmentDescription}
-                    </TableCell>
-                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.customer?.fullName}</TableCell>
-                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.pickUpAddress}</TableCell>
-                    <TableCell style={{ fontSize: '1.4rem' }} align="center">{row.dropOfAddress}</TableCell>
-                    <TableCell style={{ fontSize: '1.4rem' }} align="center"><XColored color={`var(--${row.shipmentStatus})`}>{row.shipmentStatus}</XColored></TableCell>
-                    <TableCell style={{ fontSize: '1.4rem' }} align="center">
-                        <div onClick={() => setOpen(!open)} className={classes.matchingBtn}>
-                            <XColored color={`var(--MATCHED)`}>Matching</XColored>
-                        </div>
-                    </TableCell>
-                </StyledTableRow>
-                <StyledTableRow>
-                    <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
-                        <Collapse in={open} timeout="auto" unmountOnExit>
-                            <Box sx={{ margin: 5 }}>
-                                <div className={classes.matchingForm}>
-                                    <p className={classes.note}>Kindly, confirm the pickup time and delivery time from below</p>
-                                    <div className={classes.matchingInputs}>
-                                        <div className={classes.inputWrapper}>
-                                            <XInput iconComponent={<PasswordIcon />} label="Pickup Time" type="datetime-local" register={register} required></XInput>
-                                            <div className={classes.helpers}>
-                                                <p className={classes.error}>{errors.pickupTime && <span>Pickup time is required</span>}</p>
-                                            </div>
-                                        </div>
-                                        <div className={classes.inputWrapper}>
-                                            <XInput iconComponent={<PasswordIcon />} label="Delivery Time" type="datetime-local" register={register} required></XInput>
-                                            <div className={classes.helpers}>
-                                                <p className={classes.error}>{errors.deliveryTime && <span>Delivery time is required</span>}</p>
-                                            </div>
-                                        </div>
-                                        <div className={classes.buttonWrapper}>
-                                            <XSubmit submitFunction={() => handleSubmit(onSubmit(row._id))} color="primary" label="Confirm" />
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </Box>
-                        </Collapse>
-                    </TableCell>
-                </StyledTableRow>
-            </React.Fragment>
-        );
-    }
 
     /** 
     ***************
@@ -176,7 +163,7 @@ export default function WaitingShipments() {
                             {shipmentsInfo.length ?
                                 <>
                                     {shipmentsInfo.map((row, index) => (
-                                        <Row key={index} row={row} />
+                                        <Row setAlert={setAlert} setUpdated={setUpdated} updated={updated} setLoading={setLoading} key={index} row={row} />
                                     ))}
                                 </>
                                 :

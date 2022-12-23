@@ -46,7 +46,7 @@ export default function BikerShipments() {
                 return <XAlertDialog
                     handleAgree={(setOpen: () => any) => () => handleMarkPicked(setOpen, shipmentId)}
                     description="Are you sure you want to mark this shipment as picked?"
-                    value="Mark as Picked"
+                    value="Picked"
                     title="Confirmation"
                     color="warning"
                 />
@@ -54,7 +54,7 @@ export default function BikerShipments() {
                 return <XAlertDialog
                     handleAgree={(setOpen: () => any) => () => handleMarkDelivered(setOpen, shipmentId)}
                     description="Are you sure you want to mark this shipment as delivered?"
-                    value="Mark as Delivered"
+                    value="Delivered"
                     title="Confirmation"
                     color="success"
                 />

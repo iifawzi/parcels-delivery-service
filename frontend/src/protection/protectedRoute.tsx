@@ -18,7 +18,7 @@ export const ProtectedRoute: React.FC<{ children: JSX.Element }> = ({ children }
     }, [loading]);
 
     return (
-        !loading ? state.isAuth ? children : <Navigate to="/auth/" /> : <></>
+        !loading ? state.isAuth ? children : <Navigate to="/auth/biker" /> : <></>
     )
 };
 
