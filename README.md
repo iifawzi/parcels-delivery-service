@@ -218,14 +218,26 @@ This helper component will not allow authenticated users from opening/navigating
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/guestRoute.tsx#L7-L23
 
 - Protected pages: 
-This helper component will not allow guest users from opening/navigating/routing to the protected routes ( dashboard ).
-https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/protectedRoute.tsx#L7-L23
-
-- Protected pages: 
-This helper component will not allow guest users from opening/navigating/routing to the protected routes ( dashboard ).
+This helper component will not allow guest users from opening/navigating/routing to 
+the protected routes ( dashboard ).
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/protectedRoute.tsx#L7-L23
 
 
 - Allowed for specific roles pages: 
 This helper component will only allow the authorized roles to opening/navigating/routing their specific pages, ( a biker shouldn't be allowe to navigate to the customers routes 'new shipmnent route' for example )
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/AllowedForRoute.tsx#L5-L11
+
+### Services
+
+I've created a service layer to manage the communication with the APIs, by creating a base `HTTP` abstract class, that's extended by each service: 
+
+The base HTTP Class: 
+
+https://github.com/iifawzi/parcels-delivery-service/blob/917827d1ce752d6c9570c84e8d8e8913e5c3e628/frontend/src/services/base.ts#L4-L22
+
+The `bikerServices` class for example: 
+https://github.com/iifawzi/parcels-delivery-service/blob/917827d1ce752d6c9570c84e8d8e8913e5c3e628/frontend/src/services/biker/index.ts#L5-L11
+
+
+### Some Views of the Application 
+
