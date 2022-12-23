@@ -280,6 +280,8 @@ but the time was the main constraint:
 
 - Moving the errors messages to a single file, instead of having them directly set in-place.
 
+- Using `socket` for the shipments status updates, so the biker and the customer can see the changes in real time
+
 - Focusing in decreasing the lage components files, by splitting them into more shared components. 
 
 - I'm not that good at `UX`, I'm pretty sure the dashboard components is subject to a lot of improvements too. 
