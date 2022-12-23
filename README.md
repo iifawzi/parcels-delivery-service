@@ -287,3 +287,13 @@ Btw, here's a sketch of the initial plan before relaxing the complixity ( just i
 
 That's it think. I've really enjoyed working on this, and spent too much time ensuring and caring about the testability and the code quality. 
 If you reached this section, thank you for your time going through it, I hope you enjoyed it. 
+
+
+You might also want to take a look on some of the other open-source sample projects that I created recently: 
+- Learning Platform (`Javascript` with `Express`): https://github.com/iifawzi/learning-platform-backend
+- Chatting System (`Typescript` with `Nest.js`) : https://github.com/iifawzi/nestjs-microservices-kafka
+
+
+
+Let's always hope we keep learning, love what we're doing, and more importantly, caring about our users. 
+Thank you!
