@@ -109,7 +109,7 @@ function Row(props: { row: ShipmentInfo }) {
                     :
                     <>
                     <TableCell style={{ textAlign: 'center', fontSize: '1.4rem' }} component="th" scope="row" colSpan={4}>
-                        Waiting for matching with a biker!
+                        Waiting for a matching with a biker!
                     </TableCell>
                     </>
 
@@ -165,7 +165,7 @@ export default function CustomerShipments() {
                 <StyledTableCell />
                 <StyledTableCell>Description</StyledTableCell>
                 <StyledTableCell align="center">Pickup Address</StyledTableCell>
-                <StyledTableCell align="center">Pickof Address</StyledTableCell>
+                <StyledTableCell align="center">Destination Address</StyledTableCell>
                 <StyledTableCell align="center">Status</StyledTableCell>
               </TableRow>
             </TableHead>

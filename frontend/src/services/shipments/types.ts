@@ -13,3 +13,15 @@ export interface ShipmentInfo {
 export interface CustomerShipmentsResponse {
     data: [ShipmentInfo]
 }
+
+export interface CreateShipmentBody {
+    pickUpAddress: string,
+    dropOfAddress: string,
+    shipmentDescription: string
+}
+
+export interface CreateShipmentResponse {
+    pickUpAddress: string,
+    dropOfAddress: string,
+    shipmentDescription: string
+}

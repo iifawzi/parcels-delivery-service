@@ -5,8 +5,8 @@ import { LoginBody, LoginResponse } from "./types";
 class BikerServices extends BaseService {
     routeName = '/biker'
 
-    login(Data: LoginBody): Promise<AxiosResponse<LoginResponse>> {
-        return this.http.post<LoginResponse>(`${this.routeName}/login`, Data)
+    async login(Data: LoginBody): Promise<AxiosResponse<LoginResponse>> {
+        return await this.http.post<LoginResponse>(`${this.routeName}/login`, Data)
     }
 }
 
