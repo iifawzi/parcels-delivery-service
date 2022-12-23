@@ -278,6 +278,8 @@ but the time was the main constraint:
 
 - Focusing in decreasing the lage components files, by splitting them into more shared components. 
 
+- I'm not that good at `UX`, I'm pretty sure the dashboard components is subject to a lot of improvements too. 
+
 - Applying DDD techniques to have the domain fully isolated, for the current implemntation, I've only focused into having the use-casses isolated, but in fact, there're no domain objects involved, this's huge to be implemented in 4 days, I've planned to work on it, but then relized that this will not be finished in 4 days, thus decided to relax the complixity and focus on the use-casses. 
 Btw, here's a sketch of the initial plan before relaxing the complixity ( just initial thoughts, not completed and might have some business-defects ). 
 
