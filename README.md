@@ -185,7 +185,7 @@ npm run test:integration // communicating with a real database
 npm run test:cov // will run both tests and gather the coverage reports. 
 ```
 
-Note: You need to change the module alias configuration in the package.json to: 
+Note: before running the commands on your local machine, you need to change the module alias configuration in the package.json to: 
 
 ```TS
   "_moduleAliases": {
