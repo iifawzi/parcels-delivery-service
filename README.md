@@ -5,8 +5,7 @@
 
 ## Introduction **📺**
 
-Parcels Management Service consists of the backend and the dashboard that will allow the customers to create shipments and bikers to pick and deliver them. 
-it's for Saloodo’s task for the Javascript Engineer hiring process.
+Parcels Management Service consists of the backend and the dashboard that will allow the customers to create shipments and bikers to pick and deliver them.
 
 In this document I will give you an overview about the project, grab a cup of coffee ☕, there're a lot of techncalities and fun.
 
