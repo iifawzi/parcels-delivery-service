@@ -7,7 +7,7 @@
 
 Parcels Management Service consists of the backend and the dashboard that will allow the customers to create shipments and bikers to pick and deliver them.
 
-In this document I will give you an overview about the project, grab a cup of coffee ☕, there're a lot of techncalities and fun.
+In this document I will give you an overview about the project, grab a cup of coffee ☕, there're a lot of technicalities and fun.
 
 ## Requirements
 
@@ -38,7 +38,7 @@ In the rest of the document, I will be discussing how I tried to achieve the req
 
 ## tl;dr - Installation
 
-All of the system componenets is configured in the `docker-compose.yaml` file, that you don't need anything other than
+All of the system components is configured in the `docker-compose.yaml` file, that you don't need anything other than
 - Clone the project and `cd` into it
 - Docker compose up
 - Enjoy!
@@ -75,7 +75,7 @@ Note: if you're willing to run the backend locally, without docker, don't forget
 ---
 
 Since day 1, principles and goals were set to deliver a very high quality and fulfill the requirements in an elegant, and modern way 
-with giving the testability and modularity the highest priorty. 
+with giving the testability and modularity the highest priority. 
 
 
 ## Architecture - Backend
@@ -85,7 +85,7 @@ For the backend, I've used `typescript` with `express`, and tried as much as pos
 ### Files Structure 
 
 There're multiple folders and files created to preserve the modularity and for making classes and functions more focused adhering to the `single responsibility`
-below is the file strucutre of the services, where each service have its `tests` and `repositories` implementations along with the other `REST` needed files ( router, controller, validation )
+below is the file structure of the services, where each service have its `tests` and `repositories` implementations along with the other `REST` needed files ( router, controller, validation )
 
 <img width="375" alt="Screen Shot 2022-12-23 at 5 04 33 PM" src="https://user-images.githubusercontent.com/46695441/209357229-f95a233c-1ae6-4363-8edb-fcd5bb9910f1.png">
 
@@ -93,7 +93,7 @@ More technical details and information are explained below.
 
 ### Deep Dive
 
-Firstly, for the server instansition, and the database conneciton creation, I've used the `Singleton` pattern to have a single instance of each, at any time 
+Firstly, for the server instantiation, and the database connection creation, I've used the `Singleton` pattern to have a single instance of each, at any time 
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/server.ts#L3-L25
 
@@ -102,9 +102,9 @@ https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08
 ### Dependency Inversion
 
 The `D` in `SOLID` was one of the most principles that I was focusing on not to break, I've really experienced before, the mess that occurs when we decide after months of work, that we need to change the database for example! what a mess that would be. I've fallen into it one day.
-thus for critical service I've been always keeping the `Prograam to an interface not implementation` rule, in mind.  
+thus for critical service I've been always keeping the `Program to an interface not implementation` rule, in mind.  
 
-I've used https://github.com/microsoft/tsyringe from microsoft as a lightweight `dependency injection` container, which made me able to inject the necessary services or modules in an easier, and controlable way. 
+I've used https://github.com/microsoft/tsyringe from microsoft as a lightweight `dependency injection` container, which made me able to inject the necessary services or modules in an easier, and controllable way. 
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/di/production.ts#L10-L26
 
@@ -114,44 +114,44 @@ The diagram below explains how these layers are communicating with each other, w
 
 ![parcels-diagram excalidraw](https://user-images.githubusercontent.com/46695441/209352467-a39cd0a2-1599-4c0e-bb6f-0d8ec5322491.png)
 
-By adhering to this archtechture, the Business logic is fully isolated, and can be developed and tested indepndently, this can be seen 
-in the `Biker.service`, `Customer.service` or `Shipment.service`, at which you will find that they're only applying business logic, and just communicating with the data layer interface ( not an implemntation )
+By adhering to this architecture, the Business logic is fully isolated, and can be developed and tested independently, this can be seen 
+in the `Biker.service`, `Customer.service` or `Shipment.service`, at which you will find that they're only applying business logic, and just communicating with the data layer interface ( not an implementation )
 
 for example, the `customer service`
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/services/customer/Customer.service.ts#L7-L31
 
-Such implemntation of the `services` with the `Repository pattern`
+Such implementation of the `services` with the `Repository pattern`
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/services/biker/repository/mongodb/BikerRepository.mongodb.ts#L5-L13
 
-is making the `domain` use-casses totally independent from the `infrastructure` decisions, Because from our servicies point of view, 
+is making the `domain` use-cases totally independent from the `infrastructure` decisions, Because from our services point of view, 
 it does not matter if our data is being stored in `PostgreSQL`, `MongoDB` or even `locally`, as long as we have a class that implements the interface and provides the methods we need everything is supposed to work.
 
 And this's actually what I've made to `Mock` the database in the `e2e` tests.
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/services/customer/tests/mocks/CustomerRepository.mock.ts#L3-L27
 
-### Controllers and Infrastrucutre
+### Controllers and Infrastructure
 
-Preserving the decouplance between the components, puts some challenges, as our `services layer`, shouldn't know anything about the infrastructure layer
+Preserving the decoupling between the components, puts some challenges, as our `services layer`, shouldn't know anything about the infrastructure layer
 it shouldn't care or be impacted, if we used `Express.js` or `Nest.js`, a `REST` API, or maybe just a plain socket layer as main communication channel!
 
 at our case, i'm using `REST APIs`, with `express.js`, thus the controllers are looking as following, for example the shipment controller: 
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/services/shipment/Shipment.controller.ts#L11-L16
 
-The service is injected, and is managed by the controller, this also have put some challenges into the `services` implemntation, as I needed to avoid throwing any `HTTP` Exceptions from them, because if we later decided not to use `REST` APIs, those errors from the services will break the decoupling, and we will then need to change the logic in the services, which's not really prefered IMO. We want to make the services fully isolated and independent.
+The service is injected, and is managed by the controller, this also have put some challenges into the `services` implementation, as I needed to avoid throwing any `HTTP` Exceptions from them, because if we later decided not to use `REST` APIs, those errors from the services will break the decoupling, and we will then need to change the logic in the services, which's not really preferred IMO. We want to make the services fully isolated and independent.
 
 Here's how I managed to avoid throwing errors in the services: 
 
 https://github.com/iifawzi/parcels-delivery-service/blob/4094ff475e0ace6c6781f08009c22b03a08bb86d/backend/services/shipment/Shipment.service.ts#L39-L54
 
-This's not the best way though, if I had more time, I'd rather prefer to have `domain exceptions`, that can be thrown from the services, and then with a simple switch case for example, errors can be checked in the controlelrs:
+This's not the best way though, if I had more time, I'd rather prefer to have `domain exceptions`, that can be thrown from the services, and then with a simple switch case for example, errors can be checked in the controllers:
 
 ```ts
 
-const [status, error] = await this.shipmentService.matchShipment(shimpentInfo);
+const [status, error] = await this.shipmentService.matchShipment(shipmentInfo);
 if (!status) {
     switch (error) {
         case instanceof NotFoundShipment:
@@ -195,11 +195,11 @@ Note: before running the commands on your local machine, you need to change the 
 
 # Architecture - Frontend
 
-For the frontend side, I've used `REACT`, `SCSS` and `Typescript`, resposntivity and modularity were kept in mind too while implemnting the frontend dashboard, I've tried as much as possible to divide THE files and the components in a well-structured manner, for better reusability of the shared components and for making it easier to develop and maintain the code. 
+For the frontend side, I've used `REACT`, `SCSS` and `Typescript`, responsitivity and modularity were kept in mind too while implementing the frontend dashboard, I've tried as much as possible to divide THE files and the components in a well-structured manner, for better reusability of the shared components and for making it easier to develop and maintain the code. 
 
 I've also used some components from `Material UI`
 
-Below is the file strucute of the application: 
+Below is the file structure of the application: 
 
 <img width="432" alt="Screen Shot 2022-12-23 at 5 43 07 PM" src="https://user-images.githubusercontent.com/46695441/209362128-1edbd6c2-dad4-40d9-9805-cf3eb857d1dd.png">
 
@@ -219,7 +219,7 @@ I've put all of the shared components under the `components/shared` folder, and 
 
 for the containers, I'm using them for grouping the related paths and pages together, so I can simply apply the `protection` components against them easily
 
-The main app router, pointing to the container with applying the required protection rules using the proection components: 
+The main app router, pointing to the container with applying the required protection rules using the protection components: 
 
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/App.tsx#L8-L23
 
@@ -230,7 +230,7 @@ https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f
 And lastly the protection components: 
 
 - Guest pages: 
-This helper component will not allow authenticated users from opening/navigating/routing to the routes that are allowed only for guests ( a logged in user for examole shouldn't be allowed to navigate to the auth pages ). 
+This helper component will not allow authenticated users from opening/navigating/routing to the routes that are allowed only for guests ( a logged in user for example shouldn't be allowed to navigate to the auth pages ). 
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/guestRoute.tsx#L7-L23
 
 - Protected pages: 
@@ -238,7 +238,7 @@ This helper component will not allow the guest users from opening/navigating/rou
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/protectedRoute.tsx#L7-L23
 
 - Allowed for specific roles pages: 
-This helper component will only allow the authorized users to opening/navigating/routing to their specific pages ( a biker shouldn't be allowed to navigate to the customers routes - new shipmnent route -  for example. )
+This helper component will only allow the authorized users to opening/navigating/routing to their specific pages ( a biker shouldn't be allowed to navigate to the customers routes - new shipment route -  for example. )
 https://github.com/iifawzi/parcels-delivery-service/blob/42b2bb538cdcf4eb115633f43f1a108c133a2374/frontend/src/protection/AllowedForRoute.tsx#L5-L11
 
 ### Services
@@ -279,18 +279,18 @@ but the time was the main constraint:
 
 - Using `class-validator` and data-transfer-objects (DTOs) instead of JOI. 
 
-- Adding `Swagger` documintation for the APIs
+- Adding `Swagger` documentation for the APIs
 
 - Moving the errors messages to a single file, instead of having them directly set in-place.
 
 - Using `socket` for the shipments status updates, so the biker and the customer can see the changes in real time
 
-- Focusing in decreasing the lage components files, by splitting them into more shared components. 
+- Focusing in decreasing the large components files, by splitting them into more shared components. 
 
 - I'm not that good at `UX`, I'm pretty sure the dashboard components is subject to a lot of improvements too. 
 
-- Applying DDD techniques to have the domain fully isolated, for the current implemntation, I've only focused into having the use-casses isolated, but in fact, there're no domain objects involved, this's huge to be implemented in 4 days, I've planned to work on it, but then relized that this will not be finished in 4 days, thus decided to relax the complixity and focus on the use-casses. 
-Btw, here's a sketch of the initial plan before relaxing the complixity ( just initial thoughts, not completed and might have some business-defects ). 
+- Applying DDD techniques to have the domain fully isolated, for the current implementation, I've only focused into having the use-cases isolated, but in fact, there're no domain objects involved, this's huge to be implemented in 4 days, I've planned to work on it, but then realized that this will not be finished in 4 days, thus decided to relax the complexity and focus on the use-cases. 
+Btw, here's a sketch of the initial plan before relaxing the complexity ( just initial thoughts, not completed and might have some business-defects ). 
 
 ![Untitled-2022-12-19-1817 excalidraw](https://user-images.githubusercontent.com/46695441/209370480-f72f10cd-2d04-469c-94ff-f5c91b89d117.png)
 
